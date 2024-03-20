@@ -3,5 +3,13 @@
     "counterAppBarTitle": "Counter",
     "@counterAppBarTitle": {
         "description": "Text shown in the AppBar of the Counter Page"
+    },
+    "navigationLabelHome": "Home",
+    "@navigationLabelHome": {
+      "description": "navigationLabelHome"
+    },
+    "navigationLabelProfile": "Profile",
+    "@navigationLabelProfile": {
+      "description": "navigationLabelProfile"
     }
 }
