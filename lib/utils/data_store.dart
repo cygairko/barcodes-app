@@ -8,8 +8,7 @@ import 'package:sembast_web/sembast_web.dart';
 part 'data_store.g.dart';
 
 @Riverpod(keepAlive: true)
-Future<SembastDataStore> sembastDataStore(SembastDataStoreRef ref) =>
-    SembastDataStore.makeDefault();
+Future<DataStore> dataStore(DataStoreRef ref) => DataStore.makeDefault();
 
 // class SembastDataStore implements DataStore {
 //   SembastDataStore(this.db);
@@ -29,8 +28,8 @@ Future<SembastDataStore> sembastDataStore(SembastDataStoreRef ref) =>
 //   }
 // }
 
-class SembastDataStore {
-  SembastDataStore(this.db);
+class DataStore {
+  DataStore(this.db);
   final Database db;
 
   Database get database => db;
@@ -44,7 +43,7 @@ class SembastDataStore {
     }
   }
 
-  static Future<SembastDataStore> makeDefault() async {
-    return SembastDataStore(await createDatabase('baskets.db'));
+  static Future<DataStore> makeDefault() async {
+    return DataStore(await createDatabase('baskets.db'));
   }
 }

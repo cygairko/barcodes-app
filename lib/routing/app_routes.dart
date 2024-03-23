@@ -1,3 +1,6 @@
+import 'package:barcodes/features/barcodes/presentation/barcode_screen.dart';
+import 'package:barcodes/features/barcodes/presentation/barcodes_page.dart';
+import 'package:barcodes/features/settings/presentation/settings_page.dart';
 import 'package:barcodes/routing/scaffold_with_nested_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -6,25 +9,25 @@ part 'app_routes.g.dart';
 
 @TypedStatefulShellRoute<MainShellRouteData>(
   branches: [
-    TypedStatefulShellBranch<HomeBranch>(
+    TypedStatefulShellBranch<BarcodesBranch>(
       routes: [
-        TypedGoRoute<HomeRoute>(
-          name: HomeRoute.name,
-          path: HomeRoute.path,
+        TypedGoRoute<BarcodesPageRoute>(
+          name: BarcodesPageRoute.name,
+          path: BarcodesPageRoute.path,
+          routes: [
+            TypedGoRoute<BarcodeRoute>(
+              name: BarcodeRoute.name,
+              path: BarcodeRoute.path,
+            ),
+          ],
         ),
       ],
     ),
-    TypedStatefulShellBranch<ProfileBranch>(
+    TypedStatefulShellBranch<SettingsBranch>(
       routes: [
-        TypedGoRoute<ProfileScreenRoute>(
-          name: ProfileScreenRoute.name,
-          path: ProfileScreenRoute.path,
-          routes: [
-            TypedGoRoute<SettingsScreenRoute>(
-              name: SettingsScreenRoute.name,
-              path: SettingsScreenRoute.path,
-            ),
-          ],
+        TypedGoRoute<SettingsPageRoute>(
+          name: SettingsPageRoute.name,
+          path: SettingsPageRoute.path,
         ),
       ],
     ),
@@ -49,41 +52,50 @@ class MainShellRouteData extends StatefulShellRouteData {
 /// Currently using three Branches:
 /// Home, Basket and Profile
 
-class HomeBranch extends StatefulShellBranchData {
-  const HomeBranch();
+class BarcodesBranch extends StatefulShellBranchData {
+  const BarcodesBranch();
 }
 
-class ProfileBranch extends StatefulShellBranchData {
-  const ProfileBranch();
+class SettingsBranch extends StatefulShellBranchData {
+  const SettingsBranch();
 }
 
-class HomeRoute extends GoRouteData {
-  static const String name = 'home';
+class BarcodesPageRoute extends GoRouteData {
+  static const String name = 'barcodes';
   static const String path = '/';
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) =>
       const NoTransitionPage(
-        child: Placeholder(),
+        child: BarcodesPage(),
       );
 }
 
-class ProfileScreenRoute extends GoRouteData {
-  static const String name = 'profile';
-  static const String path = '/profile';
+class BarcodeRoute extends GoRouteData {
+  const BarcodeRoute(
+    this.eid,
+  );
+  static const String name = 'barcode';
+  static const String path = 'barcode/:eid';
+
+  final int eid;
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) =>
       NoTransitionPage(
-        child: Container(),
+        child: BarcodeScreen(
+          entryId: eid,
+        ),
       );
 }
 
-class SettingsScreenRoute extends GoRouteData {
+class SettingsPageRoute extends GoRouteData {
   static const String name = 'settings';
-  static const String path = 'settings';
+  static const String path = '/settings';
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) =>
-      MaterialPage(child: Container());
+      const NoTransitionPage(
+        child: SettingsPage(),
+      );
 }

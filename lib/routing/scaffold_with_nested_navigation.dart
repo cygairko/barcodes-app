@@ -62,14 +62,14 @@ class ScaffoldWithNavigationBar extends StatelessWidget {
         selectedIndex: currentIndex,
         destinations: [
           NavigationDestination(
-            icon: const Icon(Icons.home_outlined),
-            selectedIcon: const Icon(Icons.home),
-            label: context.l10n.navigationLabelHome,
+            icon: const Icon(Icons.qr_code_outlined),
+            selectedIcon: const Icon(Icons.qr_code),
+            label: context.l10n.navigationLabelBarcodes,
           ),
           NavigationDestination(
-            icon: const Icon(Icons.person_outline),
-            selectedIcon: const Icon(Icons.person),
-            label: context.l10n.navigationLabelProfile,
+            icon: const Icon(Icons.settings_outlined),
+            selectedIcon: const Icon(Icons.settings),
+            label: context.l10n.navigationLabelSettings,
           ),
         ],
         onDestinationSelected: onDestinationSelected,
@@ -100,14 +100,14 @@ class ScaffoldWithNavigationRail extends StatelessWidget {
             labelType: NavigationRailLabelType.all,
             destinations: <NavigationRailDestination>[
               NavigationRailDestination(
-                icon: const Icon(Icons.home_outlined),
-                selectedIcon: const Icon(Icons.home),
-                label: Text(context.l10n.navigationLabelHome),
+                icon: const Icon(Icons.qr_code_outlined),
+                selectedIcon: const Icon(Icons.qr_code),
+                label: Text(context.l10n.navigationLabelBarcodes),
               ),
               NavigationRailDestination(
-                icon: const Icon(Icons.person_outline),
-                selectedIcon: const Icon(Icons.person),
-                label: Text(context.l10n.navigationLabelProfile),
+                icon: const Icon(Icons.settings_outlined),
+                selectedIcon: const Icon(Icons.settings),
+                label: Text(context.l10n.navigationLabelSettings),
               ),
             ],
           ),

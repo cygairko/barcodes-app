@@ -6,20 +6,19 @@ part of 'data_store.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$sembastDataStoreHash() => r'31a331f3f8a855192d5234b3479a20d3d2d084f3';
+String _$dataStoreHash() => r'366a8f9498302077cd59096fd2d64c349ec07a4a';
 
-/// See also [sembastDataStore].
-@ProviderFor(sembastDataStore)
-final sembastDataStoreProvider = FutureProvider<SembastDataStore>.internal(
-  sembastDataStore,
-  name: r'sembastDataStoreProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$sembastDataStoreHash,
+/// See also [dataStore].
+@ProviderFor(dataStore)
+final dataStoreProvider = FutureProvider<DataStore>.internal(
+  dataStore,
+  name: r'dataStoreProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$dataStoreHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef SembastDataStoreRef = FutureProviderRef<SembastDataStore>;
+typedef DataStoreRef = FutureProviderRef<DataStore>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

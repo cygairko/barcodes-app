@@ -17,24 +17,24 @@ RouteBase get $mainShellRouteData => StatefulShellRouteData.$route(
           routes: [
             GoRouteData.$route(
               path: '/',
-              name: 'home',
-              factory: $HomeRouteExtension._fromState,
+              name: 'barcodes',
+              factory: $BarcodesPageRouteExtension._fromState,
+              routes: [
+                GoRouteData.$route(
+                  path: 'barcode/:eid',
+                  name: 'barcode',
+                  factory: $BarcodeRouteExtension._fromState,
+                ),
+              ],
             ),
           ],
         ),
         StatefulShellBranchData.$branch(
           routes: [
             GoRouteData.$route(
-              path: '/profile',
-              name: 'profile',
-              factory: $ProfileScreenRouteExtension._fromState,
-              routes: [
-                GoRouteData.$route(
-                  path: 'settings',
-                  name: 'settings',
-                  factory: $SettingsScreenRouteExtension._fromState,
-                ),
-              ],
+              path: '/settings',
+              name: 'settings',
+              factory: $SettingsPageRouteExtension._fromState,
             ),
           ],
         ),
@@ -46,8 +46,9 @@ extension $MainShellRouteDataExtension on MainShellRouteData {
       const MainShellRouteData();
 }
 
-extension $HomeRouteExtension on HomeRoute {
-  static HomeRoute _fromState(GoRouterState state) => HomeRoute();
+extension $BarcodesPageRouteExtension on BarcodesPageRoute {
+  static BarcodesPageRoute _fromState(GoRouterState state) =>
+      BarcodesPageRoute();
 
   String get location => GoRouteData.$location(
         '/',
@@ -63,12 +64,13 @@ extension $HomeRouteExtension on HomeRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $ProfileScreenRouteExtension on ProfileScreenRoute {
-  static ProfileScreenRoute _fromState(GoRouterState state) =>
-      ProfileScreenRoute();
+extension $BarcodeRouteExtension on BarcodeRoute {
+  static BarcodeRoute _fromState(GoRouterState state) => BarcodeRoute(
+        int.parse(state.pathParameters['eid']!),
+      );
 
   String get location => GoRouteData.$location(
-        '/profile',
+        '/barcode/${Uri.encodeComponent(eid.toString())}',
       );
 
   void go(BuildContext context) => context.go(location);
@@ -81,12 +83,12 @@ extension $ProfileScreenRouteExtension on ProfileScreenRoute {
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $SettingsScreenRouteExtension on SettingsScreenRoute {
-  static SettingsScreenRoute _fromState(GoRouterState state) =>
-      SettingsScreenRoute();
+extension $SettingsPageRouteExtension on SettingsPageRoute {
+  static SettingsPageRoute _fromState(GoRouterState state) =>
+      SettingsPageRoute();
 
   String get location => GoRouteData.$location(
-        '/profile/settings',
+        '/settings',
       );
 
   void go(BuildContext context) => context.go(location);

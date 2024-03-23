@@ -1,15 +1,31 @@
 {
-    "@@locale": "en",
-    "counterAppBarTitle": "Counter",
-    "@counterAppBarTitle": {
-        "description": "Text shown in the AppBar of the Counter Page"
-    },
-    "navigationLabelHome": "Home",
-    "@navigationLabelHome": {
-      "description": "navigationLabelHome"
-    },
-    "navigationLabelProfile": "Profile",
-    "@navigationLabelProfile": {
-      "description": "navigationLabelProfile"
-    }
+  "@@locale": "en",
+  "counterAppBarTitle": "Counter",
+  "@counterAppBarTitle": {
+    "description": "Text shown in the AppBar of the Counter Page"
+  },
+  "navigationLabelHome": "Home",
+  "@navigationLabelHome": {
+    "description": "navigationLabelHome"
+  },
+  "navigationLabelBarcodes": "Barcodes",
+  "@navigationLabelBarcodes": {
+    "description": "navigationLabelBarcodes"
+  },
+  "navigationLabelProfile": "Profile",
+  "@navigationLabelProfile": {
+    "description": "navigationLabelProfile"
+  },
+  "navigationLabelSettings": "Settings",
+  "@navigationLabelSettings": {
+    "description": "navigationLabelSettings"
+  },
+  "appBarTitleBarcodes": "Barcodes",
+  "@appBarTitleBarcodes": {
+    "description": "appBarTitleBarcodes"
+  },
+  "appBarTitleSettings": "Settings",
+  "@appBarTitleSettings": {
+    "description": "appBarTitleSettings"
+  }
 }
