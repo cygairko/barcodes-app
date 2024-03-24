@@ -39,5 +39,21 @@
   "buttonCancel": "Cancel",
   "@buttonCancel": {
     "description": "buttonCancel"
+  },
+  "labelAddFormEntryName": "Entry name",
+  "@labelAddFormEntryName": {
+    "description": "labelAddFormEntryName"
+  },
+  "labelAddFormEntryComment": "Additional comment",
+  "@labelAddFormEntryComment": {
+    "description": "labelAddFormEntryComment"
+  },
+  "labelAddFormEntryData": "Data",
+  "@labelAddFormEntryData": {
+    "description": "labelAddFormEntryData"
+  },
+  "labelAddFormEntryTypeDropdown": "Barcode type",
+  "@labelAddFormEntryTypeDropdown": {
+    "description": "labelAddFormEntryTypeDropdown"
   }
 }

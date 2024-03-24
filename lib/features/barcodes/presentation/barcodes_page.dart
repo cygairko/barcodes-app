@@ -1,5 +1,3 @@
-import 'package:barcode_widget/barcode_widget.dart';
-import 'package:barcodes/features/barcodes/domain/barcode_entry.dart';
 import 'package:barcodes/features/barcodes/presentation/barcodes_list.dart';
 import 'package:barcodes/features/barcodes/presentation/barcodes_page_controller.dart';
 import 'package:barcodes/l10n/l10n.dart';
@@ -20,12 +18,6 @@ class BarcodesPage extends ConsumerWidget {
     );
     // ignore: unused_local_variable
     final state = ref.watch(barcodesPageControllerProvider);
-
-    const entry = BarcodeEntry(
-      title: 'title',
-      content: 'content',
-      type: BarcodeType.Code128,
-    );
 
     return Scaffold(
       appBar: AppBar(

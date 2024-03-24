@@ -11,7 +11,7 @@ class BarcodeListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       leading: const Icon(Icons.qr_code),
-      title: Text(entry.title),
+      title: Text(entry.name),
       subtitle: Text(entry.type.name),
       onTap: () => context.goNamed(
         BarcodeRoute.name,
