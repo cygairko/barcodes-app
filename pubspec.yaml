@@ -1,6 +1,6 @@
 name: barcodes
 description: Showing and saving a list of barcodes
-version: 1.0.0+1
+version: 0.1.0+1
 publish_to: none
 
 environment:
@@ -16,7 +16,6 @@ dependencies:
   
   intl: ^0.18.1
   barcode_widget: ^2.0.4
-  screen_brightness: ^1.0.0
 
   flutter_riverpod: ^2.5.1
   logger: ^2.1.0

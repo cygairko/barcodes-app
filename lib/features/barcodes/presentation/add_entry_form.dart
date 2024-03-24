@@ -1,6 +1,6 @@
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:barcodes/features/barcodes/domain/barcode_entry.dart';
-import 'package:barcodes/features/barcodes/presentation/barcodes_page_controller.dart';
+import 'package:barcodes/features/barcodes/presentation/barcodes_list_controller.dart';
 import 'package:barcodes/l10n/l10n.dart';
 import 'package:barcodes/utils/constants/app_sizes.dart';
 import 'package:flutter/material.dart';
@@ -35,6 +35,7 @@ class _AddEntryFormState extends ConsumerState<AddEntryForm> {
             ),
             TextFormField(
               controller: dataController,
+              // validator: (value) => ,
               decoration: InputDecoration(
                 labelText: context.l10n.labelAddFormEntryData,
               ),
@@ -63,15 +64,23 @@ class _AddEntryFormState extends ConsumerState<AddEntryForm> {
                 ),
                 ElevatedButton(
                   onPressed: () {
+                    final type = BarcodeType.values.byName(typeController.text);
                     final entry = BarcodeEntry(
                       name: nameController.text,
                       data: dataController.text,
                       type: BarcodeType.values.byName(typeController.text),
                     );
-                    context.pop();
-                    ref
-                        .read(barcodesPageControllerProvider.notifier)
-                        .add(entry);
+                    try {
+                      Barcode.fromType(type).verify(dataController.text);
+
+                      context.pop();
+                      ref
+                          .read(barcodesListControllerProvider.notifier)
+                          .add(entry);
+                    } on BarcodeException catch (error) {
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(SnackBar(content: Text('$error')));
+                    }
                   },
                   child: Text(context.l10n.buttonSubmit),
                 ),

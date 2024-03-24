@@ -28,6 +28,10 @@
   "@appBarTitleSettings": {
     "description": "appBarTitleSettings"
   },
+  "appBarTitleBarcodeScreen": "Barcode info",
+  "@appBarTitleBarcodeScreen": {
+    "description": "appBarTitleBarcodeScreen"
+  },
   "noContentFound": "No content found",
   "@noContentFound": {
     "description": "noContentFound"

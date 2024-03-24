@@ -1,27 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'barcodes_page_controller.dart';
+part of 'barcodes_list_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$barcodesPageControllerHash() =>
-    r'd4a4e81d1f6c253675dfaa81021b185b5af467b0';
+String _$barcodesListControllerHash() =>
+    r'6938aa46315e68b1a9e7a2efd85161ea733eeb3d';
 
-/// See also [BarcodesPageController].
-@ProviderFor(BarcodesPageController)
-final barcodesPageControllerProvider =
-    AutoDisposeAsyncNotifierProvider<BarcodesPageController, void>.internal(
-  BarcodesPageController.new,
-  name: r'barcodesPageControllerProvider',
+/// See also [BarcodesListController].
+@ProviderFor(BarcodesListController)
+final barcodesListControllerProvider =
+    AutoDisposeAsyncNotifierProvider<BarcodesListController, void>.internal(
+  BarcodesListController.new,
+  name: r'barcodesListControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$barcodesPageControllerHash,
+      : _$barcodesListControllerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$BarcodesPageController = AutoDisposeAsyncNotifier<void>;
+typedef _$BarcodesListController = AutoDisposeAsyncNotifier<void>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

@@ -1,8 +1,6 @@
 import 'package:barcodes/features/barcodes/presentation/barcodes_list.dart';
-import 'package:barcodes/features/barcodes/presentation/barcodes_page_controller.dart';
 import 'package:barcodes/l10n/l10n.dart';
 import 'package:barcodes/routing/app_routes.dart';
-import 'package:barcodes/utils/async_value_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -12,13 +10,6 @@ class BarcodesPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.listen<AsyncValue<void>>(
-      barcodesPageControllerProvider,
-      (_, state) => state.showAlertDialogOnError(context),
-    );
-    // ignore: unused_local_variable
-    final state = ref.watch(barcodesPageControllerProvider);
-
     return Scaffold(
       appBar: AppBar(
         title: Text(context.l10n.appBarTitleBarcodes),

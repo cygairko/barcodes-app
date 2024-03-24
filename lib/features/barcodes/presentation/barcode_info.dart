@@ -30,13 +30,15 @@ class BarcodeInfo extends StatelessWidget {
             enabled: false,
             controller: typeController,
             decoration: InputDecoration(
-                labelText: context.l10n.labelAddFormEntryTypeDropdown),
+              labelText: context.l10n.labelAddFormEntryTypeDropdown,
+            ),
           ),
           TextField(
             enabled: false,
             controller: commentController,
             decoration: InputDecoration(
-                labelText: context.l10n.labelAddFormEntryComment),
+              labelText: context.l10n.labelAddFormEntryComment,
+            ),
           ),
         ],
       ),
