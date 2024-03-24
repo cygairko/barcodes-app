@@ -3,9 +3,11 @@ import 'package:barcodes/features/barcodes/domain/barcode_entry.dart';
 import 'package:barcodes/features/barcodes/presentation/barcodes_list.dart';
 import 'package:barcodes/features/barcodes/presentation/barcodes_page_controller.dart';
 import 'package:barcodes/l10n/l10n.dart';
+import 'package:barcodes/routing/app_routes.dart';
 import 'package:barcodes/utils/async_value_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 class BarcodesPage extends ConsumerWidget {
   const BarcodesPage({super.key});
@@ -31,10 +33,7 @@ class BarcodesPage extends ConsumerWidget {
       ),
       body: const BarcodesList(),
       floatingActionButton: FloatingActionButton(
-        onPressed: state.isLoading
-            ? null
-            : () =>
-                ref.read(barcodesPageControllerProvider.notifier).add(entry),
+        onPressed: () => context.goNamed(AddEntryRoute.name),
         child: const Icon(Icons.add),
       ),
     );

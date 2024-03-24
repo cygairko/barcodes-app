@@ -20,10 +20,10 @@ BarcodeEntry _$BarcodeEntryFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$BarcodeEntry {
-  int get id => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
   BarcodeType get type => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +37,7 @@ abstract class $BarcodeEntryCopyWith<$Res> {
           BarcodeEntry value, $Res Function(BarcodeEntry) then) =
       _$BarcodeEntryCopyWithImpl<$Res, BarcodeEntry>;
   @useResult
-  $Res call({int id, String title, String content, BarcodeType type});
+  $Res call({String title, String content, BarcodeType type, int id});
 }
 
 /// @nodoc
@@ -53,16 +53,12 @@ class _$BarcodeEntryCopyWithImpl<$Res, $Val extends BarcodeEntry>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? title = null,
     Object? content = null,
     Object? type = null,
+    Object? id = null,
   }) {
     return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -75,6 +71,10 @@ class _$BarcodeEntryCopyWithImpl<$Res, $Val extends BarcodeEntry>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as BarcodeType,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
     ) as $Val);
   }
 }
@@ -87,7 +87,7 @@ abstract class _$$BarcodeEntryImplCopyWith<$Res>
       __$$BarcodeEntryImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int id, String title, String content, BarcodeType type});
+  $Res call({String title, String content, BarcodeType type, int id});
 }
 
 /// @nodoc
@@ -101,16 +101,12 @@ class __$$BarcodeEntryImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
     Object? title = null,
     Object? content = null,
     Object? type = null,
+    Object? id = null,
   }) {
     return _then(_$BarcodeEntryImpl(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as int,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -123,6 +119,10 @@ class __$$BarcodeEntryImplCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as BarcodeType,
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -131,27 +131,27 @@ class __$$BarcodeEntryImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$BarcodeEntryImpl implements _BarcodeEntry {
   const _$BarcodeEntryImpl(
-      {this.id = -1,
-      required this.title,
+      {required this.title,
       required this.content,
-      required this.type});
+      required this.type,
+      this.id = -1});
 
   factory _$BarcodeEntryImpl.fromJson(Map<String, dynamic> json) =>
       _$$BarcodeEntryImplFromJson(json);
 
-  @override
-  @JsonKey()
-  final int id;
   @override
   final String title;
   @override
   final String content;
   @override
   final BarcodeType type;
+  @override
+  @JsonKey()
+  final int id;
 
   @override
   String toString() {
-    return 'BarcodeEntry(id: $id, title: $title, content: $content, type: $type)';
+    return 'BarcodeEntry(title: $title, content: $content, type: $type, id: $id)';
   }
 
   @override
@@ -159,15 +159,15 @@ class _$BarcodeEntryImpl implements _BarcodeEntry {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$BarcodeEntryImpl &&
-            (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.content, content) || other.content == content) &&
-            (identical(other.type, type) || other.type == type));
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, title, content, type);
+  int get hashCode => Object.hash(runtimeType, title, content, type, id);
 
   @JsonKey(ignore: true)
   @override
@@ -185,22 +185,22 @@ class _$BarcodeEntryImpl implements _BarcodeEntry {
 
 abstract class _BarcodeEntry implements BarcodeEntry {
   const factory _BarcodeEntry(
-      {final int id,
-      required final String title,
+      {required final String title,
       required final String content,
-      required final BarcodeType type}) = _$BarcodeEntryImpl;
+      required final BarcodeType type,
+      final int id}) = _$BarcodeEntryImpl;
 
   factory _BarcodeEntry.fromJson(Map<String, dynamic> json) =
       _$BarcodeEntryImpl.fromJson;
 
-  @override
-  int get id;
   @override
   String get title;
   @override
   String get content;
   @override
   BarcodeType get type;
+  @override
+  int get id;
   @override
   @JsonKey(ignore: true)
   _$$BarcodeEntryImplCopyWith<_$BarcodeEntryImpl> get copyWith =>

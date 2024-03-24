@@ -8,18 +8,18 @@ part of 'barcode_entry.dart';
 
 _$BarcodeEntryImpl _$$BarcodeEntryImplFromJson(Map<String, dynamic> json) =>
     _$BarcodeEntryImpl(
-      id: json['id'] as int? ?? -1,
       title: json['title'] as String,
       content: json['content'] as String,
       type: $enumDecode(_$BarcodeTypeEnumMap, json['type']),
+      id: json['id'] as int? ?? -1,
     );
 
 Map<String, dynamic> _$$BarcodeEntryImplToJson(_$BarcodeEntryImpl instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'title': instance.title,
       'content': instance.content,
       'type': _$BarcodeTypeEnumMap[instance.type]!,
+      'id': instance.id,
     };
 
 const _$BarcodeTypeEnumMap = {

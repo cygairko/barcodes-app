@@ -1,3 +1,4 @@
+import 'package:barcodes/features/barcodes/presentation/add_entry_screen.dart';
 import 'package:barcodes/features/barcodes/presentation/barcode_screen.dart';
 import 'package:barcodes/features/barcodes/presentation/barcodes_page.dart';
 import 'package:barcodes/features/settings/presentation/settings_page.dart';
@@ -18,6 +19,10 @@ part 'app_routes.g.dart';
             TypedGoRoute<BarcodeRoute>(
               name: BarcodeRoute.name,
               path: BarcodeRoute.path,
+            ),
+            TypedGoRoute<AddEntryRoute>(
+              name: AddEntryRoute.name,
+              path: AddEntryRoute.path,
             ),
           ],
         ),
@@ -76,16 +81,28 @@ class BarcodeRoute extends GoRouteData {
     this.eid,
   );
   static const String name = 'barcode';
-  static const String path = 'barcode/:eid';
+  static const String path = 'barcode/show/:eid';
 
   final int eid;
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) =>
-      NoTransitionPage(
+      MaterialPage(
         child: BarcodeScreen(
           entryId: eid,
         ),
+      );
+}
+
+class AddEntryRoute extends GoRouteData {
+  const AddEntryRoute();
+  static const String name = 'addBarcode';
+  static const String path = 'barcode/add';
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) =>
+      const MaterialPage(
+        child: AddEntryScreen(),
       );
 }
 

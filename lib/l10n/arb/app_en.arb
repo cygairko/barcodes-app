@@ -27,5 +27,17 @@
   "appBarTitleSettings": "Settings",
   "@appBarTitleSettings": {
     "description": "appBarTitleSettings"
+  },
+  "noContentFound": "No content found",
+  "@noContentFound": {
+    "description": "noContentFound"
+  },
+  "buttonSubmit": "Submit",
+  "@buttonSubmit": {
+    "description": "buttonSubmit"
+  },
+  "buttonCancel": "Cancel",
+  "@buttonCancel": {
+    "description": "buttonCancel"
   }
 }

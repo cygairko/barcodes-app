@@ -21,9 +21,14 @@ RouteBase get $mainShellRouteData => StatefulShellRouteData.$route(
               factory: $BarcodesPageRouteExtension._fromState,
               routes: [
                 GoRouteData.$route(
-                  path: 'barcode/:eid',
+                  path: 'barcode/show/:eid',
                   name: 'barcode',
                   factory: $BarcodeRouteExtension._fromState,
+                ),
+                GoRouteData.$route(
+                  path: 'barcode/add',
+                  name: 'addBarcode',
+                  factory: $AddEntryRouteExtension._fromState,
                 ),
               ],
             ),
@@ -70,7 +75,24 @@ extension $BarcodeRouteExtension on BarcodeRoute {
       );
 
   String get location => GoRouteData.$location(
-        '/barcode/${Uri.encodeComponent(eid.toString())}',
+        '/barcode/show/${Uri.encodeComponent(eid.toString())}',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $AddEntryRouteExtension on AddEntryRoute {
+  static AddEntryRoute _fromState(GoRouterState state) => const AddEntryRoute();
+
+  String get location => GoRouteData.$location(
+        '/barcode/add',
       );
 
   void go(BuildContext context) => context.go(location);
