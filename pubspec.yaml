@@ -18,7 +18,7 @@ dependencies:
   barcode_widget: ^2.0.4
 
   flutter_riverpod: ^2.5.1
-  logger: ^2.1.0
+  logger: ^2.2.0
   freezed_annotation: ^2.4.1
   json_annotation: ^4.8.1
   riverpod_annotation: ^2.3.5
