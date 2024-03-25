@@ -32,6 +32,10 @@
   "@appBarTitleBarcodeScreen": {
     "description": "appBarTitleBarcodeScreen"
   },
+  "appBarTitleAddBarcodeScreen": "Create barcode",
+  "@appBarTitleAddBarcodeScreen": {
+    "description": "appBarTitleAddBarcodeScreen"
+  },
   "noContentFound": "No content found",
   "@noContentFound": {
     "description": "noContentFound"
@@ -59,5 +63,29 @@
   "labelAddFormEntryTypeDropdown": "Barcode type",
   "@labelAddFormEntryTypeDropdown": {
     "description": "labelAddFormEntryTypeDropdown"
+  },
+  "textBarcodeInfoNoContentTitle": "No data",
+  "@textBarcodeInfoNoContentTitle": {
+    "description": "textBarcodeInfoNoContentTitle"
+  },
+  "textBarcodeInfoNoContentMessage": "for this barcode entry",
+  "@textBarcodeInfoNoContentMessage": {
+    "description": "textBarcodeInfoNoContentMessage"
+  },
+  "settingsIncreaseBrigtnessTitle": "Increase brightness",
+  "@settingsIncreaseBrigtnessTitle": {
+    "description": "settingsIncreaseBrigtnessTitle"
+  },
+  "settingsIncreaseBrigtnessSubtitle": "Lighten up the display when showing a barcode.",
+  "@settingsIncreaseBrigtnessSubtitle": {
+    "description": "settingsIncreaseBrigtnessSubtitle"
+  },
+  "settingsIncreaseAppVersionTitle": "App version",
+  "@settingsIncreaseAppVersionTitle": {
+    "description": "settingsIncreaseAppVersionTitle"
+  },
+  "settingsIncreaseAppVersionSubtitle": "Lighten up the display when showing a barcode.",
+  "@settingsIncreaseAppVersionSubtitle": {
+    "description": "settingsIncreaseAppVersionSubtitle"
   }
 }

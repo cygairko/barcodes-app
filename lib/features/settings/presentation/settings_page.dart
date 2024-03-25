@@ -11,7 +11,27 @@ class SettingsPage extends ConsumerWidget {
       appBar: AppBar(
         title: Text(context.l10n.appBarTitleSettings),
       ),
-      body: Container(),
+      body: ListView(
+        children: [
+          SwitchListTile.adaptive(
+            title: Text('[tba] ${context.l10n.settingsIncreaseBrigtnessTitle}'),
+            subtitle: Text(context.l10n.settingsIncreaseBrigtnessSubtitle),
+            value: true,
+            onChanged: (bool value) {},
+          ),
+          SwitchListTile.adaptive(
+            title: Text('[tba] ${context.l10n.settingsIncreaseBrigtnessTitle}'),
+            subtitle: Text(context.l10n.settingsIncreaseBrigtnessSubtitle),
+            value: true,
+            onChanged: (bool value) {},
+          ),
+          const Divider(),
+          ListTile(
+            title: Text(context.l10n.settingsIncreaseAppVersionTitle),
+            subtitle: Text('0.1.0'),
+          ),
+        ],
+      ),
     );
   }
 }

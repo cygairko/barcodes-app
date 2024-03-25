@@ -1,5 +1,6 @@
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:barcodes/common_widgets/async_value_widget.dart';
+import 'package:barcodes/common_widgets/empty_content.dart';
 import 'package:barcodes/features/barcodes/data/barcode_repository.dart';
 import 'package:barcodes/features/barcodes/domain/barcode_conf.dart';
 import 'package:barcodes/features/barcodes/presentation/barcode_error.dart';
@@ -44,26 +45,31 @@ class BarcodeScreen extends ConsumerWidget {
               return BarcodeError(message: error.message);
             }
 
-            return Column(
-              children: [
-                Container(
-                  alignment: Alignment.topCenter,
-                  child: BarcodeWidget(
-                    padding: const EdgeInsets.all(12),
-                    data: conf.normalizedData,
-                    barcode: conf.barcode,
-                    height: conf.height,
-                    width: conf.width,
-                    style: TextStyle(fontSize: conf.fontSize),
+            return SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    alignment: Alignment.topCenter,
+                    child: BarcodeWidget(
+                      padding: const EdgeInsets.all(12),
+                      data: conf.normalizedData,
+                      barcode: conf.barcode,
+                      height: conf.height,
+                      width: conf.width,
+                      style: TextStyle(fontSize: conf.fontSize),
+                    ),
                   ),
-                ),
-                BarcodeInfo(
-                  entry: p0,
-                ),
-              ],
+                  BarcodeInfo(
+                    entry: p0,
+                  ),
+                ],
+              ),
             );
           } else {
-            return Container();
+            return EmptyContent(
+              title: context.l10n.textBarcodeInfoNoContentTitle,
+              message: context.l10n.textBarcodeInfoNoContentMessage,
+            );
           }
         },
       ),

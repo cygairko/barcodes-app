@@ -20,6 +20,7 @@ Future<void> appStartup(AppStartupRef ref) async {
     // list of providers to be warmed up
 
     ref.watch(dataStoreProvider.future), // for Sembast
+    // ref.watch(packageInfoProvider.future),
     // ref.watch(onboardingRepositoryProvider.future)
   ]);
 }

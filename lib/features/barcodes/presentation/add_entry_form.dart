@@ -29,12 +29,14 @@ class _AddEntryFormState extends ConsumerState<AddEntryForm> {
           children: [
             TextFormField(
               controller: nameController,
+              keyboardType: TextInputType.name,
               decoration: InputDecoration(
                 labelText: context.l10n.labelAddFormEntryName,
               ),
             ),
             TextFormField(
               controller: dataController,
+              keyboardType: TextInputType.text,
               // validator: (value) => ,
               decoration: InputDecoration(
                 labelText: context.l10n.labelAddFormEntryData,
@@ -42,16 +44,26 @@ class _AddEntryFormState extends ConsumerState<AddEntryForm> {
             ),
             TextFormField(
               controller: commentController,
+              // minLines: 1,
+              maxLines: 4,
               decoration: InputDecoration(
                 labelText: context.l10n.labelAddFormEntryComment,
               ),
             ),
-            DropdownMenu<BarcodeType>(
-              controller: typeController,
-              initialSelection: BarcodeType.Code128,
-              dropdownMenuEntries: BarcodeType.values
-                  .map((e) => DropdownMenuEntry(value: e, label: e.name))
-                  .toList(),
+            Row(
+              children: [
+                DropdownMenu<BarcodeType>(
+                  inputDecorationTheme: const InputDecorationTheme(
+                    border: UnderlineInputBorder(),
+                  ),
+                  label: Text(context.l10n.labelAddFormEntryTypeDropdown),
+                  controller: typeController,
+                  initialSelection: BarcodeType.Code128,
+                  dropdownMenuEntries: BarcodeType.values
+                      .map((e) => DropdownMenuEntry(value: e, label: e.name))
+                      .toList(),
+                ),
+              ],
             ),
             gapH16,
             ButtonBar(
