@@ -34,7 +34,7 @@ dev_dependencies:
     sdk: flutter
   
   very_good_analysis: ^5.1.0
-  flutter_lints: ^3.0.1
+  flutter_lints: ^3.0.2
   riverpod_lint: ^2.3.10
   custom_lint: ^0.6.4
   build_runner: ^2.4.8
