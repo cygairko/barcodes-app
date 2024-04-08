@@ -39,7 +39,7 @@ dev_dependencies:
   custom_lint: ^0.6.4
   build_runner: ^2.4.9
   riverpod_generator: ^2.4.0
-  freezed: ^2.4.7
+  freezed: ^2.5.1
   json_serializable: ^6.7.1
   go_router_builder: ^2.4.1
 
