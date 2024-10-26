@@ -1,5 +1,6 @@
 import 'package:barcodes/utils/constants/app_sizes.dart';
 import 'package:barcodes/utils/data_store.dart';
+import 'package:barcodes/utils/package_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -7,7 +8,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'app_startup.g.dart';
 
 @Riverpod(keepAlive: true)
-Future<void> appStartup(AppStartupRef ref) async {
+Future<void> appStartup(Ref ref) async {
   ref.onDispose(() {
     // ensure dependent providers are disposed as well
     // ref.invalidate(onboardingRepositoryProvider);
@@ -20,7 +21,7 @@ Future<void> appStartup(AppStartupRef ref) async {
     // list of providers to be warmed up
 
     ref.watch(dataStoreProvider.future), // for Sembast
-    // ref.watch(packageInfoProvider.future),
+    ref.watch(packageInfoProvider.future),
     // ref.watch(onboardingRepositoryProvider.future)
   ]);
 }

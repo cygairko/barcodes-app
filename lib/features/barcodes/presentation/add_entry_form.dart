@@ -66,7 +66,7 @@ class _AddEntryFormState extends ConsumerState<AddEntryForm> {
               ],
             ),
             gapH16,
-            ButtonBar(
+            OverflowBar(
               children: [
                 TextButton(
                   onPressed: () {

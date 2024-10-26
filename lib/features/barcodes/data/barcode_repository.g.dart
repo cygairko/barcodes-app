@@ -20,6 +20,8 @@ final barcodeRepositoryProvider = Provider<BarcodeRepository>.internal(
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef BarcodeRepositoryRef = ProviderRef<BarcodeRepository>;
 String _$barcodesStreamHash() => r'1e43601806c1e2a58d3d8eb36f6645b22c82842b';
 
@@ -36,6 +38,8 @@ final barcodesStreamProvider =
   allTransitiveDependencies: null,
 );
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 typedef BarcodesStreamRef = AutoDisposeStreamProviderRef<List<BarcodeEntry>>;
 String _$barcodeStreamHash() => r'5e807cff1a059ec68ca65568b352ee32d941470c';
 
@@ -173,6 +177,8 @@ class BarcodeStreamProvider extends AutoDisposeStreamProvider<BarcodeEntry?> {
   }
 }
 
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
 mixin BarcodeStreamRef on AutoDisposeStreamProviderRef<BarcodeEntry?> {
   /// The parameter `entryId` of this provider.
   int get entryId;
@@ -187,4 +193,4 @@ class _BarcodeStreamProviderElement
   int get entryId => (origin as BarcodeStreamProvider).entryId;
 }
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

@@ -26,8 +26,12 @@ mixin _$BarcodeEntry {
   String? get comment => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
 
+  /// Serializes this BarcodeEntry to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of BarcodeEntry
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $BarcodeEntryCopyWith<BarcodeEntry> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -52,6 +56,8 @@ class _$BarcodeEntryCopyWithImpl<$Res, $Val extends BarcodeEntry>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of BarcodeEntry
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -106,6 +112,8 @@ class __$$BarcodeEntryImplCopyWithImpl<$Res>
       _$BarcodeEntryImpl _value, $Res Function(_$BarcodeEntryImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of BarcodeEntry
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -182,11 +190,13 @@ class _$BarcodeEntryImpl implements _BarcodeEntry {
             (identical(other.id, id) || other.id == id));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, name, data, type, comment, id);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of BarcodeEntry
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$BarcodeEntryImplCopyWith<_$BarcodeEntryImpl> get copyWith =>
@@ -221,8 +231,11 @@ abstract class _BarcodeEntry implements BarcodeEntry {
   String? get comment;
   @override
   int get id;
+
+  /// Create a copy of BarcodeEntry
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BarcodeEntryImplCopyWith<_$BarcodeEntryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

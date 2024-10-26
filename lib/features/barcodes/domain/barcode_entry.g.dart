@@ -12,7 +12,7 @@ _$BarcodeEntryImpl _$$BarcodeEntryImplFromJson(Map<String, dynamic> json) =>
       data: json['data'] as String,
       type: $enumDecode(_$BarcodeTypeEnumMap, json['type']),
       comment: json['comment'] as String?,
-      id: json['id'] as int? ?? -1,
+      id: (json['id'] as num?)?.toInt() ?? -1,
     );
 
 Map<String, dynamic> _$$BarcodeEntryImplToJson(_$BarcodeEntryImpl instance) =>
