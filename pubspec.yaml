@@ -14,7 +14,7 @@ dependencies:
   flutter_web_plugins:
     sdk: flutter
   
-  intl: ^0.19.0
+  intl: ^0.20.2
   barcode_widget: ^2.0.4
 
   flutter_riverpod: ^2.6.1
@@ -28,6 +28,7 @@ dependencies:
   
   path_provider: ^2.1.5
   package_info_plus: ^8.3.0
+  screen_brightness: ^1.0.1
 
 dev_dependencies:
   flutter_test:
@@ -40,8 +41,11 @@ dev_dependencies:
   build_runner: ^2.4.15
   riverpod_generator: ^2.6.5
   freezed: ^3.0.4
+  mockito: ^5.4.4
   json_serializable: ^6.9.4
   go_router_builder: ^2.8.2
+  # Ensure build_runner is also present for mockito code generation if needed by other parts of the project
+  # build_runner: ^2.4.15 # Already present
 
 flutter:
   uses-material-design: true

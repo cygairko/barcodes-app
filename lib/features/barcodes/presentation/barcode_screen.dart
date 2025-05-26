@@ -6,19 +6,81 @@ import 'package:barcodes/features/barcodes/domain/barcode_conf.dart';
 import 'package:barcodes/features/barcodes/presentation/barcode_error.dart';
 import 'package:barcodes/features/barcodes/presentation/barcode_info.dart';
 import 'package:barcodes/features/barcodes/presentation/barcodes_list_controller.dart';
+import 'package:barcodes/features/settings/data/settings_repository.dart';
 import 'package:barcodes/l10n/l10n.dart';
+import 'package:barcodes/utils/brightness_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class BarcodeScreen extends ConsumerWidget {
+class BarcodeScreen extends ConsumerStatefulWidget {
   const BarcodeScreen({required this.entryId, super.key});
 
   final int entryId;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final asyncEntry = ref.watch(barcodeStreamProvider(entryId));
+  ConsumerState<BarcodeScreen> createState() => _BarcodeScreenState();
+}
+
+class _BarcodeScreenState extends ConsumerState<BarcodeScreen> {
+  double? _originalBrightness;
+  bool _brightnessWasAdjustedByThisScreen = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _setupBrightness();
+  }
+
+  Future<void> _setupBrightness() async {
+    try {
+      final autoBrightEnabled = await ref.read(automaticScreenBrightnessProvider.future);
+
+      if (autoBrightEnabled) {
+        final brightnessService = ref.read(brightnessServiceProvider);
+        // It's important to handle potential errors when getting current brightness
+        // For example, if the platform call fails.
+        try {
+          _originalBrightness = await brightnessService.getCurrentBrightness();
+        } catch (e) {
+          print('Error getting current brightness in BarcodeScreen: $e');
+          // Decide if we should proceed or not if current brightness can't be fetched.
+          // For now, we'll assume we can't proceed reliably without it.
+          return;
+        }
+        
+        final maxLevel = await ref.read(maxScreenBrightnessLevelProvider.future);
+
+        // Check if _originalBrightness is not null before comparison
+        if (_originalBrightness != null && _originalBrightness! < maxLevel) {
+          await brightnessService.setBrightness(maxLevel);
+          // Only set this flag if we actually attempt to change brightness.
+          // And ensure it's only true if the setBrightness call is expected to succeed.
+          _brightnessWasAdjustedByThisScreen = true; 
+        }
+      }
+    } catch (e) {
+      // Catch any errors from reading providers or other operations
+      print('Error in _setupBrightness: $e');
+    }
+  }
+
+  @override
+  void dispose() {
+    if (_brightnessWasAdjustedByThisScreen && _originalBrightness != null) {
+      // Use a try-catch here as well, in case restoring brightness fails
+      try {
+        ref.read(brightnessServiceProvider).setBrightness(_originalBrightness!);
+      } catch (e) {
+        print('Error restoring brightness in BarcodeScreen dispose: $e');
+      }
+    }
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final asyncEntry = ref.watch(barcodeStreamProvider(widget.entryId));
 
     return Scaffold(
       appBar: AppBar(
@@ -26,7 +88,7 @@ class BarcodeScreen extends ConsumerWidget {
         actions: [
           IconButton(
             onPressed: () {
-              ref.read(barcodesListControllerProvider.notifier).delete(entryId);
+              ref.read(barcodesListControllerProvider.notifier).delete(widget.entryId);
               context.pop();
             },
             icon: const Icon(Icons.delete_outlined),
@@ -50,13 +112,23 @@ class BarcodeScreen extends ConsumerWidget {
                 children: [
                   Container(
                     alignment: Alignment.topCenter,
-                    child: BarcodeWidget(
-                      padding: const EdgeInsets.all(12),
-                      data: conf.normalizedData,
-                      barcode: conf.barcode,
-                      height: conf.height,
-                      width: conf.width,
-                      style: TextStyle(fontSize: conf.fontSize),
+                    child: GestureDetector(
+                      onDoubleTap: () {
+                        // Note: If automatic brightness is on, this double-tap might
+                        // conflict or be redundant if maxLevel is already 1.0.
+                        // Or, it could be a way to force max brightness if auto didn't set it to 1.0.
+                        // For now, it just sets to 1.0 regardless of auto-brightness logic.
+                        ref.read(brightnessServiceProvider).setBrightness(1.0);
+                      },
+                      child: BarcodeWidget(
+                        key: const Key('barcodeWidget'), // Add key here
+                        padding: const EdgeInsets.all(12),
+                        data: conf.normalizedData,
+                        barcode: conf.barcode,
+                        height: conf.height,
+                        width: conf.width,
+                        style: TextStyle(fontSize: conf.fontSize),
+                      ),
                     ),
                   ),
                   BarcodeInfo(
