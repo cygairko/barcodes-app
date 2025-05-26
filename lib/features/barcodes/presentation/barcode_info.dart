@@ -8,37 +8,24 @@ class BarcodeInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final nameController = TextEditingController();
-    final typeController = TextEditingController();
-    final commentController = TextEditingController();
-
-    nameController.text = entry.name;
-    typeController.text = entry.type.name;
-    commentController.text = entry.comment ?? '';
-
     return Padding(
       padding: const EdgeInsets.all(12),
       child: Column(
         children: [
-          TextField(
-            enabled: false,
-            controller: nameController,
-            decoration:
-                InputDecoration(labelText: context.l10n.labelAddFormEntryName),
+          ListTile(
+            leading: const Icon(Icons.label_outline),
+            title: Text(entry.name),
+            subtitle: Text(context.l10n.labelAddFormEntryName),
           ),
-          TextField(
-            enabled: false,
-            controller: typeController,
-            decoration: InputDecoration(
-              labelText: context.l10n.labelAddFormEntryTypeDropdown,
-            ),
+          ListTile(
+            leading: const Icon(Icons.settings_overscan),
+            title: Text(entry.type.name),
+            subtitle: Text(context.l10n.labelAddFormEntryTypeDropdown),
           ),
-          TextField(
-            enabled: false,
-            controller: commentController,
-            decoration: InputDecoration(
-              labelText: context.l10n.labelAddFormEntryComment,
-            ),
+          ListTile(
+            leading: const Icon(Icons.comment_outlined),
+            title: Text(entry.comment ?? ''),
+            subtitle: Text(context.l10n.labelAddFormEntryComment),
           ),
         ],
       ),
