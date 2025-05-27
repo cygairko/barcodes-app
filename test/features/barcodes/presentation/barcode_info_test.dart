@@ -1,10 +1,10 @@
+import 'package:barcode_widget/barcode_widget.dart';
 import 'package:barcodes/features/barcodes/domain/barcode_entry.dart';
-import 'package:barcodes/features/barcodes/domain/barcode_type.dart';
 import 'package:barcodes/features/barcodes/presentation/barcode_info.dart';
-import 'package:barcodes/l10n/l10n.dart';
+import 'package:barcodes/l10n/arb/app_localizations.dart';
+import 'package:barcodes/l10n/arb/app_localizations_en.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() {
   testWidgets('BarcodeInfo displays entry data correctly in ListTiles',
@@ -13,7 +13,7 @@ void main() {
     final mockEntry = BarcodeEntry(
       id: 1,
       name: 'Test Barcode',
-      type: BarcodeType.qrCode,
+      type: BarcodeType.QrCode,
       data: 'test_data',
       comment: 'Test comment',
     );
@@ -34,7 +34,7 @@ void main() {
 
     // 4. Verify Text widgets within each ListTile display correct data
     expect(find.text('Test Barcode'), findsOneWidget);
-    expect(find.text(BarcodeType.qrCode.name), findsOneWidget);
+    expect(find.text(BarcodeType.QrCode.name), findsOneWidget);
     expect(find.text('Test comment'), findsOneWidget);
 
     // Verify subtitles (using l10n keys as stand-ins for actual localized strings)
@@ -42,7 +42,7 @@ void main() {
     // For a more robust test, you might want to mock AppLocalizations or use a real one.
     // However, for this task, we'll find them by the text they'd display if l10n is set up.
     // We need to pump the widget again after a delay for localizations to load.
-    await tester.pump(); 
+    await tester.pump();
 
     // At this point, context.l10n should be available.
     // We'll find the subtitle texts. This is a bit indirect, as we're finding the Text widget
@@ -71,13 +71,13 @@ void main() {
     // The subtitle for Type
     expect(
         find.descendant(
-            of: find.widgetWithText(ListTile, BarcodeType.qrCode.name),
+            of: find.widgetWithText(ListTile, BarcodeType.QrCode.name),
             matching: find.byWidgetPredicate((widget) =>
                 widget is Text &&
                 widget.data ==
                     AppLocalizationsEn().labelAddFormEntryTypeDropdown)),
         findsOneWidget);
-    
+
     // The subtitle for Comment
     expect(
         find.descendant(
@@ -86,7 +86,6 @@ void main() {
                 widget is Text &&
                 widget.data == AppLocalizationsEn().labelAddFormEntryComment)),
         findsOneWidget);
-
 
     // 5. Verify Icon widgets are present
     expect(find.byIcon(Icons.label_outline), findsOneWidget);

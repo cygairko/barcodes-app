@@ -47,7 +47,7 @@ class BarcodeScreen extends ConsumerWidget {
 
             return SingleChildScrollView(
               child: Card(
-                margin: const EdgeInsets.all(12.0),
+                margin: const EdgeInsets.all(12),
                 child: Column(
                   children: [
                     Container(
@@ -56,15 +56,16 @@ class BarcodeScreen extends ConsumerWidget {
                         padding: const EdgeInsets.all(12),
                         data: conf.normalizedData,
                         barcode: conf.barcode,
-                      height: conf.height,
-                      width: conf.width,
-                      style: TextStyle(fontSize: conf.fontSize),
+                        height: conf.height,
+                        width: conf.width,
+                        style: TextStyle(fontSize: conf.fontSize),
+                      ),
                     ),
-                  ),
-                  BarcodeInfo(
-                    entry: p0,
-                  ),
-                ],
+                    BarcodeInfo(
+                      entry: p0,
+                    ),
+                  ],
+                ),
               ),
             );
           } else {
