@@ -23,6 +23,7 @@ mixin _$BarcodeEntry {
   String get name => throw _privateConstructorUsedError;
   String get data => throw _privateConstructorUsedError;
   BarcodeType get type => throw _privateConstructorUsedError;
+  String? get categoryId => throw _privateConstructorUsedError;
   String? get comment => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
 
@@ -43,7 +44,12 @@ abstract class $BarcodeEntryCopyWith<$Res> {
       _$BarcodeEntryCopyWithImpl<$Res, BarcodeEntry>;
   @useResult
   $Res call(
-      {String name, String data, BarcodeType type, String? comment, int id});
+      {String name,
+      String data,
+      BarcodeType type,
+      String? categoryId,
+      String? comment,
+      int id});
 }
 
 /// @nodoc
@@ -64,6 +70,7 @@ class _$BarcodeEntryCopyWithImpl<$Res, $Val extends BarcodeEntry>
     Object? name = null,
     Object? data = null,
     Object? type = null,
+    Object? categoryId = freezed,
     Object? comment = freezed,
     Object? id = null,
   }) {
@@ -80,6 +87,10 @@ class _$BarcodeEntryCopyWithImpl<$Res, $Val extends BarcodeEntry>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as BarcodeType,
+      categoryId: freezed == categoryId
+          ? _value.categoryId
+          : categoryId // ignore: cast_nullable_to_non_nullable
+              as String?,
       comment: freezed == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
@@ -101,7 +112,12 @@ abstract class _$$BarcodeEntryImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String name, String data, BarcodeType type, String? comment, int id});
+      {String name,
+      String data,
+      BarcodeType type,
+      String? categoryId,
+      String? comment,
+      int id});
 }
 
 /// @nodoc
@@ -120,6 +136,7 @@ class __$$BarcodeEntryImplCopyWithImpl<$Res>
     Object? name = null,
     Object? data = null,
     Object? type = null,
+    Object? categoryId = freezed,
     Object? comment = freezed,
     Object? id = null,
   }) {
@@ -136,6 +153,10 @@ class __$$BarcodeEntryImplCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as BarcodeType,
+      categoryId: freezed == categoryId
+          ? _value.categoryId
+          : categoryId // ignore: cast_nullable_to_non_nullable
+              as String?,
       comment: freezed == comment
           ? _value.comment
           : comment // ignore: cast_nullable_to_non_nullable
@@ -155,6 +176,7 @@ class _$BarcodeEntryImpl implements _BarcodeEntry {
       {required this.name,
       required this.data,
       required this.type,
+      this.categoryId,
       this.comment,
       this.id = -1});
 
@@ -168,6 +190,8 @@ class _$BarcodeEntryImpl implements _BarcodeEntry {
   @override
   final BarcodeType type;
   @override
+  final String? categoryId;
+  @override
   final String? comment;
   @override
   @JsonKey()
@@ -175,7 +199,7 @@ class _$BarcodeEntryImpl implements _BarcodeEntry {
 
   @override
   String toString() {
-    return 'BarcodeEntry(name: $name, data: $data, type: $type, comment: $comment, id: $id)';
+    return 'BarcodeEntry(name: $name, data: $data, type: $type, categoryId: $categoryId, comment: $comment, id: $id)';
   }
 
   @override
@@ -186,13 +210,16 @@ class _$BarcodeEntryImpl implements _BarcodeEntry {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.data, data) || other.data == data) &&
             (identical(other.type, type) || other.type == type) &&
+            (identical(other.categoryId, categoryId) ||
+                other.categoryId == categoryId) &&
             (identical(other.comment, comment) || other.comment == comment) &&
             (identical(other.id, id) || other.id == id));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, name, data, type, comment, id);
+  int get hashCode =>
+      Object.hash(runtimeType, name, data, type, categoryId, comment, id);
 
   /// Create a copy of BarcodeEntry
   /// with the given fields replaced by the non-null parameter values.
@@ -215,6 +242,7 @@ abstract class _BarcodeEntry implements BarcodeEntry {
       {required final String name,
       required final String data,
       required final BarcodeType type,
+      final String? categoryId,
       final String? comment,
       final int id}) = _$BarcodeEntryImpl;
 
@@ -227,6 +255,8 @@ abstract class _BarcodeEntry implements BarcodeEntry {
   String get data;
   @override
   BarcodeType get type;
+  @override
+  String? get categoryId;
   @override
   String? get comment;
   @override

@@ -1,5 +1,6 @@
 import 'package:barcodes/common_widgets/async_value_widget.dart';
 import 'package:barcodes/l10n/l10n.dart';
+import 'package:barcodes/routing/app_routes.dart';
 import 'package:barcodes/utils/package_info.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,6 +22,12 @@ class SettingsPage extends ConsumerWidget {
             subtitle: Text(context.l10n.settingsIncreaseBrigtnessSubtitle),
             value: false,
             onChanged: null,
+          ),
+          const Divider(),
+          ListTile(
+            title: Text(context.l10n.settingsCategoriesTitle),
+            leading: const Icon(Icons.category_outlined),
+            onTap: () => const CategoriesPageRoute().go(context),
           ),
           const Divider(),
           AsyncValueWidget(

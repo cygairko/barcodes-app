@@ -1,6 +1,7 @@
 import 'package:barcodes/features/barcodes/presentation/add_entry_screen.dart';
 import 'package:barcodes/features/barcodes/presentation/barcode_screen.dart';
 import 'package:barcodes/features/barcodes/presentation/barcodes_page.dart';
+import 'package:barcodes/features/settings/presentation/categories/categories_page.dart';
 import 'package:barcodes/features/settings/presentation/settings_page.dart';
 import 'package:barcodes/routing/scaffold_with_nested_navigation.dart';
 import 'package:flutter/material.dart';
@@ -31,9 +32,14 @@ part 'app_routes.g.dart';
     TypedStatefulShellBranch<SettingsBranch>(
       routes: [
         TypedGoRoute<SettingsPageRoute>(
-          name: SettingsPageRoute.name,
-          path: SettingsPageRoute.path,
-        ),
+            name: SettingsPageRoute.name,
+            path: SettingsPageRoute.path,
+            routes: [
+              TypedGoRoute<CategoriesPageRoute>(
+                name: CategoriesPageRoute.name,
+                path: CategoriesPageRoute.path,
+              ),
+            ]),
       ],
     ),
   ],
@@ -114,5 +120,16 @@ class SettingsPageRoute extends GoRouteData {
   Page<void> buildPage(BuildContext context, GoRouterState state) =>
       const NoTransitionPage(
         child: SettingsPage(),
+      );
+}
+
+class CategoriesPageRoute extends GoRouteData {
+  static const String name = 'categories';
+  static const String path = 'categories';
+
+  @override
+  Page<void> buildPage(BuildContext context, GoRouterState state) =>
+      const MaterialPage(
+        child: CategoriesPage(),
       );
 }

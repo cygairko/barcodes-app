@@ -10,6 +10,7 @@ class BarcodeEntry with _$BarcodeEntry {
     required String name,
     required String data,
     required BarcodeType type,
+    String? categoryId,
     String? comment,
     @Default(-1) int id,
   }) = _BarcodeEntry;

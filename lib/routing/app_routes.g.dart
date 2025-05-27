@@ -40,6 +40,13 @@ RouteBase get $mainShellRouteData => StatefulShellRouteData.$route(
               path: '/settings',
               name: 'settings',
               factory: $SettingsPageRouteExtension._fromState,
+              routes: [
+                GoRouteData.$route(
+                  path: 'categories',
+                  name: 'categories',
+                  factory: $CategoriesPageRouteExtension._fromState,
+                ),
+              ],
             ),
           ],
         ),
@@ -57,6 +64,24 @@ extension $BarcodesPageRouteExtension on BarcodesPageRoute {
 
   String get location => GoRouteData.$location(
         '/',
+      );
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $CategoriesPageRouteExtension on CategoriesPageRoute {
+  static CategoriesPageRoute _fromState(GoRouterState state) =>
+      CategoriesPageRoute();
+
+  String get location => GoRouteData.$location(
+        '/settings/categories',
       );
 
   void go(BuildContext context) => context.go(location);
