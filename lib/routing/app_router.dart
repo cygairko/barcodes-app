@@ -15,8 +15,7 @@ GoRouter goRouter(GoRouterRef ref) {
     navigatorKey: _rootNavigatorKey,
     debugLogDiagnostics: true,
     initialLocation: BarcodesPageRoute.path,
-    errorBuilder: (context, state) =>
-        EmptyContent(message: 'No content found'.hardcoded),
+    errorBuilder: (context, state) => EmptyContent(message: 'No content found'.hardcoded),
     routes: $appRoutes,
   );
 }

@@ -29,14 +29,14 @@ String _$barcodesStreamHash() => r'1e43601806c1e2a58d3d8eb36f6645b22c82842b';
 @ProviderFor(barcodesStream)
 final barcodesStreamProvider =
     AutoDisposeStreamProvider<List<BarcodeEntry>>.internal(
-  barcodesStream,
-  name: r'barcodesStreamProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$barcodesStreamHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      barcodesStream,
+      name: r'barcodesStreamProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$barcodesStreamHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
@@ -74,21 +74,15 @@ class BarcodeStreamFamily extends Family<AsyncValue<BarcodeEntry?>> {
   const BarcodeStreamFamily();
 
   /// See also [barcodeStream].
-  BarcodeStreamProvider call(
-    int entryId,
-  ) {
-    return BarcodeStreamProvider(
-      entryId,
-    );
+  BarcodeStreamProvider call(int entryId) {
+    return BarcodeStreamProvider(entryId);
   }
 
   @override
   BarcodeStreamProvider getProviderOverride(
     covariant BarcodeStreamProvider provider,
   ) {
-    return call(
-      provider.entryId,
-    );
+    return call(provider.entryId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -109,24 +103,19 @@ class BarcodeStreamFamily extends Family<AsyncValue<BarcodeEntry?>> {
 /// See also [barcodeStream].
 class BarcodeStreamProvider extends AutoDisposeStreamProvider<BarcodeEntry?> {
   /// See also [barcodeStream].
-  BarcodeStreamProvider(
-    int entryId,
-  ) : this._internal(
-          (ref) => barcodeStream(
-            ref as BarcodeStreamRef,
-            entryId,
-          ),
-          from: barcodeStreamProvider,
-          name: r'barcodeStreamProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : _$barcodeStreamHash,
-          dependencies: BarcodeStreamFamily._dependencies,
-          allTransitiveDependencies:
-              BarcodeStreamFamily._allTransitiveDependencies,
-          entryId: entryId,
-        );
+  BarcodeStreamProvider(int entryId)
+    : this._internal(
+        (ref) => barcodeStream(ref as BarcodeStreamRef, entryId),
+        from: barcodeStreamProvider,
+        name: r'barcodeStreamProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$barcodeStreamHash,
+        dependencies: BarcodeStreamFamily._dependencies,
+        allTransitiveDependencies:
+            BarcodeStreamFamily._allTransitiveDependencies,
+        entryId: entryId,
+      );
 
   BarcodeStreamProvider._internal(
     super._createNotifier, {
@@ -192,5 +181,6 @@ class _BarcodeStreamProviderElement
   @override
   int get entryId => (origin as BarcodeStreamProvider).entryId;
 }
+
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

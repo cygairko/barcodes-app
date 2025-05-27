@@ -29,18 +29,18 @@ class BarcodeRepository {
   final storeRef = intMapStoreFactory.store('barcodes_store');
 
   Future<int> addEntry(BarcodeEntry entry) => storeRef.add(
+    datastore.database,
+    entry.toJson(),
+  );
+
+  Future<void> updateEntry(BarcodeEntry entry) => storeRef
+      .record(entry.id)
+      .update(
         datastore.database,
         entry.toJson(),
       );
 
-  Future<void> updateEntry(BarcodeEntry entry) =>
-      storeRef.record(entry.id).update(
-            datastore.database,
-            entry.toJson(),
-          );
-
-  Future<int?> deleteEntry(int entryId) =>
-      storeRef.record(entryId).delete(datastore.database);
+  Future<int?> deleteEntry(int entryId) => storeRef.record(entryId).delete(datastore.database);
 
   Future<BarcodeEntry?> fetchEntry(int entryId) async {
     final entryJson = await storeRef.record(entryId).get(datastore.database);
@@ -58,13 +58,14 @@ class BarcodeRepository {
     });
   }
 
-  Stream<List<BarcodeEntry>> watchBarcodes() =>
-      storeRef.query().onSnapshots(datastore.database).map(
-            (snapshot) => snapshot
-                .map(
-                  (entry) => BarcodeEntry.fromJson(entry.value)
-                      .copyWith(id: entry.key),
-                )
-                .toList(growable: false),
-          );
+  Stream<List<BarcodeEntry>> watchBarcodes() => storeRef
+      .query()
+      .onSnapshots(datastore.database)
+      .map(
+        (snapshot) => snapshot
+            .map(
+              (entry) => BarcodeEntry.fromJson(entry.value).copyWith(id: entry.key),
+            )
+            .toList(growable: false),
+      );
 }

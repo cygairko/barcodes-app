@@ -13,14 +13,14 @@ String _$barcodesListControllerHash() =>
 @ProviderFor(BarcodesListController)
 final barcodesListControllerProvider =
     AutoDisposeAsyncNotifierProvider<BarcodesListController, void>.internal(
-  BarcodesListController.new,
-  name: r'barcodesListControllerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$barcodesListControllerHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      BarcodesListController.new,
+      name: r'barcodesListControllerProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$barcodesListControllerHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 typedef _$BarcodesListController = AutoDisposeAsyncNotifier<void>;
 // ignore_for_file: type=lint

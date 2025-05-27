@@ -7,10 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('BarcodeInfo displays entry data correctly in ListTiles',
-      (WidgetTester tester) async {
+  testWidgets('BarcodeInfo displays entry data correctly in ListTiles', (WidgetTester tester) async {
     // 1. Create a mock BarcodeEntry object
-    final mockEntry = BarcodeEntry(
+    const mockEntry = BarcodeEntry(
       id: 1,
       name: 'Test Barcode',
       type: BarcodeType.QrCode,
@@ -20,7 +19,7 @@ void main() {
 
     // 2. Pump the BarcodeInfo widget
     await tester.pumpWidget(
-      MaterialApp(
+      const MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
         home: Scaffold(
@@ -61,31 +60,36 @@ void main() {
     // Let's find the Text widgets that are subtitles.
     // The subtitle for Name
     expect(
-        find.descendant(
-            of: find.widgetWithText(ListTile, 'Test Barcode'),
-            matching: find.byWidgetPredicate((widget) =>
-                widget is Text &&
-                widget.data == AppLocalizationsEn().labelAddFormEntryName)),
-        findsOneWidget);
+      find.descendant(
+        of: find.widgetWithText(ListTile, 'Test Barcode'),
+        matching: find.byWidgetPredicate(
+          (widget) => widget is Text && widget.data == AppLocalizationsEn().labelAddFormEntryName,
+        ),
+      ),
+      findsOneWidget,
+    );
 
     // The subtitle for Type
     expect(
-        find.descendant(
-            of: find.widgetWithText(ListTile, BarcodeType.QrCode.name),
-            matching: find.byWidgetPredicate((widget) =>
-                widget is Text &&
-                widget.data ==
-                    AppLocalizationsEn().labelAddFormEntryTypeDropdown)),
-        findsOneWidget);
+      find.descendant(
+        of: find.widgetWithText(ListTile, BarcodeType.QrCode.name),
+        matching: find.byWidgetPredicate(
+          (widget) => widget is Text && widget.data == AppLocalizationsEn().labelAddFormEntryTypeDropdown,
+        ),
+      ),
+      findsOneWidget,
+    );
 
     // The subtitle for Comment
     expect(
-        find.descendant(
-            of: find.widgetWithText(ListTile, 'Test comment'),
-            matching: find.byWidgetPredicate((widget) =>
-                widget is Text &&
-                widget.data == AppLocalizationsEn().labelAddFormEntryComment)),
-        findsOneWidget);
+      find.descendant(
+        of: find.widgetWithText(ListTile, 'Test comment'),
+        matching: find.byWidgetPredicate(
+          (widget) => widget is Text && widget.data == AppLocalizationsEn().labelAddFormEntryComment,
+        ),
+      ),
+      findsOneWidget,
+    );
 
     // 5. Verify Icon widgets are present
     expect(find.byIcon(Icons.label_outline), findsOneWidget);

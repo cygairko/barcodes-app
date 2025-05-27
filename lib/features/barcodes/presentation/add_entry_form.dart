@@ -86,12 +86,9 @@ class _AddEntryFormState extends ConsumerState<AddEntryForm> {
                       Barcode.fromType(type).verify(dataController.text);
 
                       context.pop();
-                      ref
-                          .read(barcodesListControllerProvider.notifier)
-                          .add(entry);
+                      ref.read(barcodesListControllerProvider.notifier).add(entry);
                     } on BarcodeException catch (error) {
-                      ScaffoldMessenger.of(context)
-                          .showSnackBar(SnackBar(content: Text('$error')));
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('$error')));
                     }
                   },
                   child: Text(context.l10n.buttonSubmit),
