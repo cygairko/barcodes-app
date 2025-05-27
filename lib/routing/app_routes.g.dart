@@ -71,7 +71,7 @@ extension $BarcodesPageRouteExtension on BarcodesPageRoute {
 
 extension $BarcodeRouteExtension on BarcodeRoute {
   static BarcodeRoute _fromState(GoRouterState state) => BarcodeRoute(
-        int.parse(state.pathParameters['eid']!),
+        int.parse(state.pathParameters['eid']!)!,
       );
 
   String get location => GoRouteData.$location(
