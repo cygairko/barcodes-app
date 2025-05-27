@@ -28,13 +28,13 @@ To run the desired flavor, you can use the launch configuration in your IDE (VS 
 
 ```sh
 # Development
-flutter run --flavor development --target lib/main_development.dart
+flutter run --flavor development --target lib/main.dart
 
 # Staging
-flutter run --flavor staging --target lib/main_staging.dart
+flutter run --flavor staging --target lib/main.dart
 
 # Production
-flutter run --flavor production --target lib/main_production.dart
+flutter run --flavor production --target lib/main.dart
 ```
 
 _\*Barcodes works on iOS, Android, Web, and Windows._
