@@ -46,23 +46,26 @@ class BarcodeScreen extends ConsumerWidget {
             }
 
             return SingleChildScrollView(
-              child: Column(
-                children: [
-                  Container(
-                    alignment: Alignment.topCenter,
-                    child: BarcodeWidget(
-                      padding: const EdgeInsets.all(12),
-                      data: conf.normalizedData,
-                      barcode: conf.barcode,
-                      height: conf.height,
-                      width: conf.width,
-                      style: TextStyle(fontSize: conf.fontSize),
+              child: Card(
+                margin: const EdgeInsets.all(12),
+                child: Column(
+                  children: [
+                    Container(
+                      alignment: Alignment.topCenter,
+                      child: BarcodeWidget(
+                        padding: const EdgeInsets.all(12),
+                        data: conf.normalizedData,
+                        barcode: conf.barcode,
+                        height: conf.height,
+                        width: conf.width,
+                        style: TextStyle(fontSize: conf.fontSize),
+                      ),
                     ),
-                  ),
-                  BarcodeInfo(
-                    entry: p0,
-                  ),
-                ],
+                    BarcodeInfo(
+                      entry: p0,
+                    ),
+                  ],
+                ),
               ),
             );
           } else {

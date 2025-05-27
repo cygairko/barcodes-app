@@ -6,8 +6,8 @@ part of 'barcode_entry.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$BarcodeEntryImpl _$$BarcodeEntryImplFromJson(Map<String, dynamic> json) =>
-    _$BarcodeEntryImpl(
+_BarcodeEntry _$BarcodeEntryFromJson(Map<String, dynamic> json) =>
+    _BarcodeEntry(
       name: json['name'] as String,
       data: json['data'] as String,
       type: $enumDecode(_$BarcodeTypeEnumMap, json['type']),
@@ -15,7 +15,7 @@ _$BarcodeEntryImpl _$$BarcodeEntryImplFromJson(Map<String, dynamic> json) =>
       id: (json['id'] as num?)?.toInt() ?? -1,
     );
 
-Map<String, dynamic> _$$BarcodeEntryImplToJson(_$BarcodeEntryImpl instance) =>
+Map<String, dynamic> _$BarcodeEntryToJson(_BarcodeEntry instance) =>
     <String, dynamic>{
       'name': instance.name,
       'data': instance.data,
@@ -45,5 +45,6 @@ const _$BarcodeTypeEnumMap = {
   BarcodeType.DataMatrix: 'DataMatrix',
   BarcodeType.Aztec: 'Aztec',
   BarcodeType.Rm4scc: 'Rm4scc',
+  BarcodeType.Postnet: 'Postnet',
   BarcodeType.Itf: 'Itf',
 };

@@ -66,11 +66,13 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsIncreaseBrigtnessTitle => 'Increase brightness';
 
   @override
-  String get settingsIncreaseBrigtnessSubtitle => 'Lighten up the display when showing a barcode.';
+  String get settingsIncreaseBrigtnessSubtitle =>
+      'Lighten up the display when showing a barcode.';
 
   @override
   String get settingsIncreaseAppVersionTitle => 'App version';
 
   @override
-  String get settingsIncreaseAppVersionSubtitle => 'Lighten up the display when showing a barcode.';
+  String get settingsIncreaseAppVersionSubtitle =>
+      'Lighten up the display when showing a barcode.';
 }
