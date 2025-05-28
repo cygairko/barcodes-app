@@ -206,17 +206,23 @@ abstract class AppLocalizations {
   /// **'for this barcode entry'**
   String get textBarcodeInfoNoContentMessage;
 
-  /// settingsIncreaseBrigtnessTitle
+  /// settingsAutomaticBrigtnessTitle
   ///
   /// In en, this message translates to:
-  /// **'Increase brightness'**
-  String get settingsIncreaseBrigtnessTitle;
+  /// **'Automatic screen brightness'**
+  String get settingsAutomaticBrigtnessTitle;
 
-  /// settingsIncreaseBrigtnessSubtitle
+  /// settingsAutomaticBrigtnessSubtitle
   ///
   /// In en, this message translates to:
-  /// **'Lighten up the display when showing a barcode.'**
-  String get settingsIncreaseBrigtnessSubtitle;
+  /// **'Adjust brightness automatically when a barcode is shown.'**
+  String get settingsAutomaticBrigtnessSubtitle;
+
+  /// settingsMaxScreenBrightnessTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum brightness level'**
+  String get settingsMaxScreenBrightnessTitle;
 
   /// settingsIncreaseAppVersionTitle
   ///

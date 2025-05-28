@@ -72,13 +72,17 @@
   "@textBarcodeInfoNoContentMessage": {
     "description": "textBarcodeInfoNoContentMessage"
   },
-  "settingsIncreaseBrigtnessTitle": "Increase brightness",
-  "@settingsIncreaseBrigtnessTitle": {
-    "description": "settingsIncreaseBrigtnessTitle"
+  "settingsAutomaticBrigtnessTitle": "Automatic screen brightness",
+  "@settingsAutomaticBrigtnessTitle": {
+    "description": "settingsAutomaticBrigtnessTitle"
   },
-  "settingsIncreaseBrigtnessSubtitle": "Lighten up the display when showing a barcode.",
-  "@settingsIncreaseBrigtnessSubtitle": {
-    "description": "settingsIncreaseBrigtnessSubtitle"
+  "settingsAutomaticBrigtnessSubtitle": "Adjust brightness automatically when a barcode is shown.",
+  "@settingsAutomaticBrigtnessSubtitle": {
+    "description": "settingsAutomaticBrigtnessSubtitle"
+  },
+  "settingsMaxScreenBrightnessTitle": "Maximum brightness level",
+  "@settingsMaxScreenBrightnessTitle": {
+    "description": "settingsMaxScreenBrightnessTitle"
   },
   "settingsIncreaseAppVersionTitle": "App version",
   "@settingsIncreaseAppVersionTitle": {
