@@ -1,3 +1,4 @@
+import 'package:barcode_widget/barcode_widget.dart'; // Import BarcodeType
 import 'package:barcodes/features/barcodes/data/barcode_repository.dart';
 import 'package:barcodes/features/barcodes/domain/barcode_entry.dart';
 import 'package:barcodes/features/barcodes/presentation/barcode_screen.dart';
@@ -5,7 +6,7 @@ import 'package:barcodes/features/barcodes/presentation/barcodes_list_controller
 import 'package:barcodes/features/settings/data/settings_repository.dart';
 import 'package:barcodes/l10n/arb/app_localizations.dart';
 import 'package:barcodes/utils/brightness_service.dart';
-import 'package:barcode_widget/barcode_widget.dart'; // Import BarcodeType
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -21,11 +22,11 @@ import 'package:mockito/mockito.dart';
 import 'barcode_screen_test.mocks.dart';
 
 // Default mock BarcodeEntry
-final mockBarcodeEntry = BarcodeEntry(
+const mockBarcodeEntry = BarcodeEntry(
   id: 1, // Explicitly setting ID, though @Default(-1) exists in source
   name: 'Test Barcode',
   data: '1234567890123', // Ensure this is valid for EAN-13 if verification runs
-  type: BarcodeType.ean13, 
+  type: BarcodeType.CodeEAN13,
   comment: 'A test barcode entry for brightness tests',
 );
 
@@ -43,7 +44,6 @@ Future<void> pumpBarcodeScreen(
   if (mockBarcodesListController == null) {
     when(controller.delete(any)).thenAnswer((_) async => true);
   }
-
 
   await tester.pumpWidget(
     ProviderScope(
@@ -85,8 +85,7 @@ void main() {
   });
 
   group('BarcodeScreen Brightness Tests', () {
-    testWidgets('Double-tap on BarcodeWidget calls setBrightness(1.0)',
-        (WidgetTester tester) async {
+    testWidgets('Double-tap on BarcodeWidget calls setBrightness(1.0)', (WidgetTester tester) async {
       await pumpBarcodeScreen(
         tester,
         mockBrightnessService: mockBrightnessService,
@@ -100,7 +99,11 @@ void main() {
       expect(barcodeWidgetFinder, findsOneWidget);
 
       // Simulate a double-tap
-      await tester.doubleTap(barcodeWidgetFinder);
+      // Note: kDoubleTapMinTime is a constant defined in the Flutter framework
+      // It represents the minimum time between two taps to be considered a double-tap.
+      await tester.tap(barcodeWidgetFinder);
+      await tester.pump(kDoubleTapMinTime);
+      await tester.tap(barcodeWidgetFinder);
       await tester.pumpAndSettle(); // Allow any potential state changes
 
       // Verify that setBrightness(1.0) was called
@@ -128,7 +131,6 @@ void main() {
       when(mockBrightnessService.getCurrentBrightness()).thenAnswer((_) async => 0.5);
       when(mockBrightnessService.setBrightness(any)).thenAnswer((_) async {});
 
-
       // Pop the screen to test dispose
       Navigator.of(tester.element(find.byType(BarcodeScreen))).pop();
       await tester.pumpAndSettle();
@@ -138,8 +140,7 @@ void main() {
       verifyNever(mockBrightnessService.setBrightness(any));
     });
 
-    testWidgets('Automatic Brightening Enabled: Brightness Increased and Restored',
-        (WidgetTester tester) async {
+    testWidgets('Automatic Brightening Enabled: Brightness Increased and Restored', (WidgetTester tester) async {
       final initialBrightness = 0.5;
       final targetMaxBrightness = 0.9;
       when(mockBrightnessService.getCurrentBrightness()).thenAnswer((_) async => initialBrightness);
@@ -149,12 +150,11 @@ void main() {
         setBrightnessCalls.add(invocation.positionalArguments.first as double);
       });
 
-
       await pumpBarcodeScreen(
         tester,
         mockBrightnessService: mockBrightnessService,
         initialAutoBrightness: true,
-        initialMaxBrightnessLevel: targetMaxBrightness, 
+        initialMaxBrightnessLevel: targetMaxBrightness,
         entry: mockBarcodeEntry,
       );
 
@@ -177,17 +177,17 @@ void main() {
       final currentBrightness = 0.8;
       final targetMaxBrightness = 0.7; // Target max (lower than current)
       when(mockBrightnessService.getCurrentBrightness()).thenAnswer((_) async => currentBrightness);
-      
+
       final List<double> setBrightnessCalls = [];
       when(mockBrightnessService.setBrightness(any)).thenAnswer((invocation) async {
-         setBrightnessCalls.add(invocation.positionalArguments.first as double);
+        setBrightnessCalls.add(invocation.positionalArguments.first as double);
       });
 
       await pumpBarcodeScreen(
         tester,
         mockBrightnessService: mockBrightnessService,
         initialAutoBrightness: true,
-        initialMaxBrightnessLevel: targetMaxBrightness, 
+        initialMaxBrightnessLevel: targetMaxBrightness,
         entry: mockBarcodeEntry,
       );
 
@@ -197,7 +197,7 @@ void main() {
       expect(setBrightnessCalls, isNot(contains(targetMaxBrightness)));
       // In fact, for this path, setBrightnessCalls should be empty after initState.
       expect(setBrightnessCalls, isEmpty);
-      
+
       // Pop the screen
       Navigator.of(tester.element(find.byType(BarcodeScreen))).pop();
       await tester.pumpAndSettle();
