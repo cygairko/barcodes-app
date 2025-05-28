@@ -52,11 +52,13 @@ class MockBarcodeRepository implements BarcodeRepository {
 
   @override
   Future<BarcodeEntry?> fetchEntry(int entryId) async {
-    return _entries.firstWhere((e) => e.id == entryId, orElse: () => null);
+    final entry = _entries.firstWhere((e) => e.id == entryId, orElse: () => null);
+    return entry != null ? Future.value(entry) : Future.value(null);
   }
 
+  // Renamed from updateEntry to updateBarcode to match the form's call
   @override
-  Future<void> updateEntry(BarcodeEntry entry) async {
+  Future<void> updateBarcode(BarcodeEntry entry) async {
     final index = _entries.indexWhere((e) => e.id == entry.id);
     if (index != -1) {
       _entries[index] = entry;
@@ -88,12 +90,18 @@ class MockBarcodeRepository implements BarcodeRepository {
 
   void dispose() {
     _entriesStreamController.close();
-     _entryStreamControllers.values.forEach((controller) => controller.close());
+    _entryStreamControllers.values.forEach((controller) => controller.close());
     _entryStreamControllers.clear();
   }
-  
+
   // Not part of the interface, but useful for testing
   List<BarcodeEntry> get currentEntries => List.unmodifiable(_entries);
+
+  // Ensure all interface methods are present, even if simple
+  @override
+  Future<void> updateEntry(BarcodeEntry entry) async { // Keep original if it's still used elsewhere, or remove if updateBarcode is the sole replacement
+    return updateBarcode(entry); // Or implement separately if logic differs
+  }
 
   @override
   DataStore get datastore => throw UnimplementedError('datastore getter not implemented in mock');

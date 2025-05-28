@@ -1,4 +1,5 @@
 import 'package:barcode_widget/barcode_widget.dart';
+import 'package:barcodes/features/barcodes/data/barcode_repository.dart';
 import 'package:barcodes/features/barcodes/domain/barcode_entry.dart';
 import 'package:barcodes/features/barcodes/presentation/barcodes_list_controller.dart';
 import 'package:barcodes/features/categories/domain/category.dart';
@@ -73,15 +74,14 @@ class _AddEntryFormState extends ConsumerState<AddEntryForm> {
         Barcode.fromType(_selectedBarcodeType!)
             .verify(_dataController.text.trim());
 
-        final controller = ref.read(barcodesListControllerProvider.notifier);
         if (widget.barcodeEntry == null) {
-          await controller.add(entry);
+          await ref.read(barcodesListControllerProvider.notifier).add(entry);
         } else {
           // Ensure the ID is not -1 if we are updating an existing entry
           if (entry.id == -1) {
              throw Exception("Cannot update entry with ID -1");
           }
-          await controller.updateEntry(entry);
+          await ref.read(barcodeRepositoryProvider).updateBarcode(entry);
         }
         if (mounted) context.pop();
       } on BarcodeException catch (error) {
