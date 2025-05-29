@@ -12,8 +12,8 @@ import 'package:barcodes/features/settings/data/settings_repository.dart'
     as _i7;
 import 'package:barcodes/utils/brightness_service.dart' as _i5;
 import 'package:barcodes/utils/data_store.dart' as _i2;
+import 'package:flutter_riverpod/flutter_riverpod.dart' as _i4;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:riverpod_annotation/riverpod_annotation.dart' as _i4;
 import 'package:sembast/sembast.dart' as _i3;
 
 // ignore_for_file: type=lint

@@ -1,13 +1,15 @@
 import 'dart:math' as math;
 
 import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 
+part 'brightness_service.g.dart';
+
 // Provider for the BrightnessService
-final brightnessServiceProvider = Provider<BrightnessService>((ref) {
-  return BrightnessService();
-});
+@Riverpod(keepAlive: true)
+BrightnessService brightnessService(Ref ref) => BrightnessService();
 
 class BrightnessService {
   final ScreenBrightness _screenBrightness = ScreenBrightness();
@@ -19,7 +21,7 @@ class BrightnessService {
   Future<void> setBrightness(double brightness) async {
     final clampedBrightness = math.max(0.0, math.min(1.0, brightness));
     try {
-      await _screenBrightness.setScreenBrightness(clampedBrightness);
+      await _screenBrightness.setApplicationScreenBrightness(clampedBrightness);
       print('Brightness set to $clampedBrightness');
     } on PlatformException catch (e) {
       print('Failed to set brightness: ${e.message}');
@@ -34,7 +36,7 @@ class BrightnessService {
   /// or throws an exception if it cannot be retrieved.
   Future<double> getCurrentBrightness() async {
     try {
-      final brightness = await _screenBrightness.current;
+      final brightness = await _screenBrightness.application;
       print('Current brightness: $brightness');
       return brightness;
     } on PlatformException catch (e) {
@@ -47,7 +49,7 @@ class BrightnessService {
   /// Resets the screen brightness to the system default.
   Future<void> resetBrightness() async {
     try {
-      await _screenBrightness.resetScreenBrightness();
+      await _screenBrightness.resetApplicationScreenBrightness();
       print('Brightness reset to system default.');
     } on PlatformException catch (e) {
       print('Failed to reset brightness: ${e.message}');

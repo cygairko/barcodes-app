@@ -70,7 +70,6 @@ class _BarcodeScreenState extends ConsumerState<BarcodeScreen> {
     if (_brightnessWasAdjustedByThisScreen && _originalBrightness != null) {
       // Use a try-catch here as well, in case restoring brightness fails
       try {
-        if (!context.mounted) return;
         ref.read(brightnessServiceProvider).resetBrightness();
       } catch (e) {
         print('Error restoring brightness in BarcodeScreen dispose: $e');
