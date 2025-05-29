@@ -143,6 +143,13 @@ class _BarcodeScreenState extends ConsumerState<BarcodeScreen> {
                       },
                       child: BarcodeWidget(
                         key: const Key('barcodeWidget'), // Add key here
+              child: Card(
+                margin: const EdgeInsets.all(12),
+                child: Column(
+                  children: [
+                    Container(
+                      alignment: Alignment.topCenter,
+                      child: BarcodeWidget(
                         padding: const EdgeInsets.all(12),
                         data: conf.normalizedData,
                         barcode: conf.barcode,
@@ -151,11 +158,11 @@ class _BarcodeScreenState extends ConsumerState<BarcodeScreen> {
                         style: TextStyle(fontSize: conf.fontSize),
                       ),
                     ),
-                  ),
-                  BarcodeInfo(
-                    entry: p0,
-                  ),
-                ],
+                    BarcodeInfo(
+                      entry: p0,
+                    ),
+                  ],
+                ),
               ),
             );
           } else {

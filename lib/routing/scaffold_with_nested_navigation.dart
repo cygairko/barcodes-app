@@ -9,8 +9,8 @@ class ScaffoldWithNestedNavigation extends StatelessWidget {
     required this.navigationShell,
     Key? key,
   }) : super(
-          key: key ?? const ValueKey('ScaffoldWithNestedNavigation'),
-        );
+         key: key ?? const ValueKey('ScaffoldWithNestedNavigation'),
+       );
   final StatefulNavigationShell navigationShell;
 
   void _goBranch(int index) {

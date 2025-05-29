@@ -107,6 +107,7 @@ class _$BarcodeEntryCopyWithImpl<$Res> implements $BarcodeEntryCopyWith<$Res> {
   }
 }
 
+
 /// @nodoc
 @JsonSerializable()
 class _BarcodeEntry implements BarcodeEntry {
@@ -223,5 +224,6 @@ class __$BarcodeEntryCopyWithImpl<$Res>
     ));
   }
 }
+
 
 // dart format on

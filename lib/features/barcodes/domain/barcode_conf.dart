@@ -192,8 +192,7 @@ class BarcodeConf extends ChangeNotifier {
       case BarcodeType.Aztec:
         width = 300;
         height = width;
-        _desc =
-            'Named after the resemblance of the central finder pattern to an Aztec pyramid.';
+        _desc = 'Named after the resemblance of the central finder pattern to an Aztec pyramid.';
         _method = 'aztec()';
         _barcode = Barcode.aztec();
       case BarcodeType.Rm4scc:

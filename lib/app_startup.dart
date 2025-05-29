@@ -19,7 +19,6 @@ Future<void> appStartup(Ref ref) async {
     // Firebase.initializeApp(options: ref.watch(firebaseOptionsProvider)),
 
     // list of providers to be warmed up
-
     ref.watch(dataStoreProvider.future), // for Sembast
     ref.watch(packageInfoProvider.future),
     // ref.watch(onboardingRepositoryProvider.future)
