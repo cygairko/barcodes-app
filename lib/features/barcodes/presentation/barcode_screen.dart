@@ -48,7 +48,7 @@ class _BarcodeScreenState extends ConsumerState<BarcodeScreen> {
           // For now, we'll assume we can't proceed reliably without it.
           return;
         }
-        
+
         final maxLevel = await ref.read(maxScreenBrightnessLevelProvider.future);
 
         // Check if _originalBrightness is not null before comparison
@@ -56,7 +56,7 @@ class _BarcodeScreenState extends ConsumerState<BarcodeScreen> {
           await brightnessService.setBrightness(maxLevel);
           // Only set this flag if we actually attempt to change brightness.
           // And ensure it's only true if the setBrightness call is expected to succeed.
-          _brightnessWasAdjustedByThisScreen = true; 
+          _brightnessWasAdjustedByThisScreen = true;
         }
       }
     } catch (e) {
@@ -70,7 +70,8 @@ class _BarcodeScreenState extends ConsumerState<BarcodeScreen> {
     if (_brightnessWasAdjustedByThisScreen && _originalBrightness != null) {
       // Use a try-catch here as well, in case restoring brightness fails
       try {
-        ref.read(brightnessServiceProvider).setBrightness(_originalBrightness!);
+        if (!context.mounted) return;
+        ref.read(brightnessServiceProvider).resetBrightness();
       } catch (e) {
         print('Error restoring brightness in BarcodeScreen dispose: $e');
       }
@@ -128,12 +129,11 @@ class _BarcodeScreenState extends ConsumerState<BarcodeScreen> {
                               // or we proceed without being able to restore. For now, let's print and continue.
                             }
                           }
-                          
+
                           await brightnessService.setBrightness(maxLevel);
                           // Ensure that if brightness is set, we attempt to restore it.
                           // No need to call setState if these vars don't directly drive UI rebuilds for this action.
                           _brightnessWasAdjustedByThisScreen = true;
-
                         } catch (e) {
                           // Catch any errors from reading providers or other operations
                           print('Error in onDoubleTap brightness adjustment: $e');

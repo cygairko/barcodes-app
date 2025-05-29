@@ -5,7 +5,7 @@ part 'barcode_entry.freezed.dart';
 part 'barcode_entry.g.dart';
 
 @freezed
-class BarcodeEntry with _$BarcodeEntry {
+abstract class BarcodeEntry with _$BarcodeEntry {
   const factory BarcodeEntry({
     required String name,
     required String data,
@@ -14,6 +14,5 @@ class BarcodeEntry with _$BarcodeEntry {
     @Default(-1) int id,
   }) = _BarcodeEntry;
 
-  factory BarcodeEntry.fromJson(Map<String, dynamic> json) =>
-      _$BarcodeEntryFromJson(json);
+  factory BarcodeEntry.fromJson(Map<String, dynamic> json) => _$BarcodeEntryFromJson(json);
 }

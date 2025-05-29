@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:screen_brightness/screen_brightness.dart';
 
 // Provider for the BrightnessService
@@ -34,7 +34,7 @@ class BrightnessService {
   /// or throws an exception if it cannot be retrieved.
   Future<double> getCurrentBrightness() async {
     try {
-      final double brightness = await _screenBrightness.current;
+      final brightness = await _screenBrightness.current;
       print('Current brightness: $brightness');
       return brightness;
     } on PlatformException catch (e) {

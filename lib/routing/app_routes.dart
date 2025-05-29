@@ -70,8 +70,7 @@ class BarcodesPageRoute extends GoRouteData {
   static const String path = '/';
 
   @override
-  Page<void> buildPage(BuildContext context, GoRouterState state) =>
-      const NoTransitionPage(
+  Page<void> buildPage(BuildContext context, GoRouterState state) => const NoTransitionPage(
         child: BarcodesPage(),
       );
 }
@@ -86,8 +85,7 @@ class BarcodeRoute extends GoRouteData {
   final int eid;
 
   @override
-  Page<void> buildPage(BuildContext context, GoRouterState state) =>
-      MaterialPage(
+  Page<void> buildPage(BuildContext context, GoRouterState state) => MaterialPage(
         child: BarcodeScreen(
           entryId: eid,
         ),
@@ -100,8 +98,7 @@ class AddEntryRoute extends GoRouteData {
   static const String path = 'barcode/add';
 
   @override
-  Page<void> buildPage(BuildContext context, GoRouterState state) =>
-      const MaterialPage(
+  Page<void> buildPage(BuildContext context, GoRouterState state) => const MaterialPage(
         child: AddEntryScreen(),
       );
 }
@@ -111,8 +108,7 @@ class SettingsPageRoute extends GoRouteData {
   static const String path = '/settings';
 
   @override
-  Page<void> buildPage(BuildContext context, GoRouterState state) =>
-      const NoTransitionPage(
+  Page<void> buildPage(BuildContext context, GoRouterState state) => const NoTransitionPage(
         child: SettingsPage(),
       );
 }
