@@ -25,7 +25,7 @@ final settingsRepositoryProvider = Provider<SettingsRepository>.internal(
 // ignore: unused_element
 typedef SettingsRepositoryRef = ProviderRef<SettingsRepository>;
 String _$automaticScreenBrightnessHash() =>
-    r'56f4c6664049c468ea1130887ec8b91285742458';
+    r'a5728986e211ddddc5722e7135baaffa47ceafd8';
 
 /// See also [automaticScreenBrightness].
 @ProviderFor(automaticScreenBrightness)
@@ -44,7 +44,7 @@ final automaticScreenBrightnessProvider =
 // ignore: unused_element
 typedef AutomaticScreenBrightnessRef = AutoDisposeFutureProviderRef<bool>;
 String _$maxScreenBrightnessLevelHash() =>
-    r'130c3b84cead305df15e202c0b236e1aa5f6d9df';
+    r'7fee483f5c130003a67be96a8018e6455476edf2';
 
 /// See also [maxScreenBrightnessLevel].
 @ProviderFor(maxScreenBrightnessLevel)

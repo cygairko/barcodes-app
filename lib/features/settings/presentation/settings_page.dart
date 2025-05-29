@@ -28,8 +28,8 @@ class SettingsPage extends ConsumerWidget {
         children: [
           SwitchListTile.adaptive(
             key: const Key('automaticBrightnessSwitch'),
-            title: Text(context.l10n.settingsAutomaticBrigtnessTitle),
-            subtitle: Text(context.l10n.settingsAutomaticBrigtnessSubtitle),
+            title: const Text('Automatic screen brightness'), // Placeholder
+            subtitle: const Text('Adjust brightness automatically when a barcode is shown'), // Placeholder
             value: automaticBrightness.asData?.value ?? false, // Default to false if loading or error
             onChanged: (bool newValue) {
               ref.read(settingsRepositoryProvider).setAutomaticScreenBrightness(newValue);
@@ -40,7 +40,7 @@ class SettingsPage extends ConsumerWidget {
           ),
           const Divider(),
           ListTile(
-            title: Text(context.l10n.settingsMaxScreenBrightnessTitle),
+            title: const Text('Maximum brightness level'), // Placeholder
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -48,6 +48,7 @@ class SettingsPage extends ConsumerWidget {
                   key: const Key('maxBrightnessSlider'),
                   value: maxBrightness.asData?.value ?? 0.8, // Default to 0.8 if loading or error
                   min: 0.1,
+                  max: 1.0,
                   divisions: 9,
                   label: (maxBrightness.asData?.value ?? 0.8).toStringAsFixed(1),
                   onChanged: sliderEnabled
@@ -59,17 +60,17 @@ class SettingsPage extends ConsumerWidget {
                 ),
                 if (maxBrightness.isLoading)
                   const Padding(
-                    padding: EdgeInsets.only(left: 16, bottom: 8),
+                    padding: EdgeInsets.only(left: 16.0, bottom: 8.0),
                     child: Text('Loading...'),
                   ),
                 if (maxBrightness.hasError)
                   Padding(
-                    padding: const EdgeInsets.only(left: 16, bottom: 8),
+                    padding: const EdgeInsets.only(left: 16.0, bottom: 8.0),
                     child: Text('Error: ${maxBrightness.error}'),
                   ),
-                if (!sliderEnabled && !automaticBrightness.isLoading)
+                 if (!sliderEnabled && !automaticBrightness.isLoading)
                   const Padding(
-                    padding: EdgeInsets.only(left: 16, bottom: 8),
+                    padding: EdgeInsets.only(left: 16.0, bottom: 8.0),
                     child: Text('Enable automatic brightness to set level.'),
                   ),
               ],

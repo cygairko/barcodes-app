@@ -113,12 +113,31 @@ class _BarcodeScreenState extends ConsumerState<BarcodeScreen> {
                   Container(
                     alignment: Alignment.topCenter,
                     child: GestureDetector(
-                      onDoubleTap: () {
-                        // Note: If automatic brightness is on, this double-tap might
-                        // conflict or be redundant if maxLevel is already 1.0.
-                        // Or, it could be a way to force max brightness if auto didn't set it to 1.0.
-                        // For now, it just sets to 1.0 regardless of auto-brightness logic.
-                        ref.read(brightnessServiceProvider).setBrightness(1.0);
+                      onDoubleTap: () async {
+                        try {
+                          final maxLevel = await ref.read(maxScreenBrightnessLevelProvider.future);
+                          final brightnessService = ref.read(brightnessServiceProvider);
+
+                          if (_originalBrightness == null) {
+                            // Try to get current brightness only if not already fetched by initState or previous double tap
+                            try {
+                              _originalBrightness = await brightnessService.getCurrentBrightness();
+                            } catch (e) {
+                              print('Error getting current brightness on double tap: $e');
+                              // If we can't get current brightness, we might not want to proceed
+                              // or we proceed without being able to restore. For now, let's print and continue.
+                            }
+                          }
+                          
+                          await brightnessService.setBrightness(maxLevel);
+                          // Ensure that if brightness is set, we attempt to restore it.
+                          // No need to call setState if these vars don't directly drive UI rebuilds for this action.
+                          _brightnessWasAdjustedByThisScreen = true;
+
+                        } catch (e) {
+                          // Catch any errors from reading providers or other operations
+                          print('Error in onDoubleTap brightness adjustment: $e');
+                        }
                       },
                       child: BarcodeWidget(
                         key: const Key('barcodeWidget'), // Add key here
