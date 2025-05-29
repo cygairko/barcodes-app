@@ -1,6 +1,6 @@
 name: barcodes
 description: Showing and saving a list of barcodes
-version: 0.2.1
+version: 0.3.0
 publish_to: none
 
 environment:
@@ -44,8 +44,6 @@ dev_dependencies:
   mockito: ^5.4.4
   json_serializable: ^6.9.5
   go_router_builder: ^2.9.0
-  # Ensure build_runner is also present for mockito code generation if needed by other parts of the project
-  # build_runner: ^2.4.15 # Already present
 
 flutter:
   uses-material-design: true

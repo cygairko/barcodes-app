@@ -31,14 +31,14 @@ String _$automaticScreenBrightnessHash() =>
 @ProviderFor(automaticScreenBrightness)
 final automaticScreenBrightnessProvider =
     AutoDisposeFutureProvider<bool>.internal(
-  automaticScreenBrightness,
-  name: r'automaticScreenBrightnessProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$automaticScreenBrightnessHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      automaticScreenBrightness,
+      name: r'automaticScreenBrightnessProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$automaticScreenBrightnessHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
@@ -50,14 +50,14 @@ String _$maxScreenBrightnessLevelHash() =>
 @ProviderFor(maxScreenBrightnessLevel)
 final maxScreenBrightnessLevelProvider =
     AutoDisposeFutureProvider<double>.internal(
-  maxScreenBrightnessLevel,
-  name: r'maxScreenBrightnessLevelProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$maxScreenBrightnessLevelHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+      maxScreenBrightnessLevel,
+      name: r'maxScreenBrightnessLevelProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$maxScreenBrightnessLevelHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element

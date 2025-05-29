@@ -17,8 +17,8 @@ class SettingsPage extends ConsumerWidget {
     // Determine if the slider should be enabled
     // It's enabled if automatic brightness is ON (true) and has data.
     // If automatic brightness is OFF (false) or loading/error, slider is disabled.
-    final bool isAutomaticBrightnessOn = automaticBrightness.asData?.value ?? false;
-    final bool sliderEnabled = isAutomaticBrightnessOn;
+    final isAutomaticBrightnessOn = automaticBrightness.asData?.value ?? false;
+    final sliderEnabled = isAutomaticBrightnessOn;
 
     return Scaffold(
       appBar: AppBar(
@@ -28,19 +28,20 @@ class SettingsPage extends ConsumerWidget {
         children: [
           SwitchListTile.adaptive(
             key: const Key('automaticBrightnessSwitch'),
-            title: const Text('Automatic screen brightness'), // Placeholder
-            subtitle: const Text('Adjust brightness automatically when a barcode is shown'), // Placeholder
+            title: Text(context.l10n.settingsAutomaticBrightnessTitle), // Placeholder
+            subtitle: Text(context.l10n.settingsAutomaticBrightnessSubtitle), // Placeholder
             value: automaticBrightness.asData?.value ?? false, // Default to false if loading or error
             onChanged: (bool newValue) {
               ref.read(settingsRepositoryProvider).setAutomaticScreenBrightness(newValue);
-              ref.invalidate(automaticScreenBrightnessProvider);
-              // Also invalidate max brightness provider in case its UI needs to update (e.g. enabled state)
-              ref.invalidate(maxScreenBrightnessLevelProvider);
+              ref
+                ..invalidate(automaticScreenBrightnessProvider)
+                // Also invalidate max brightness provider in case its UI needs to update (e.g. enabled state)
+                ..invalidate(maxScreenBrightnessLevelProvider);
             },
           ),
           const Divider(),
           ListTile(
-            title: const Text('Maximum brightness level'), // Placeholder
+            title: Text(context.l10n.settingsMaxAutomaticBrightnessTitle), // Placeholder
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -48,7 +49,6 @@ class SettingsPage extends ConsumerWidget {
                   key: const Key('maxBrightnessSlider'),
                   value: maxBrightness.asData?.value ?? 0.8, // Default to 0.8 if loading or error
                   min: 0.1,
-                  max: 1.0,
                   divisions: 9,
                   label: (maxBrightness.asData?.value ?? 0.8).toStringAsFixed(1),
                   onChanged: sliderEnabled
@@ -59,19 +59,24 @@ class SettingsPage extends ConsumerWidget {
                       : null, // Disable if automatic brightness is off or loading
                 ),
                 if (maxBrightness.isLoading)
-                  const Padding(
-                    padding: EdgeInsets.only(left: 16.0, bottom: 8.0),
-                    child: Text('Loading...'),
-                  ),
-                if (maxBrightness.hasError)
                   Padding(
-                    padding: const EdgeInsets.only(left: 16.0, bottom: 8.0),
-                    child: Text('Error: ${maxBrightness.error}'),
-                  ),
-                 if (!sliderEnabled && !automaticBrightness.isLoading)
-                  const Padding(
-                    padding: EdgeInsets.only(left: 16.0, bottom: 8.0),
-                    child: Text('Enable automatic brightness to set level.'),
+                    padding: const EdgeInsets.only(left: 16, bottom: 8),
+                    child: Text(context.l10n.settingsMaxAutomaticBrightnessSubtitleLoading),
+                  )
+                else if (maxBrightness.hasError)
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16, bottom: 8),
+                    child: Text('${context.l10n.settingsMaxAutomaticBrightnessSubtitleError}${maxBrightness.error}'),
+                  )
+                else if (!sliderEnabled && !automaticBrightness.isLoading)
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16, bottom: 8),
+                    child: Text(context.l10n.settingsMaxAutomaticBrightnessSubtitleDisabled),
+                  )
+                else
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16, bottom: 8),
+                    child: Text(context.l10n.settingsMaxAutomaticBrightnessSubtitleEnabled),
                   ),
               ],
             ),
@@ -80,7 +85,7 @@ class SettingsPage extends ConsumerWidget {
           AsyncValueWidget(
             value: packageInfo,
             data: (p0) => ListTile(
-              title: Text(context.l10n.settingsIncreaseAppVersionTitle),
+              title: Text(context.l10n.settingsAppVersionTitle),
               subtitle: Text(
                 p0.version,
               ),

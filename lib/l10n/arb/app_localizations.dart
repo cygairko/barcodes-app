@@ -62,8 +62,7 @@ import 'app_localizations_es.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale)
-      : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -71,8 +70,7 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -84,8 +82,7 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
-      <LocalizationsDelegate<dynamic>>[
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
     delegate,
     GlobalMaterialLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,
@@ -203,33 +200,56 @@ abstract class AppLocalizations {
   /// **'for this barcode entry'**
   String get textBarcodeInfoNoContentMessage;
 
-  /// settingsIncreaseBrigtnessTitle
+  /// settingsAutomaticBrightnessTitle
   ///
   /// In en, this message translates to:
-  /// **'Increase brightness'**
-  String get settingsIncreaseBrigtnessTitle;
+  /// **'Automatic screen brightness'**
+  String get settingsAutomaticBrightnessTitle;
 
-  /// settingsIncreaseBrigtnessSubtitle
+  /// settingsAutomaticBrightnessSubtitle
   ///
   /// In en, this message translates to:
-  /// **'Lighten up the display when showing a barcode.'**
-  String get settingsIncreaseBrigtnessSubtitle;
+  /// **'Adjust brightness automatically when a barcode is shown. Alternative: Double-tap.'**
+  String get settingsAutomaticBrightnessSubtitle;
 
-  /// settingsIncreaseAppVersionTitle
+  /// settingsMaxBrightnessTitle
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum brightness level'**
+  String get settingsMaxAutomaticBrightnessTitle;
+
+  /// settingsMaxAutomaticBrightnessSubtitleDisabled
+  ///
+  /// In en, this message translates to:
+  /// **'Enable automatic brightness to set level.'**
+  String get settingsMaxAutomaticBrightnessSubtitleDisabled;
+
+  /// settingsMaxAutomaticBrightnessSubtitleEnabled
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum level to which the screen will brighten up.'**
+  String get settingsMaxAutomaticBrightnessSubtitleEnabled;
+
+  /// settingsMaxAutomaticBrightnessSubtitleLoading
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum level to which the screen will brighten up.'**
+  String get settingsMaxAutomaticBrightnessSubtitleLoading;
+
+  /// settingsMaxAutomaticBrightnessSubtitleError
+  ///
+  /// In en, this message translates to:
+  /// **'Maximum level to which the screen will brighten up.'**
+  String get settingsMaxAutomaticBrightnessSubtitleError;
+
+  /// settingsAppVersionTitle
   ///
   /// In en, this message translates to:
   /// **'App version'**
-  String get settingsIncreaseAppVersionTitle;
-
-  /// settingsIncreaseAppVersionSubtitle
-  ///
-  /// In en, this message translates to:
-  /// **'Lighten up the display when showing a barcode.'**
-  String get settingsIncreaseAppVersionSubtitle;
+  String get settingsAppVersionTitle;
 }
 
-class _AppLocalizationsDelegate
-    extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -238,8 +258,7 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['en', 'es'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en', 'es'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;

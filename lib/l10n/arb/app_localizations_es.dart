@@ -63,16 +63,27 @@ class AppLocalizationsEs extends AppLocalizations {
   String get textBarcodeInfoNoContentMessage => 'for this barcode entry';
 
   @override
-  String get settingsIncreaseBrigtnessTitle => 'Increase brightness';
+  String get settingsAutomaticBrightnessTitle => 'Automatic screen brightness';
 
   @override
-  String get settingsIncreaseBrigtnessSubtitle =>
-      'Lighten up the display when showing a barcode.';
+  String get settingsAutomaticBrightnessSubtitle =>
+      'Adjust brightness automatically when a barcode is shown. Alternative: Double-tap.';
 
   @override
-  String get settingsIncreaseAppVersionTitle => 'App version';
+  String get settingsMaxAutomaticBrightnessTitle => 'Maximum brightness level';
 
   @override
-  String get settingsIncreaseAppVersionSubtitle =>
-      'Lighten up the display when showing a barcode.';
+  String get settingsMaxAutomaticBrightnessSubtitleDisabled => 'Enable automatic brightness to set level.';
+
+  @override
+  String get settingsMaxAutomaticBrightnessSubtitleEnabled => 'Maximum level to which the screen will brighten up.';
+
+  @override
+  String get settingsMaxAutomaticBrightnessSubtitleLoading => 'Maximum level to which the screen will brighten up.';
+
+  @override
+  String get settingsMaxAutomaticBrightnessSubtitleError => 'Maximum level to which the screen will brighten up.';
+
+  @override
+  String get settingsAppVersionTitle => 'App version';
 }
