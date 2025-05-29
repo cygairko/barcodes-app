@@ -25,6 +25,7 @@ class BarcodeScreen extends ConsumerStatefulWidget {
 class _BarcodeScreenState extends ConsumerState<BarcodeScreen> {
   double? _originalBrightness;
   bool _brightnessWasAdjustedByThisScreen = false;
+  BrightnessService? _brightnessService;
 
   @override
   void initState() {
@@ -38,6 +39,7 @@ class _BarcodeScreenState extends ConsumerState<BarcodeScreen> {
 
       if (autoBrightEnabled) {
         final brightnessService = ref.read(brightnessServiceProvider);
+        _brightnessService = brightnessService;
         // It's important to handle potential errors when getting current brightness
         // For example, if the platform call fails.
         try {
@@ -70,7 +72,7 @@ class _BarcodeScreenState extends ConsumerState<BarcodeScreen> {
     if (_brightnessWasAdjustedByThisScreen && _originalBrightness != null) {
       // Use a try-catch here as well, in case restoring brightness fails
       try {
-        ref.read(brightnessServiceProvider).resetBrightness();
+        _brightnessService?.resetBrightness();
       } catch (e) {
         print('Error restoring brightness in BarcodeScreen dispose: $e');
       }
@@ -117,6 +119,7 @@ class _BarcodeScreenState extends ConsumerState<BarcodeScreen> {
                         try {
                           final maxLevel = await ref.read(maxScreenBrightnessLevelProvider.future);
                           final brightnessService = ref.read(brightnessServiceProvider);
+                          _brightnessService = brightnessService;
 
                           if (_originalBrightness == null) {
                             // Try to get current brightness only if not already fetched by initState or previous double tap
