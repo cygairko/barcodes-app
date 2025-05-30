@@ -4,12 +4,12 @@ part 'category.freezed.dart';
 part 'category.g.dart';
 
 @freezed
-class Category with _$Category {
+abstract class Category with _$Category {
   const factory Category({
     // For Sembast, the ID is the record key.
     // It's often not stored as part of the JSON value itself if auto-generated.
     // Making it potentially null for new objects not yet saved.
-    int? id, 
+    int? id,
     required String name,
   }) = _Category;
 
