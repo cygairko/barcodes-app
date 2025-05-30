@@ -6,10 +6,8 @@
 import 'dart:async' as _i6;
 
 import 'package:barcodes/features/barcodes/domain/barcode_entry.dart' as _i9;
-import 'package:barcodes/features/barcodes/presentation/barcodes_list_controller.dart'
-    as _i8;
-import 'package:barcodes/features/settings/data/settings_repository.dart'
-    as _i7;
+import 'package:barcodes/features/barcodes/presentation/barcodes_list_controller.dart' as _i8;
+import 'package:barcodes/features/settings/data/settings_repository.dart' as _i7;
 import 'package:barcodes/utils/brightness_service.dart' as _i5;
 import 'package:barcodes/utils/data_store.dart' as _i2;
 import 'package:flutter_riverpod/flutter_riverpod.dart' as _i4;
@@ -31,15 +29,11 @@ import 'package:sembast/sembast.dart' as _i3;
 // ignore_for_file: subtype_of_sealed_class
 
 class _FakeDataStore_0 extends _i1.SmartFake implements _i2.DataStore {
-  _FakeDataStore_0(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
+  _FakeDataStore_0(Object parent, Invocation parentInvocation) : super(parent, parentInvocation);
 }
 
-class _FakeStoreRef_1<K extends Object?, V extends Object?>
-    extends _i1.SmartFake
-    implements _i3.StoreRef<K, V> {
-  _FakeStoreRef_1(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
+class _FakeStoreRef_1<K extends Object?, V extends Object?> extends _i1.SmartFake implements _i3.StoreRef<K, V> {
+  _FakeStoreRef_1(Object parent, Invocation parentInvocation) : super(parent, parentInvocation);
 }
 
 class _FakeAutoDisposeAsyncNotifierProviderRef_2<T> extends _i1.SmartFake
@@ -51,8 +45,7 @@ class _FakeAutoDisposeAsyncNotifierProviderRef_2<T> extends _i1.SmartFake
 }
 
 class _FakeAsyncValue_3<T> extends _i1.SmartFake implements _i4.AsyncValue<T> {
-  _FakeAsyncValue_3(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
+  _FakeAsyncValue_3(Object parent, Invocation parentInvocation) : super(parent, parentInvocation);
 }
 
 /// A class which mocks [BrightnessService].
@@ -93,8 +86,7 @@ class MockBrightnessService extends _i1.Mock implements _i5.BrightnessService {
 /// A class which mocks [SettingsRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSettingsRepository extends _i1.Mock
-    implements _i7.SettingsRepository {
+class MockSettingsRepository extends _i1.Mock implements _i7.SettingsRepository {
   MockSettingsRepository() {
     _i1.throwOnMissingStub(this);
   }
@@ -156,8 +148,7 @@ class MockSettingsRepository extends _i1.Mock
 /// A class which mocks [BarcodesListController].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockBarcodesListController extends _i1.Mock
-    implements _i8.BarcodesListController {
+class MockBarcodesListController extends _i1.Mock implements _i8.BarcodesListController {
   MockBarcodesListController() {
     _i1.throwOnMissingStub(this);
   }

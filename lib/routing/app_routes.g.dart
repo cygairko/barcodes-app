@@ -57,13 +57,11 @@ RouteBase get $mainShellRouteData => StatefulShellRouteData.$route(
 );
 
 extension $MainShellRouteDataExtension on MainShellRouteData {
-  static MainShellRouteData _fromState(GoRouterState state) =>
-      const MainShellRouteData();
+  static MainShellRouteData _fromState(GoRouterState state) => const MainShellRouteData();
 }
 
 extension $BarcodesPageRouteExtension on BarcodesPageRoute {
-  static BarcodesPageRoute _fromState(GoRouterState state) =>
-      BarcodesPageRoute();
+  static BarcodesPageRoute _fromState(GoRouterState state) => BarcodesPageRoute();
 
   String get location => GoRouteData.$location('/');
 
@@ -71,15 +69,13 @@ extension $BarcodesPageRouteExtension on BarcodesPageRoute {
 
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
+  void pushReplacement(BuildContext context) => context.pushReplacement(location);
 
   void replace(BuildContext context) => context.replace(location);
 }
 
 extension $BarcodeRouteExtension on BarcodeRoute {
-  static BarcodeRoute _fromState(GoRouterState state) =>
-      BarcodeRoute(int.parse(state.pathParameters['eid']!)!);
+  static BarcodeRoute _fromState(GoRouterState state) => BarcodeRoute(int.parse(state.pathParameters['eid']!)!);
 
   String get location => GoRouteData.$location(
     '/barcode/show/${Uri.encodeComponent(eid.toString())}',
@@ -89,8 +85,7 @@ extension $BarcodeRouteExtension on BarcodeRoute {
 
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
+  void pushReplacement(BuildContext context) => context.pushReplacement(location);
 
   void replace(BuildContext context) => context.replace(location);
 }
@@ -104,15 +99,13 @@ extension $AddEntryRouteExtension on AddEntryRoute {
 
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
+  void pushReplacement(BuildContext context) => context.pushReplacement(location);
 
   void replace(BuildContext context) => context.replace(location);
 }
 
 extension $SettingsPageRouteExtension on SettingsPageRoute {
-  static SettingsPageRoute _fromState(GoRouterState state) =>
-      SettingsPageRoute();
+  static SettingsPageRoute _fromState(GoRouterState state) => SettingsPageRoute();
 
   String get location => GoRouteData.$location('/settings');
 
@@ -120,15 +113,13 @@ extension $SettingsPageRouteExtension on SettingsPageRoute {
 
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
+  void pushReplacement(BuildContext context) => context.pushReplacement(location);
 
   void replace(BuildContext context) => context.replace(location);
 }
 
 extension $ManageCategoriesRouteExtension on ManageCategoriesRoute {
-  static ManageCategoriesRoute _fromState(GoRouterState state) =>
-      const ManageCategoriesRoute();
+  static ManageCategoriesRoute _fromState(GoRouterState state) => const ManageCategoriesRoute();
 
   String get location => GoRouteData.$location('/settings/categories');
 
@@ -136,8 +127,7 @@ extension $ManageCategoriesRouteExtension on ManageCategoriesRoute {
 
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
-  void pushReplacement(BuildContext context) =>
-      context.pushReplacement(location);
+  void pushReplacement(BuildContext context) => context.pushReplacement(location);
 
   void replace(BuildContext context) => context.replace(location);
 }
