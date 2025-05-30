@@ -17,11 +17,11 @@ void main() {
 
   setUp(() async {
     // Ensure a clean database for each test
-    await factory.deleteDatabase('test_categories.db'); 
+    await factory.deleteDatabase('test_categories.db');
     db = await factory.openDatabase('test_categories.db');
     testDataStore = DataStore(db); // Create DataStore with the test DB
     // Instantiate CategoryRepository with the test DataStore
-    categoryRepository = CategoryRepository(testDataStore); 
+    categoryRepository = CategoryRepository(testDataStore);
   });
 
   tearDown(() async {
@@ -82,7 +82,7 @@ void main() {
           throwsA(isA<ArgumentError>()),
         );
       });
-      
+
       test('should throw an exception when updating a non-existent category ID', () async {
         final nonExistentCategory = Category(id: 999, name: 'Non Existent');
         expect(
@@ -98,7 +98,6 @@ void main() {
         final added2 = await categoryRepository.addCategory(categoryNoId2);
         expect(added1.id, isNotNull);
         expect(added2.id, isNotNull);
-
 
         await categoryRepository.deleteCategory(added1.id);
 

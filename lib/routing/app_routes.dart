@@ -34,7 +34,8 @@ part 'app_routes.g.dart';
         TypedGoRoute<SettingsPageRoute>(
           name: SettingsPageRoute.name,
           path: SettingsPageRoute.path,
-          routes: [ // Adding ManageCategoriesRoute as a sub-route
+          routes: [
+            // Adding ManageCategoriesRoute as a sub-route
             TypedGoRoute<ManageCategoriesRoute>(
               name: ManageCategoriesRoute.name,
               path: ManageCategoriesRoute.path,
@@ -78,17 +79,15 @@ class BarcodesPageRoute extends GoRouteData {
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) => const NoTransitionPage(
-
-        child: BarcodesPage(),
-      );
-
+    child: BarcodesPage(),
+  );
 }
 
 class ManageCategoriesRoute extends GoRouteData {
   const ManageCategoriesRoute();
   static const String name = 'manageCategories';
   // This path will be relative to its parent, which is '/settings'
-  static const String path = 'categories'; 
+  static const String path = 'categories';
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) => const MaterialPage(
@@ -109,12 +108,10 @@ class BarcodeRoute extends GoRouteData {
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) => MaterialPage(
-
     child: BarcodeScreen(
       entryId: eid,
     ),
   );
-
 }
 
 class AddEntryRoute extends GoRouteData {
@@ -124,10 +121,8 @@ class AddEntryRoute extends GoRouteData {
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) => const MaterialPage(
-
-        child: AddEntryScreen(),
-      );
-
+    child: AddEntryScreen(),
+  );
 }
 
 class SettingsPageRoute extends GoRouteData {
@@ -136,8 +131,6 @@ class SettingsPageRoute extends GoRouteData {
 
   @override
   Page<void> buildPage(BuildContext context, GoRouterState state) => const NoTransitionPage(
-
-        child: SettingsPage(),
-      );
-
+    child: SettingsPage(),
+  );
 }

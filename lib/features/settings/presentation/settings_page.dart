@@ -4,7 +4,7 @@ import 'package:barcodes/l10n/l10n.dart';
 import 'package:barcodes/utils/package_info.dart';
 import 'package:flutter/material.dart';
 // Import for CategoryManagementPage is no longer needed here if using GoRouter for navigation
-// import 'package:barcodes/features/categories/presentation/category_management_page.dart'; 
+// import 'package:barcodes/features/categories/presentation/category_management_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart'; // Added import for GoRouter
 import 'package:barcodes/routing/app_routes.dart'; // Added import for typed routes

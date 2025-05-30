@@ -108,8 +108,9 @@ void main() {
       verify(mockBrightnessService.setBrightness(1)).called(1);
     });
 
-    testWidgets('Automatic Brightening Disabled: no increase/restore calls for brightness',
-        (WidgetTester tester) async {
+    testWidgets('Automatic Brightening Disabled: no increase/restore calls for brightness', (
+      WidgetTester tester,
+    ) async {
       await pumpBarcodeScreen(
         tester,
         mockBrightnessService: mockBrightnessService,
@@ -170,8 +171,9 @@ void main() {
       expect(setBrightnessCalls.last, initialBrightness);
     });
 
-    testWidgets('Automatic Brightening Enabled: Brightness NOT Increased (already bright)',
-        (WidgetTester tester) async {
+    testWidgets('Automatic Brightening Enabled: Brightness NOT Increased (already bright)', (
+      WidgetTester tester,
+    ) async {
       const currentBrightness = 0.8;
       const targetMaxBrightness = 0.7; // Target max (lower than current)
       when(mockBrightnessService.getCurrentBrightness()).thenAnswer((_) async => currentBrightness);

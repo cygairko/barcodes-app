@@ -8,7 +8,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 // Import for AppLocalizations - try direct import
-import 'package:barcodes/l10n/arb/app_localizations.dart'; 
+import 'package:barcodes/l10n/arb/app_localizations.dart';
 
 // Generate mocks for SettingsRepository
 @GenerateMocks([SettingsRepository])
@@ -22,16 +22,12 @@ Future<void> pumpSettingsPage(
   double initialMaxBrightnessLevel = 0.8,
 }) async {
   // Mock the repository methods
-  when(mockSettingsRepository.getAutomaticScreenBrightness())
-      .thenAnswer((_) async => initialAutoBrightness);
-  when(mockSettingsRepository.getMaxScreenBrightnessLevel())
-      .thenAnswer((_) async => initialMaxBrightnessLevel);
-  
+  when(mockSettingsRepository.getAutomaticScreenBrightness()).thenAnswer((_) async => initialAutoBrightness);
+  when(mockSettingsRepository.getMaxScreenBrightnessLevel()).thenAnswer((_) async => initialMaxBrightnessLevel);
+
   // Mock the set methods to do nothing or return a completed Future
-  when(mockSettingsRepository.setAutomaticScreenBrightness(any))
-      .thenAnswer((_) async {});
-  when(mockSettingsRepository.setMaxScreenBrightnessLevel(any))
-      .thenAnswer((_) async {});
+  when(mockSettingsRepository.setAutomaticScreenBrightness(any)).thenAnswer((_) async {});
+  when(mockSettingsRepository.setMaxScreenBrightnessLevel(any)).thenAnswer((_) async {});
 
   await tester.pumpWidget(
     ProviderScope(
@@ -47,12 +43,16 @@ Future<void> pumpSettingsPage(
           (ref) => ref.watch(settingsRepositoryProvider).getMaxScreenBrightnessLevel(),
         ),
         // Provide a mock for packageInfoProvider as it's used in SettingsPage
-        packageInfoProvider.overrideWith((ref) => Future.value(PackageInfo(
-            appName: 'TestApp',
-            packageName: 'com.example.testapp',
-            version: '1.0.0',
-            buildNumber: '1',
-          ))),
+        packageInfoProvider.overrideWith(
+          (ref) => Future.value(
+            PackageInfo(
+              appName: 'TestApp',
+              packageName: 'com.example.testapp',
+              version: '1.0.0',
+              buildNumber: '1',
+            ),
+          ),
+        ),
         // REMOVE EXTRA PARENTHESIS THAT WAS HERE
       ],
       child: MaterialApp(
@@ -80,24 +80,20 @@ void main() {
   });
 
   group('SettingsPage Widget Tests', () {
-    testWidgets('Initial state reflects provider values and slider is disabled',
-        (WidgetTester tester) async {
+    testWidgets('Initial state reflects provider values and slider is disabled', (WidgetTester tester) async {
       // Configure mocks for this specific test's initial state
-      when(mockSettingsRepository.getAutomaticScreenBrightness())
-          .thenAnswer((_) async => false);
-      when(mockSettingsRepository.getMaxScreenBrightnessLevel())
-          .thenAnswer((_) async => 0.7);
+      when(mockSettingsRepository.getAutomaticScreenBrightness()).thenAnswer((_) async => false);
+      when(mockSettingsRepository.getMaxScreenBrightnessLevel()).thenAnswer((_) async => 0.7);
       // Ensure set methods are stubbed if they could possibly be called, though not expected here.
       when(mockSettingsRepository.setAutomaticScreenBrightness(any)).thenAnswer((_) async {});
       when(mockSettingsRepository.setMaxScreenBrightnessLevel(any)).thenAnswer((_) async {});
-
 
       await pumpSettingsPage(
         tester,
         mockSettingsRepository: mockSettingsRepository,
         // These values are used by pumpSettingsPage to set up the initial mocks
-        initialAutoBrightness: false, 
-        initialMaxBrightnessLevel: 0.7, 
+        initialAutoBrightness: false,
+        initialMaxBrightnessLevel: 0.7,
       );
 
       // Verify switch state
@@ -113,18 +109,16 @@ void main() {
       expect(find.text('Enable automatic brightness to set level.'), findsOneWidget);
     });
 
-    testWidgets('Tapping automatic brightness switch calls repository and updates UI',
-        (WidgetTester tester) async {
+    testWidgets('Tapping automatic brightness switch calls repository and updates UI', (WidgetTester tester) async {
       // Initial state: switch is OFF
       when(mockSettingsRepository.getAutomaticScreenBrightness()).thenAnswer((_) async => false);
       when(mockSettingsRepository.getMaxScreenBrightnessLevel()).thenAnswer((_) async => 0.8);
       when(mockSettingsRepository.setAutomaticScreenBrightness(any)).thenAnswer((_) async {});
 
-
       await pumpSettingsPage(
         tester,
         mockSettingsRepository: mockSettingsRepository,
-        initialAutoBrightness: false, 
+        initialAutoBrightness: false,
         initialMaxBrightnessLevel: 0.8,
       );
 
@@ -141,43 +135,44 @@ void main() {
       // For this test, we assume it just enables, and the value remains what it was (0.8 from setUp).
       when(mockSettingsRepository.getMaxScreenBrightnessLevel()).thenAnswer((_) async => 0.8);
 
-
       // 2. Tap the switch
       await tester.tap(find.byKey(const Key('automaticBrightnessSwitch')));
-      
+
       // 3. Rebuild the UI. Providers will be re-evaluated.
       //    The pumpSettingsPage is NOT called again here. We let the existing widget tree rebuild.
-      await tester.pumpAndSettle(); 
+      await tester.pumpAndSettle();
 
       // 4. Verify repository SET method was called
       verify(mockSettingsRepository.setAutomaticScreenBrightness(true)).called(1);
-      
+
       // 5. Verify UI updates (switch is now on, slider is enabled)
       // Re-fetch the widget after pumpAndSettle
       switchTile = tester.widget(find.byKey(const Key('automaticBrightnessSwitch')));
       slider = tester.widget(find.byKey(const Key('maxBrightnessSlider')));
-      
-      expect(switchTile.value, isTrue, reason: "Switch should be on after tap. Provider may not have updated UI if this fails.");
+
+      expect(
+        switchTile.value,
+        isTrue,
+        reason: "Switch should be on after tap. Provider may not have updated UI if this fails.",
+      );
       expect(slider.onChanged, isNotNull, reason: "Slider should be enabled when switch is on");
       expect(find.text('Enable automatic brightness to set level.'), findsNothing);
     });
 
-    testWidgets('Changing slider value calls repository when switch is on',
-        (WidgetTester tester) async {
+    testWidgets('Changing slider value calls repository when switch is on', (WidgetTester tester) async {
       // Initial state: switch is ON, slider value 0.5
       when(mockSettingsRepository.getAutomaticScreenBrightness()).thenAnswer((_) async => true);
       when(mockSettingsRepository.getMaxScreenBrightnessLevel()).thenAnswer((_) async => 0.5);
       // Ensure setMaxScreenBrightnessLevel is stubbed
       when(mockSettingsRepository.setMaxScreenBrightnessLevel(any)).thenAnswer((_) async {});
 
-
       await pumpSettingsPage(
         tester,
         mockSettingsRepository: mockSettingsRepository,
-        initialAutoBrightness: true, 
+        initialAutoBrightness: true,
         initialMaxBrightnessLevel: 0.5,
       );
-      
+
       // Verify initial state for slider
       Slider slider = tester.widget(find.byKey(const Key('maxBrightnessSlider')));
       expect(slider.onChanged, isNotNull, reason: "Slider should be enabled");
@@ -188,7 +183,6 @@ void main() {
       clearInteractions(mockSettingsRepository);
       // Re-stub setMaxScreenBrightnessLevel because clearInteractions removes stubs.
       when(mockSettingsRepository.setMaxScreenBrightnessLevel(any)).thenAnswer((_) async {});
-
 
       // Mock the getMaxScreenBrightnessLevel to return a new value after the set operation,
       // to simulate the provider being invalidated and refetched, updating the slider's UI.
@@ -214,15 +208,13 @@ void main() {
       expect(slider.value, newSliderValue, reason: "Slider value should update after interaction and provider refresh");
     });
 
-    testWidgets('Slider is disabled and does not call repository when switch is off',
-        (WidgetTester tester) async {
+    testWidgets('Slider is disabled and does not call repository when switch is off', (WidgetTester tester) async {
       // Initial state: switch is OFF
       when(mockSettingsRepository.getAutomaticScreenBrightness()).thenAnswer((_) async => false);
       when(mockSettingsRepository.getMaxScreenBrightnessLevel()).thenAnswer((_) async => 0.8);
       // No set calls expected, but stub them just in case for robustness.
       when(mockSettingsRepository.setAutomaticScreenBrightness(any)).thenAnswer((_) async {});
       when(mockSettingsRepository.setMaxScreenBrightnessLevel(any)).thenAnswer((_) async {});
-
 
       await pumpSettingsPage(
         tester,

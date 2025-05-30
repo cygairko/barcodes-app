@@ -64,7 +64,7 @@ void main() {
         final value = await settingsRepository.getMaxScreenBrightnessLevel();
         expect(value, 1.0);
       });
-      
+
       test('setMaxScreenBrightnessLevel(0) and then getMaxScreenBrightnessLevel() returns 0.0 (edge case)', () async {
         await settingsRepository.setMaxScreenBrightnessLevel(0.0);
         final value = await settingsRepository.getMaxScreenBrightnessLevel();

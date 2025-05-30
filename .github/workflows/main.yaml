@@ -21,6 +21,7 @@ jobs:
     with:
       flutter_channel: stable
       format_line_length: 120
+      coverage_excludes: "*.g.dart *.freezed.dart" # defaults to "" (none)
 
   spell-check:
     uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/spell_check.yml@v1

@@ -60,7 +60,8 @@ class CategoryRepository {
 }
 
 @Riverpod(keepAlive: true)
-CategoryRepository categoryRepository(Ref ref) { // Changed to Ref
+CategoryRepository categoryRepository(Ref ref) {
+  // Changed to Ref
   // .requireValue is used here assuming DataStoreProvider handles its async states
   // and provides a DataStore object synchronously once ready, or throws if not.
   // If DataStoreProvider can be in an error/loading state that needs specific handling here,
