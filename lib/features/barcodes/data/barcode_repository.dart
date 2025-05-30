@@ -1,23 +1,24 @@
 import 'package:barcodes/features/barcodes/domain/barcode_entry.dart';
 import 'package:barcodes/utils/data_store.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sembast/sembast.dart';
 
 part 'barcode_repository.g.dart';
 
 @Riverpod(keepAlive: true)
-BarcodeRepository barcodeRepository(BarcodeRepositoryRef ref) {
+BarcodeRepository barcodeRepository(Ref ref) {
   return BarcodeRepository(ref.read(dataStoreProvider).requireValue);
 }
 
 @riverpod
-Stream<List<BarcodeEntry>> barcodesStream(BarcodesStreamRef ref) {
+Stream<List<BarcodeEntry>> barcodesStream(Ref ref) {
   final barcodeRepository = ref.read(barcodeRepositoryProvider);
   return barcodeRepository.watchBarcodes();
 }
 
 @riverpod
-Stream<BarcodeEntry?> barcodeStream(BarcodeStreamRef ref, int entryId) {
+Stream<BarcodeEntry?> barcodeStream(Ref ref, int entryId) {
   final barcodeRepository = ref.read(barcodeRepositoryProvider);
   return barcodeRepository.watchEntry(entryId);
 }
@@ -26,7 +27,7 @@ class BarcodeRepository {
   BarcodeRepository(this.datastore);
 
   final DataStore datastore;
-  final storeRef = intMapStoreFactory.store('barcodes_store');
+  final StoreRef<int, Map<String, Object?>> storeRef = intMapStoreFactory.store('barcodes_store');
 
   Future<int> addEntry(BarcodeEntry entry) => storeRef.add(
     datastore.database,

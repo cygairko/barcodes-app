@@ -14,12 +14,12 @@ SettingsRepository settingsRepository(Ref ref) {
 }
 
 @riverpod
-Future<bool> automaticScreenBrightness(AutomaticScreenBrightnessRef ref) {
+Future<bool> automaticScreenBrightness(Ref ref) {
   return ref.watch(settingsRepositoryProvider).getAutomaticScreenBrightness();
 }
 
 @riverpod
-Future<double> maxScreenBrightnessLevel(MaxScreenBrightnessLevelRef ref) {
+Future<double> maxScreenBrightnessLevel(Ref ref) {
   return ref.watch(settingsRepositoryProvider).getMaxScreenBrightnessLevel();
 }
 
@@ -27,7 +27,7 @@ class SettingsRepository {
   SettingsRepository(this.datastore);
   final DataStore datastore;
   // Use a store that can hold primitive types directly, keyed by String.
-  final storeRef = StoreRef<String, Object?>.main();
+  final storeRef = StoreRef<String, Object?>('settings_store');
 
   Future<bool> getAutomaticScreenBrightness() async {
     final value = await storeRef.record(kAutomaticScreenBrightness).get(datastore.db);

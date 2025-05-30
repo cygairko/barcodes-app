@@ -10,24 +10,6 @@ part 'data_store.g.dart';
 @Riverpod(keepAlive: true)
 Future<DataStore> dataStore(Ref ref) => DataStore.makeDefault();
 
-// class SembastDataStore implements DataStore {
-//   SembastDataStore(this.db);
-//   final Database db;
-
-//   static Future<Database> createDatabase(String filename) async {
-//     if (!kIsWeb) {
-//       final appDocDir = await getApplicationDocumentsDirectory();
-//       return databaseFactoryIo.openDatabase('${appDocDir.path}/$filename');
-//     } else {
-//       return databaseFactoryWeb.openDatabase(filename);
-//     }
-//   }
-
-//   static Future<SembastDataStore> makeDefault() async {
-//     return SembastDataStore(await createDatabase('default.db'));
-//   }
-// }
-
 class DataStore {
   DataStore(this.db);
   final Database db;
@@ -44,6 +26,6 @@ class DataStore {
   }
 
   static Future<DataStore> makeDefault() async {
-    return DataStore(await createDatabase('baskets.db'));
+    return DataStore(await createDatabase('barcodes.db'));
   }
 }
