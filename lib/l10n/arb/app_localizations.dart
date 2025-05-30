@@ -247,6 +247,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'App version'**
   String get settingsAppVersionTitle;
+
+  /// Title for the Category Management Page
+  ///
+  /// In en, this message translates to:
+  /// **'Manage Categories'**
+  String get categoryManagementPageTitle;
+
+  /// Dialog title for adding a new category
+  ///
+  /// In en, this message translates to:
+  /// **'Add Category'**
+  String get addCategoryDialogTitle;
+
+  /// Dialog title for editing an existing category
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Category'**
+  String get editCategoryDialogTitle;
+
+  /// Dialog title for confirming category deletion
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Delete'**
+  String get confirmDeleteDialogTitle;
+
+  /// Hint text for the category name input field
+  ///
+  /// In en, this message translates to:
+  /// **'Category name'**
+  String get categoryNameHint;
+
+  /// Label for the Save button
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get buttonSave;
+
+  /// Label for the Edit button
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get buttonEdit;
+
+  /// Label for the Delete button
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get buttonDelete;
+
+  /// Error message shown when categories fail to load
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load categories: {error}'**
+  String errorFailedToLoadCategories(String error);
+
+  /// Error message shown if category name is submitted empty
+  ///
+  /// In en, this message translates to:
+  /// **'Name cannot be empty'**
+  String get errorCategoryNameEmpty;
+
+  /// Error message shown when saving a category fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to save category: {error}'**
+  String errorFailedToSaveCategory(String error);
+
+  /// Info message shown after a category is successfully deleted
+  ///
+  /// In en, this message translates to:
+  /// **'Category \'\'{categoryName}\'\' deleted.'**
+  String infoCategoryDeleted(String categoryName);
+
+  /// Error message shown when deleting a category fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to delete category: {error}'**
+  String errorFailedToDeleteCategory(String error);
+
+  /// Confirmation message when attempting to delete a category
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete category \'\'{categoryName}\'\'?'**
+  String confirmDeleteCategoryMessage(String categoryName);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

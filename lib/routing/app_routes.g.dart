@@ -42,6 +42,14 @@ RouteBase get $mainShellRouteData => StatefulShellRouteData.$route(
           name: 'settings',
 
           factory: $SettingsPageRouteExtension._fromState,
+          routes: [
+            GoRouteData.$route(
+              path: 'categories',
+              name: 'manageCategories',
+
+              factory: $ManageCategoriesRouteExtension._fromState,
+            ),
+          ],
         ),
       ],
     ),
@@ -107,6 +115,22 @@ extension $SettingsPageRouteExtension on SettingsPageRoute {
       SettingsPageRoute();
 
   String get location => GoRouteData.$location('/settings');
+
+  void go(BuildContext context) => context.go(location);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  void replace(BuildContext context) => context.replace(location);
+}
+
+extension $ManageCategoriesRouteExtension on ManageCategoriesRoute {
+  static ManageCategoriesRoute _fromState(GoRouterState state) =>
+      const ManageCategoriesRoute();
+
+  String get location => GoRouteData.$location('/settings/categories');
 
   void go(BuildContext context) => context.go(location);
 

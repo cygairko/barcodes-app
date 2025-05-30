@@ -3,5 +3,51 @@
     "counterAppBarTitle": "Contador",
     "@counterAppBarTitle": {
         "description": "Texto mostrado en la AppBar de la página del contador"
+    },
+    "navigationLabelHome": "Inicio",
+    "navigationLabelBarcodes": "Códigos de Barras",
+    "navigationLabelProfile": "Perfil",
+    "navigationLabelSettings": "Ajustes",
+    "appBarTitleBarcodes": "Códigos de Barras",
+    "appBarTitleSettings": "Ajustes",
+    "appBarTitleBarcodeScreen": "Información del Código",
+    "appBarTitleAddBarcodeScreen": "Crear Código de Barras",
+    "noContentFound": "No se encontró contenido",
+    "buttonSubmit": "Enviar",
+    "buttonCancel": "Cancelar",
+    "labelAddFormEntryName": "Nombre de la entrada",
+    "labelAddFormEntryComment": "Comentario adicional",
+    "labelAddFormEntryData": "Datos",
+    "labelAddFormEntryTypeDropdown": "Tipo de código de barras",
+    "textBarcodeInfoNoContentTitle": "Sin datos",
+    "textBarcodeInfoNoContentMessage": "para esta entrada de código de barras",
+    "settingsAutomaticBrightnessTitle": "Brillo automático de pantalla",
+    "settingsAutomaticBrightnessSubtitle": "Ajustar brillo automáticamente al mostrar un código. Alternativa: Doble toque.",
+    "settingsMaxAutomaticBrightnessTitle": "Nivel máximo de brillo automático",
+    "settingsMaxAutomaticBrightnessSubtitleDisabled": "Habilite el brillo automático para establecer el nivel.",
+    "settingsMaxAutomaticBrightnessSubtitleEnabled": "Nivel máximo al que se iluminará la pantalla.",
+    "settingsMaxAutomaticBrightnessSubtitleLoading": "Nivel máximo al que se iluminará la pantalla.",
+    "settingsMaxAutomaticBrightnessSubtitleError": "Nivel máximo al que se iluminará la pantalla.",
+    "settingsAppVersionTitle": "Versión de la aplicación",
+    "categoryManagementPageTitle": "Gestionar Categorías",
+    "addCategoryDialogTitle": "Añadir Categoría",
+    "editCategoryDialogTitle": "Editar Categoría",
+    "confirmDeleteDialogTitle": "Confirmar Eliminación",
+    "categoryNameHint": "Nombre de la categoría",
+    "buttonSave": "Guardar",
+    "buttonEdit": "Editar",
+    "buttonDelete": "Eliminar",
+    "errorFailedToLoadCategories": "Error al cargar categorías: {error}",
+    "errorCategoryNameEmpty": "El nombre no puede estar vacío",
+    "errorFailedToSaveCategory": "Error al guardar categoría: {error}",
+    "infoCategoryDeleted": "Categoría ''{categoryName}'' eliminada.",
+    "errorFailedToDeleteCategory": "Error al eliminar categoría: {error}",
+    "confirmDeleteCategoryMessage": "¿Estás seguro de que quieres eliminar la categoría ''{categoryName}''?",
+    "@confirmDeleteCategoryMessage": {
+        "placeholders": {
+            "categoryName": {
+                "type": "String"
+            }
+        }
     }
 }
