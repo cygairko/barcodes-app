@@ -3,6 +3,7 @@ import 'package:barcodes/features/settings/data/settings_repository.dart';
 import 'package:barcodes/l10n/l10n.dart';
 import 'package:barcodes/utils/package_info.dart';
 import 'package:flutter/material.dart';
+import 'package:barcodes/features/categories/presentation/category_management_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SettingsPage extends ConsumerWidget {
@@ -90,6 +91,17 @@ class SettingsPage extends ConsumerWidget {
                 p0.version,
               ),
             ),
+          ),
+          const Divider(),
+          ListTile(
+            title: const Text('Manage Categories'), // Assuming no l10n for now
+            trailing: const Icon(Icons.arrow_forward_ios),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const CategoryManagementPage()),
+              );
+            },
           ),
         ],
       ),

@@ -73,16 +73,20 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsMaxAutomaticBrightnessTitle => 'Maximum brightness level';
 
   @override
-  String get settingsMaxAutomaticBrightnessSubtitleDisabled => 'Enable automatic brightness to set level.';
+  String get settingsMaxAutomaticBrightnessSubtitleDisabled =>
+      'Enable automatic brightness to set level.';
 
   @override
-  String get settingsMaxAutomaticBrightnessSubtitleEnabled => 'Maximum level to which the screen will brighten up.';
+  String get settingsMaxAutomaticBrightnessSubtitleEnabled =>
+      'Maximum level to which the screen will brighten up.';
 
   @override
-  String get settingsMaxAutomaticBrightnessSubtitleLoading => 'Maximum level to which the screen will brighten up.';
+  String get settingsMaxAutomaticBrightnessSubtitleLoading =>
+      'Maximum level to which the screen will brighten up.';
 
   @override
-  String get settingsMaxAutomaticBrightnessSubtitleError => 'Maximum level to which the screen will brighten up.';
+  String get settingsMaxAutomaticBrightnessSubtitleError =>
+      'Maximum level to which the screen will brighten up.';
 
   @override
   String get settingsAppVersionTitle => 'App version';
