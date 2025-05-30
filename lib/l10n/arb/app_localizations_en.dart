@@ -73,21 +73,69 @@ class AppLocalizationsEn extends AppLocalizations {
   String get settingsMaxAutomaticBrightnessTitle => 'Maximum brightness level';
 
   @override
-  String get settingsMaxAutomaticBrightnessSubtitleDisabled =>
-      'Enable automatic brightness to set level.';
+  String get settingsMaxAutomaticBrightnessSubtitleDisabled => 'Enable automatic brightness to set level.';
 
   @override
-  String get settingsMaxAutomaticBrightnessSubtitleEnabled =>
-      'Maximum level to which the screen will brighten up.';
+  String get settingsMaxAutomaticBrightnessSubtitleEnabled => 'Maximum level to which the screen will brighten up.';
 
   @override
-  String get settingsMaxAutomaticBrightnessSubtitleLoading =>
-      'Maximum level to which the screen will brighten up.';
+  String get settingsMaxAutomaticBrightnessSubtitleLoading => 'Maximum level to which the screen will brighten up.';
 
   @override
-  String get settingsMaxAutomaticBrightnessSubtitleError =>
-      'Maximum level to which the screen will brighten up.';
+  String get settingsMaxAutomaticBrightnessSubtitleError => 'Maximum level to which the screen will brighten up.';
 
   @override
   String get settingsAppVersionTitle => 'App version';
+
+  @override
+  String get categoryManagementPageTitle => 'Manage Categories';
+
+  @override
+  String get addCategoryDialogTitle => 'Add Category';
+
+  @override
+  String get editCategoryDialogTitle => 'Edit Category';
+
+  @override
+  String get confirmDeleteDialogTitle => 'Confirm Delete';
+
+  @override
+  String get categoryNameHint => 'Category name';
+
+  @override
+  String get buttonSave => 'Save';
+
+  @override
+  String get buttonEdit => 'Edit';
+
+  @override
+  String get buttonDelete => 'Delete';
+
+  @override
+  String errorFailedToLoadCategories(String error) {
+    return 'Failed to load categories: $error';
+  }
+
+  @override
+  String get errorCategoryNameEmpty => 'Name cannot be empty';
+
+  @override
+  String errorFailedToSaveCategory(String error) {
+    return 'Failed to save category: $error';
+  }
+
+  @override
+  String infoCategoryDeleted(String categoryName) {
+    return 'Category \'\'$categoryName\'\' deleted.';
+  }
+
+  @override
+  String errorFailedToDeleteCategory(String error) {
+    return 'Failed to delete category: $error';
+  }
+
+  @override
+  String confirmDeleteCategoryMessage(String categoryName) {
+    return 'Are you sure you want to delete category \'\'$categoryName\'\'?';
+  }
 }

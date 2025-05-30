@@ -12,82 +12,131 @@ class AppLocalizationsEs extends AppLocalizations {
   String get counterAppBarTitle => 'Contador';
 
   @override
-  String get navigationLabelHome => 'Home';
+  String get navigationLabelHome => 'Inicio';
 
   @override
-  String get navigationLabelBarcodes => 'Barcodes';
+  String get navigationLabelBarcodes => 'Códigos de Barras';
 
   @override
-  String get navigationLabelProfile => 'Profile';
+  String get navigationLabelProfile => 'Perfil';
 
   @override
-  String get navigationLabelSettings => 'Settings';
+  String get navigationLabelSettings => 'Ajustes';
 
   @override
-  String get appBarTitleBarcodes => 'Barcodes';
+  String get appBarTitleBarcodes => 'Códigos de Barras';
 
   @override
-  String get appBarTitleSettings => 'Settings';
+  String get appBarTitleSettings => 'Ajustes';
 
   @override
-  String get appBarTitleBarcodeScreen => 'Barcode info';
+  String get appBarTitleBarcodeScreen => 'Información del Código';
 
   @override
-  String get appBarTitleAddBarcodeScreen => 'Create barcode';
+  String get appBarTitleAddBarcodeScreen => 'Crear Código de Barras';
 
   @override
-  String get noContentFound => 'No content found';
+  String get noContentFound => 'No se encontró contenido';
 
   @override
-  String get buttonSubmit => 'Submit';
+  String get buttonSubmit => 'Enviar';
 
   @override
-  String get buttonCancel => 'Cancel';
+  String get buttonCancel => 'Cancelar';
 
   @override
-  String get labelAddFormEntryName => 'Entry name';
+  String get labelAddFormEntryName => 'Nombre de la entrada';
 
   @override
-  String get labelAddFormEntryComment => 'Additional comment';
+  String get labelAddFormEntryComment => 'Comentario adicional';
 
   @override
-  String get labelAddFormEntryData => 'Data';
+  String get labelAddFormEntryData => 'Datos';
 
   @override
-  String get labelAddFormEntryTypeDropdown => 'Barcode type';
+  String get labelAddFormEntryTypeDropdown => 'Tipo de código de barras';
 
   @override
-  String get textBarcodeInfoNoContentTitle => 'No data';
+  String get textBarcodeInfoNoContentTitle => 'Sin datos';
 
   @override
-  String get textBarcodeInfoNoContentMessage => 'for this barcode entry';
+  String get textBarcodeInfoNoContentMessage => 'para esta entrada de código de barras';
 
   @override
-  String get settingsAutomaticBrightnessTitle => 'Automatic screen brightness';
+  String get settingsAutomaticBrightnessTitle => 'Brillo automático de pantalla';
 
   @override
   String get settingsAutomaticBrightnessSubtitle =>
-      'Adjust brightness automatically when a barcode is shown. Alternative: Double-tap.';
+      'Ajustar brillo automáticamente al mostrar un código. Alternativa: Doble toque.';
 
   @override
-  String get settingsMaxAutomaticBrightnessTitle => 'Maximum brightness level';
+  String get settingsMaxAutomaticBrightnessTitle => 'Nivel máximo de brillo automático';
 
   @override
   String get settingsMaxAutomaticBrightnessSubtitleDisabled =>
-      'Enable automatic brightness to set level.';
+      'Habilite el brillo automático para establecer el nivel.';
 
   @override
-  String get settingsMaxAutomaticBrightnessSubtitleEnabled =>
-      'Maximum level to which the screen will brighten up.';
+  String get settingsMaxAutomaticBrightnessSubtitleEnabled => 'Nivel máximo al que se iluminará la pantalla.';
 
   @override
-  String get settingsMaxAutomaticBrightnessSubtitleLoading =>
-      'Maximum level to which the screen will brighten up.';
+  String get settingsMaxAutomaticBrightnessSubtitleLoading => 'Nivel máximo al que se iluminará la pantalla.';
 
   @override
-  String get settingsMaxAutomaticBrightnessSubtitleError =>
-      'Maximum level to which the screen will brighten up.';
+  String get settingsMaxAutomaticBrightnessSubtitleError => 'Nivel máximo al que se iluminará la pantalla.';
 
   @override
-  String get settingsAppVersionTitle => 'App version';
+  String get settingsAppVersionTitle => 'Versión de la aplicación';
+
+  @override
+  String get categoryManagementPageTitle => 'Gestionar Categorías';
+
+  @override
+  String get addCategoryDialogTitle => 'Añadir Categoría';
+
+  @override
+  String get editCategoryDialogTitle => 'Editar Categoría';
+
+  @override
+  String get confirmDeleteDialogTitle => 'Confirmar Eliminación';
+
+  @override
+  String get categoryNameHint => 'Nombre de la categoría';
+
+  @override
+  String get buttonSave => 'Guardar';
+
+  @override
+  String get buttonEdit => 'Editar';
+
+  @override
+  String get buttonDelete => 'Eliminar';
+
+  @override
+  String errorFailedToLoadCategories(String error) {
+    return 'Error al cargar categorías: $error';
+  }
+
+  @override
+  String get errorCategoryNameEmpty => 'El nombre no puede estar vacío';
+
+  @override
+  String errorFailedToSaveCategory(String error) {
+    return 'Error al guardar categoría: $error';
+  }
+
+  @override
+  String infoCategoryDeleted(String categoryName) {
+    return 'Categoría \'\'$categoryName\'\' eliminada.';
+  }
+
+  @override
+  String errorFailedToDeleteCategory(String error) {
+    return 'Error al eliminar categoría: $error';
+  }
+
+  @override
+  String confirmDeleteCategoryMessage(String categoryName) {
+    return '¿Estás seguro de que quieres eliminar la categoría \'\'$categoryName\'\'?';
+  }
 }

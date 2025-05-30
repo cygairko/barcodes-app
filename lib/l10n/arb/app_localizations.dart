@@ -62,8 +62,7 @@ import 'app_localizations_es.dart';
 /// be consistent with the languages listed in the AppLocalizations.supportedLocales
 /// property.
 abstract class AppLocalizations {
-  AppLocalizations(String locale)
-    : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  AppLocalizations(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -71,8 +70,7 @@ abstract class AppLocalizations {
     return Localizations.of<AppLocalizations>(context, AppLocalizations)!;
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<AppLocalizations> delegate = _AppLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -84,19 +82,15 @@ abstract class AppLocalizations {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
-      <LocalizationsDelegate<dynamic>>[
-        delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ];
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
+    delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+  ];
 
   /// A list of this localizations delegate's supported locales.
-  static const List<Locale> supportedLocales = <Locale>[
-    Locale('en'),
-    Locale('es'),
-  ];
+  static const List<Locale> supportedLocales = <Locale>[Locale('en'), Locale('es')];
 
   /// Text shown in the AppBar of the Counter Page
   ///
@@ -253,10 +247,93 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'App version'**
   String get settingsAppVersionTitle;
+
+  /// Title for the Category Management Page
+  ///
+  /// In en, this message translates to:
+  /// **'Manage Categories'**
+  String get categoryManagementPageTitle;
+
+  /// Dialog title for adding a new category
+  ///
+  /// In en, this message translates to:
+  /// **'Add Category'**
+  String get addCategoryDialogTitle;
+
+  /// Dialog title for editing an existing category
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Category'**
+  String get editCategoryDialogTitle;
+
+  /// Dialog title for confirming category deletion
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm Delete'**
+  String get confirmDeleteDialogTitle;
+
+  /// Hint text for the category name input field
+  ///
+  /// In en, this message translates to:
+  /// **'Category name'**
+  String get categoryNameHint;
+
+  /// Label for the Save button
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get buttonSave;
+
+  /// Label for the Edit button
+  ///
+  /// In en, this message translates to:
+  /// **'Edit'**
+  String get buttonEdit;
+
+  /// Label for the Delete button
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get buttonDelete;
+
+  /// Error message shown when categories fail to load
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to load categories: {error}'**
+  String errorFailedToLoadCategories(String error);
+
+  /// Error message shown if category name is submitted empty
+  ///
+  /// In en, this message translates to:
+  /// **'Name cannot be empty'**
+  String get errorCategoryNameEmpty;
+
+  /// Error message shown when saving a category fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to save category: {error}'**
+  String errorFailedToSaveCategory(String error);
+
+  /// Info message shown after a category is successfully deleted
+  ///
+  /// In en, this message translates to:
+  /// **'Category \'\'{categoryName}\'\' deleted.'**
+  String infoCategoryDeleted(String categoryName);
+
+  /// Error message shown when deleting a category fails
+  ///
+  /// In en, this message translates to:
+  /// **'Failed to delete category: {error}'**
+  String errorFailedToDeleteCategory(String error);
+
+  /// Confirmation message when attempting to delete a category
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to delete category \'\'{categoryName}\'\'?'**
+  String confirmDeleteCategoryMessage(String categoryName);
 }
 
-class _AppLocalizationsDelegate
-    extends LocalizationsDelegate<AppLocalizations> {
+class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
   const _AppLocalizationsDelegate();
 
   @override
@@ -265,8 +342,7 @@ class _AppLocalizationsDelegate
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['en', 'es'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en', 'es'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;

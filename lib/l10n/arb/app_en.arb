@@ -103,5 +103,91 @@
   "settingsAppVersionTitle": "App version",
   "@settingsAppVersionTitle": {
     "description": "settingsAppVersionTitle"
+  },
+  "categoryManagementPageTitle": "Manage Categories",
+  "@categoryManagementPageTitle": {
+    "description": "Title for the Category Management Page"
+  },
+  "addCategoryDialogTitle": "Add Category",
+  "@addCategoryDialogTitle": {
+    "description": "Dialog title for adding a new category"
+  },
+  "editCategoryDialogTitle": "Edit Category",
+  "@editCategoryDialogTitle": {
+    "description": "Dialog title for editing an existing category"
+  },
+  "confirmDeleteDialogTitle": "Confirm Delete",
+  "@confirmDeleteDialogTitle": {
+    "description": "Dialog title for confirming category deletion"
+  },
+  "categoryNameHint": "Category name",
+  "@categoryNameHint": {
+    "description": "Hint text for the category name input field"
+  },
+  "buttonSave": "Save",
+  "@buttonSave": {
+    "description": "Label for the Save button"
+  },
+  "buttonEdit": "Edit",
+  "@buttonEdit": {
+    "description": "Label for the Edit button"
+  },
+  "buttonDelete": "Delete",
+  "@buttonDelete": {
+    "description": "Label for the Delete button"
+  },
+  "errorFailedToLoadCategories": "Failed to load categories: {error}",
+  "@errorFailedToLoadCategories": {
+    "description": "Error message shown when categories fail to load",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Network error"
+      }
+    }
+  },
+  "errorCategoryNameEmpty": "Name cannot be empty",
+  "@errorCategoryNameEmpty": {
+    "description": "Error message shown if category name is submitted empty"
+  },
+  "errorFailedToSaveCategory": "Failed to save category: {error}",
+  "@errorFailedToSaveCategory": {
+    "description": "Error message shown when saving a category fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Database error"
+      }
+    }
+  },
+  "infoCategoryDeleted": "Category ''{categoryName}'' deleted.",
+  "@infoCategoryDeleted": {
+    "description": "Info message shown after a category is successfully deleted",
+    "placeholders": {
+      "categoryName": {
+        "type": "String",
+        "example": "Groceries"
+      }
+    }
+  },
+  "errorFailedToDeleteCategory": "Failed to delete category: {error}",
+  "@errorFailedToDeleteCategory": {
+    "description": "Error message shown when deleting a category fails",
+    "placeholders": {
+      "error": {
+        "type": "String",
+        "example": "Database error"
+      }
+    }
+  },
+  "confirmDeleteCategoryMessage": "Are you sure you want to delete category ''{categoryName}''?",
+  "@confirmDeleteCategoryMessage": {
+    "description": "Confirmation message when attempting to delete a category",
+    "placeholders": {
+      "categoryName": {
+        "type": "String",
+        "example": "Groceries"
+      }
+    }
   }
 }
