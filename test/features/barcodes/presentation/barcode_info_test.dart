@@ -7,8 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('BarcodeInfo displays entry data correctly in ListTiles',
-      (WidgetTester tester) async {
+  testWidgets('BarcodeInfo displays entry data correctly in ListTiles', (WidgetTester tester) async {
     // 1. Create a mock BarcodeEntry object
     const mockEntry = BarcodeEntry(
       id: 1,
@@ -64,9 +63,7 @@ void main() {
       find.descendant(
         of: find.widgetWithText(ListTile, 'Test Barcode'),
         matching: find.byWidgetPredicate(
-          (widget) =>
-              widget is Text &&
-              widget.data == AppLocalizationsEn().labelAddFormEntryName,
+          (widget) => widget is Text && widget.data == AppLocalizationsEn().labelAddFormEntryName,
         ),
       ),
       findsOneWidget,
@@ -77,9 +74,7 @@ void main() {
       find.descendant(
         of: find.widgetWithText(ListTile, BarcodeType.QrCode.name),
         matching: find.byWidgetPredicate(
-          (widget) =>
-              widget is Text &&
-              widget.data == AppLocalizationsEn().labelAddFormEntryTypeDropdown,
+          (widget) => widget is Text && widget.data == AppLocalizationsEn().labelAddFormEntryTypeDropdown,
         ),
       ),
       findsOneWidget,
@@ -90,9 +85,7 @@ void main() {
       find.descendant(
         of: find.widgetWithText(ListTile, 'Test comment'),
         matching: find.byWidgetPredicate(
-          (widget) =>
-              widget is Text &&
-              widget.data == AppLocalizationsEn().labelAddFormEntryComment,
+          (widget) => widget is Text && widget.data == AppLocalizationsEn().labelAddFormEntryComment,
         ),
       ),
       findsOneWidget,
