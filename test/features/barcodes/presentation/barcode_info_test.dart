@@ -1,13 +1,14 @@
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:barcodes/features/barcodes/domain/barcode_entry.dart';
 import 'package:barcodes/features/barcodes/presentation/barcode_info.dart';
-import 'package:barcodes/l10n/arb/app_localizations.dart';
-import 'package:barcodes/l10n/arb/app_localizations_en.dart';
+import 'package:barcodes/l10n/generated/app_localizations.dart';
+import 'package:barcodes/l10n/generated/app_localizations_en.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('BarcodeInfo displays entry data correctly in ListTiles', (WidgetTester tester) async {
+  testWidgets('BarcodeInfo displays entry data correctly in ListTiles',
+      (WidgetTester tester) async {
     // 1. Create a mock BarcodeEntry object
     const mockEntry = BarcodeEntry(
       id: 1,
@@ -63,7 +64,9 @@ void main() {
       find.descendant(
         of: find.widgetWithText(ListTile, 'Test Barcode'),
         matching: find.byWidgetPredicate(
-          (widget) => widget is Text && widget.data == AppLocalizationsEn().labelAddFormEntryName,
+          (widget) =>
+              widget is Text &&
+              widget.data == AppLocalizationsEn().labelAddFormEntryName,
         ),
       ),
       findsOneWidget,
@@ -74,7 +77,9 @@ void main() {
       find.descendant(
         of: find.widgetWithText(ListTile, BarcodeType.QrCode.name),
         matching: find.byWidgetPredicate(
-          (widget) => widget is Text && widget.data == AppLocalizationsEn().labelAddFormEntryTypeDropdown,
+          (widget) =>
+              widget is Text &&
+              widget.data == AppLocalizationsEn().labelAddFormEntryTypeDropdown,
         ),
       ),
       findsOneWidget,
@@ -85,7 +90,9 @@ void main() {
       find.descendant(
         of: find.widgetWithText(ListTile, 'Test comment'),
         matching: find.byWidgetPredicate(
-          (widget) => widget is Text && widget.data == AppLocalizationsEn().labelAddFormEntryComment,
+          (widget) =>
+              widget is Text &&
+              widget.data == AppLocalizationsEn().labelAddFormEntryComment,
         ),
       ),
       findsOneWidget,
