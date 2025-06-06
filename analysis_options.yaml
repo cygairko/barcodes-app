@@ -10,3 +10,4 @@ linter:
 analyzer:
   exclude:
     - **/*.g.dart
+    - **/*.freezed.dart
