@@ -8,6 +8,4 @@ linter:
     public_member_api_docs: false
     sort_pub_dependencies: false
 analyzer:
-  exclude:
-    - **/*.g.dart
-    - **/*.freezed.dart
+  exclude: [build/**, lib/**.freezed.dart, lib/**.g.dart]
