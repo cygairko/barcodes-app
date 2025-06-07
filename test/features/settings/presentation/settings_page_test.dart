@@ -508,7 +508,6 @@ void main() {
       when(mockSettingsRepository.getAutomaticScreenBrightness()).thenAnswer((_) async => false);
       when(mockSettingsRepository.getMaxScreenBrightnessLevel()).thenAnswer((_) async => 0.5);
 
-
       await pumpSettingsPage(
         tester,
         settingsRepository: mockSettingsRepository,
@@ -520,12 +519,16 @@ void main() {
       await tester.pumpAndSettle();
 
       // Verify initial state "List" is selected
-      SegmentedButton<BarcodeDisplayMode> segmentedButton = tester.widget(find.byType(SegmentedButton<BarcodeDisplayMode>));
+      var segmentedButton = tester.widget<SegmentedButton<BarcodeDisplayMode>>(
+        find.byType(SegmentedButton<BarcodeDisplayMode>),
+      );
       expect(segmentedButton.selected, {BarcodeDisplayMode.list});
 
       // Tap "Carousel"
       when(mockSettingsRepository.setBarcodeDisplayMode(BarcodeDisplayMode.carousel)).thenAnswer((_) async {});
-      when(mockSettingsRepository.getBarcodeDisplayMode()).thenAnswer((_) async => BarcodeDisplayMode.carousel); // For provider refresh
+      when(
+        mockSettingsRepository.getBarcodeDisplayMode(),
+      ).thenAnswer((_) async => BarcodeDisplayMode.carousel); // For provider refresh
 
       await tester.tap(find.text('Carousel'));
       await tester.pumpAndSettle();
@@ -536,7 +539,9 @@ void main() {
 
       // Tap "List"
       when(mockSettingsRepository.setBarcodeDisplayMode(BarcodeDisplayMode.list)).thenAnswer((_) async {});
-      when(mockSettingsRepository.getBarcodeDisplayMode()).thenAnswer((_) async => BarcodeDisplayMode.list); // For provider refresh
+      when(
+        mockSettingsRepository.getBarcodeDisplayMode(),
+      ).thenAnswer((_) async => BarcodeDisplayMode.list); // For provider refresh
 
       await tester.tap(find.text('List'));
       await tester.pumpAndSettle();

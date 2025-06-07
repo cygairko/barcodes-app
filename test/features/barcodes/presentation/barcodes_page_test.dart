@@ -8,19 +8,19 @@ import 'package:flutter_test/flutter_test.dart';
 
 // Helper widget to wrap BarcodesPage for testing
 class TestBarcodesPageWidget extends StatelessWidget {
-  final List<Override> overrides;
-
   const TestBarcodesPageWidget({super.key, this.overrides = const []});
+
+  final List<Override> overrides;
 
   @override
   Widget build(BuildContext context) {
     return ProviderScope(
       overrides: overrides,
-      child: MaterialApp(
+      child: const MaterialApp(
         // Adding localizations delegates for any text that might be in BarcodesPage (e.g., AppBar title)
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        home: const BarcodesPage(),
+        home: BarcodesPage(),
       ),
     );
   }

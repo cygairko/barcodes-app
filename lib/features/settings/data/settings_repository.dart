@@ -30,7 +30,7 @@ Future<double> maxScreenBrightnessLevel(Ref ref) {
 }
 
 @riverpod
-Future<BarcodeDisplayMode> barcodeDisplayMode(BarcodeDisplayModeRef ref) {
+Future<BarcodeDisplayMode> barcodeDisplayMode(Ref ref) {
   return ref.watch(settingsRepositoryProvider).getBarcodeDisplayMode();
 }
 

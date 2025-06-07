@@ -74,7 +74,7 @@ void main() {
     group('Add Category', () {
       testWidgets('opens add category dialog and adds a category successfully', (tester) async {
         const newCategoryName = 'New Category';
-        final addedCategory = Category(id: 2, name: newCategoryName); // Changed 'newId' to int
+        const addedCategory = Category(id: 2, name: newCategoryName); // Changed 'newId' to int
 
         when(() => mockCategoryRepository.getCategories()).thenAnswer((_) async => []); // Initial empty list
         when(
@@ -161,9 +161,9 @@ void main() {
     });
 
     group('Edit Category', () {
-      final initialCategory = Category(id: 1, name: 'Old Name'); // ID is int
+      const initialCategory = Category(id: 1, name: 'Old Name'); // ID is int
       const updatedName = 'Updated Name';
-      final updatedCategory = Category(id: 1, name: updatedName); // ID is int
+      const updatedCategory = Category(id: 1, name: updatedName); // ID is int
 
       Finder findEditButtonForItem(String itemName) {
         final listTileFinder = find.ancestor(of: find.text(itemName), matching: find.byType(ListTile));
@@ -260,7 +260,7 @@ void main() {
     });
 
     group('Delete Category', () {
-      final categoryToDelete = Category(id: 3, name: 'To Delete'); // Changed 'delId' to int
+      const categoryToDelete = Category(id: 3, name: 'To Delete'); // Changed 'delId' to int
 
       Finder findDeleteButtonInList(String itemName) {
         final listTileFinder = find.ancestor(of: find.text(itemName), matching: find.byType(ListTile));
@@ -285,7 +285,7 @@ void main() {
       testWidgets('confirms and deletes a category successfully', (tester) async {
         when(() => mockCategoryRepository.getCategories()).thenAnswer((_) async => [categoryToDelete]);
         when(
-          () => mockCategoryRepository.deleteCategory(categoryToDelete.id!),
+          () => mockCategoryRepository.deleteCategory(categoryToDelete.id),
         ).thenAnswer((_) async {}); // id is now int
 
         await tester.pumpWidget(createTestableWidget(const CategoryManagementPage(), mockCategoryRepository));
@@ -304,7 +304,7 @@ void main() {
         await tester.pumpAndSettle();
 
         expect(find.byType(AlertDialog), findsNothing);
-        verify(() => mockCategoryRepository.deleteCategory(categoryToDelete.id!)).called(1);
+        verify(() => mockCategoryRepository.deleteCategory(categoryToDelete.id)).called(1);
         expect(find.text(l10n.infoCategoryDeleted(categoryToDelete.name)), findsOneWidget);
         verify(() => mockCategoryRepository.getCategories()).called(2);
         expect(find.text('To Delete'), findsNothing);
@@ -330,7 +330,7 @@ void main() {
       testWidgets('shows error SnackBar if deleting category fails', (tester) async {
         final exception = Exception('Delete failed');
         when(() => mockCategoryRepository.getCategories()).thenAnswer((_) async => [categoryToDelete]);
-        when(() => mockCategoryRepository.deleteCategory(categoryToDelete.id!)).thenThrow(exception); // id is now int
+        when(() => mockCategoryRepository.deleteCategory(categoryToDelete.id)).thenThrow(exception); // id is now int
 
         await tester.pumpWidget(createTestableWidget(const CategoryManagementPage(), mockCategoryRepository));
         await tester.pumpAndSettle();
@@ -372,7 +372,7 @@ void main() {
     });
 
     testWidgets('ListTile Edit button triggers _showCategoryDialog with category argument', (tester) async {
-      final categoryToEdit = Category(id: 4, name: 'Editable Category'); // Changed 'editId' to int
+      const categoryToEdit = Category(id: 4, name: 'Editable Category'); // Changed 'editId' to int
       when(() => mockCategoryRepository.getCategories()).thenAnswer((_) async => [categoryToEdit]);
 
       await tester.pumpWidget(createTestableWidget(const CategoryManagementPage(), mockCategoryRepository));
