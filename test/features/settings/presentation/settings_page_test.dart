@@ -1,8 +1,5 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:barcodes/features/settings/data/settings_repository.dart';
 import 'package:barcodes/features/settings/presentation/settings_page.dart';
-import 'package:barcodes/l10n/l10n.dart'; // Standard import
 import 'package:barcodes/l10n/generated/app_localizations.dart'; // Direct import for diagnostics
 import 'package:barcodes/routing/app_routes.dart'; // For ManageCategoriesRoute.name
 import 'package:barcodes/utils/package_info.dart';
@@ -36,25 +33,33 @@ void main() {
     Future<double> Function()? maxScreenBrightnessFuture,
     GoRouter? router,
   }) async {
-    final defaultPackageInfo = PackageInfo(appName: 'TestApp', packageName: 'com.test', version: '1.0.0', buildNumber: '1');
-
-    final testRouter = router ?? GoRouter(
-      initialLocation: '/', // Assuming SettingsPage is the initial route for these tests
-      routes: [
-        GoRoute(
-          path: '/', // Path for SettingsPage
-          name: 'settings_test_root', // A unique name for the test's perspective of settings
-          builder: (context, state) => const SettingsPage(),
-          routes: [
-             GoRoute(
-              name: ManageCategoriesRoute.name, // Actual name 'manageCategories'
-              path: ManageCategoriesRoute.path, // Actual path 'categories'
-              builder: (context, state) => const Scaffold(body: Center(child: Text('Manage Categories Page Placeholder'))),
-            ),
-          ]
-        ),
-      ],
+    final defaultPackageInfo = PackageInfo(
+      appName: 'TestApp',
+      packageName: 'com.test',
+      version: '1.0.0',
+      buildNumber: '1',
     );
+
+    final testRouter =
+        router ??
+        GoRouter(
+          initialLocation: '/', // Assuming SettingsPage is the initial route for these tests
+          routes: [
+            GoRoute(
+              path: '/', // Path for SettingsPage
+              name: 'settings_test_root', // A unique name for the test's perspective of settings
+              builder: (context, state) => const SettingsPage(),
+              routes: [
+                GoRoute(
+                  name: ManageCategoriesRoute.name, // Actual name 'manageCategories'
+                  path: ManageCategoriesRoute.path, // Actual path 'categories'
+                  builder: (context, state) =>
+                      const Scaffold(body: Center(child: Text('Manage Categories Page Placeholder'))),
+                ),
+              ],
+            ),
+          ],
+        );
 
     await tester.pumpWidget(
       ProviderScope(
@@ -89,8 +94,8 @@ void main() {
       // Arrange
       // SettingsRepository mock is already set up in setUp()
       // For initial state, we assume automatic brightness is off, and a default max brightness.
-      final expectedInitialAutoBrightness = false;
-      final expectedInitialMaxBrightness = 0.75;
+      const expectedInitialAutoBrightness = false;
+      const expectedInitialMaxBrightness = 0.75;
 
       await pumpSettingsPage(
         tester,
@@ -108,17 +113,25 @@ void main() {
       final switchWidget = tester.widget<SwitchListTile>(autoBrightnessSwitchTile);
       expect(switchWidget.value, expectedInitialAutoBrightness);
       expect(find.text('Automatic screen brightness'), findsOneWidget); // Key: settingsAutomaticBrightnessTitle
-      expect(find.text('Adjust brightness automatically when a barcode is shown. Alternative: Double-tap.'), findsOneWidget); // Key: settingsAutomaticBrightnessSubtitle
+      expect(
+        find.text('Adjust brightness automatically when a barcode is shown. Alternative: Double-tap.'),
+        findsOneWidget,
+      ); // Key: settingsAutomaticBrightnessSubtitle
 
       // 2. Max Brightness Slider
-      final maxBrightnessSliderTile = find.widgetWithText(ListTile, 'Maximum brightness level'); // Key: settingsMaxAutomaticBrightnessTitle
+      final maxBrightnessSliderTile = find.widgetWithText(
+        ListTile,
+        'Maximum brightness level',
+      ); // Key: settingsMaxAutomaticBrightnessTitle
       expect(maxBrightnessSliderTile, findsOneWidget);
       final sliderWidget = tester.widget<Slider>(find.byKey(const Key('maxBrightnessSlider')));
       expect(sliderWidget.value, expectedInitialMaxBrightness);
       // Slider should be disabled because automatic brightness is off
       expect(sliderWidget.onChanged, isNull);
-      expect(find.text('Enable automatic brightness to set level.'), findsOneWidget); // Key: settingsMaxAutomaticBrightnessSubtitleDisabled
-
+      expect(
+        find.text('Enable automatic brightness to set level.'),
+        findsOneWidget,
+      ); // Key: settingsMaxAutomaticBrightnessSubtitleDisabled
 
       // 3. App Version Display
       expect(find.text('App version'), findsOneWidget);
@@ -133,37 +146,37 @@ void main() {
       await FakeAsync().run((fakeAsync) async {
         // Arrange
         await pumpSettingsPage(
-        tester,
-        settingsRepository: mockSettingsRepository,
-        packageInfo: testPackageInfo,
-        // For loading, use a minimal delay. It won't complete until timers are flushed.
-        automaticScreenBrightnessFuture: () => Future.delayed(const Duration(milliseconds: 1), () => false),
-        maxScreenBrightnessFuture: () => Future.delayed(const Duration(milliseconds: 1), () => 0.0),
-      );
-      // Do not pumpAndSettle, check immediate loading state
+          tester,
+          settingsRepository: mockSettingsRepository,
+          packageInfo: testPackageInfo,
+          // For loading, use a minimal delay. It won't complete until timers are flushed.
+          automaticScreenBrightnessFuture: () => Future.delayed(const Duration(milliseconds: 1), () => false),
+          maxScreenBrightnessFuture: () => Future.delayed(const Duration(milliseconds: 1), () => 0.0),
+        );
+        // Do not pumpAndSettle, check immediate loading state
 
-      // Act & Assert
-      // Automatic Brightness Switch should show its default (false) or a spinner if implemented
-      final autoBrightnessSwitchTile = find.byKey(const Key('automaticBrightnessSwitch'));
-      expect(autoBrightnessSwitchTile, findsOneWidget);
-      // Default value is false when loading
-      expect(tester.widget<SwitchListTile>(autoBrightnessSwitchTile).value, false);
+        // Act & Assert
+        // Automatic Brightness Switch should show its default (false) or a spinner if implemented
+        final autoBrightnessSwitchTile = find.byKey(const Key('automaticBrightnessSwitch'));
+        expect(autoBrightnessSwitchTile, findsOneWidget);
+        // Default value is false when loading
+        expect(tester.widget<SwitchListTile>(autoBrightnessSwitchTile).value, false);
 
-      // Max Brightness Slider should show loading subtitle
-      expect(find.text('Maximum brightness level'), findsOneWidget); // Key: settingsMaxAutomaticBrightnessTitle
-      // Slider defaults to 0.8 and is disabled
-      final sliderWidget = tester.widget<Slider>(find.byKey(const Key('maxBrightnessSlider')));
-      expect(sliderWidget.value, 0.8); // Default value from widget
-      expect(sliderWidget.onChanged, isNull);
-      // This is the actual text for loading from app_en.arb's settingsMaxAutomaticBrightnessSubtitleLoading
-      expect(find.text('Maximum level to which the screen will brighten up.'), findsOneWidget);
+        // Max Brightness Slider should show loading subtitle
+        expect(find.text('Maximum brightness level'), findsOneWidget); // Key: settingsMaxAutomaticBrightnessTitle
+        // Slider defaults to 0.8 and is disabled
+        final sliderWidget = tester.widget<Slider>(find.byKey(const Key('maxBrightnessSlider')));
+        expect(sliderWidget.value, 0.8); // Default value from widget
+        expect(sliderWidget.onChanged, isNull);
+        // This is the actual text for loading from app_en.arb's settingsMaxAutomaticBrightnessSubtitleLoading
+        expect(find.text('Maximum level to which the screen will brighten up.'), findsOneWidget);
 
-      // Clean up timers
-      fakeAsync.flushTimers();
+        // Clean up timers
+        fakeAsync.flushTimers();
+      });
     });
-    });
 
-     testWidgets('renders error state for brightness settings', (WidgetTester tester) async {
+    testWidgets('renders error state for brightness settings', (WidgetTester tester) async {
       // Arrange
       final error = Exception('Failed to load settings');
       await pumpSettingsPage(
@@ -192,8 +205,8 @@ void main() {
       expect(find.textContaining(error.toString()), findsOneWidget); // Check if the actual error is also shown
     });
 
-    // TODO: Add more tests for interactions (tapping switch, moving slider)
-    // TODO: Add tests for navigation to Manage Categories page
+    // TODO(cygairko): Add more tests for interactions (tapping switch, moving slider)
+    // TODO(cygairko): Add tests for navigation to Manage Categories page
   });
 
   group('SettingsPage Interactions', () {
@@ -237,7 +250,6 @@ void main() {
       //    SettingsPage invalidates maxScreenBrightnessLevelProvider too.
       when(mockSettingsRepository.getMaxScreenBrightnessLevel()).thenAnswer((_) async => initialSliderValue);
 
-
       // Act
       await tester.tap(find.byKey(const Key('automaticBrightnessSwitch')));
       await tester.pumpAndSettle(); // Allow providers to invalidate, futures to complete, and UI to rebuild
@@ -279,12 +291,12 @@ void main() {
       expect(tester.widget<Slider>(find.byKey(const Key('maxBrightnessSlider'))).onChanged, isNotNull);
       expect(find.text('Maximum level to which the screen will brighten up.'), findsOneWidget);
 
-
       // Setup mocks for interaction:
       when(mockSettingsRepository.setAutomaticScreenBrightness(isAutoBrightness: false)).thenAnswer((_) async {});
-      when(mockSettingsRepository.getAutomaticScreenBrightness()).thenAnswer((_) async => false); // New state after invalidation
+      when(
+        mockSettingsRepository.getAutomaticScreenBrightness(),
+      ).thenAnswer((_) async => false); // New state after invalidation
       when(mockSettingsRepository.getMaxScreenBrightnessLevel()).thenAnswer((_) async => initialSliderValue);
-
 
       // Act
       await tester.tap(find.byKey(const Key('automaticBrightnessSwitch')));
@@ -294,7 +306,10 @@ void main() {
       verify(mockSettingsRepository.setAutomaticScreenBrightness(isAutoBrightness: false)).called(1);
       expect(tester.widget<SwitchListTile>(find.byKey(const Key('automaticBrightnessSwitch'))).value, false);
       expect(tester.widget<Slider>(find.byKey(const Key('maxBrightnessSlider'))).onChanged, isNull);
-      expect(find.text('Enable automatic brightness to set level.'), findsOneWidget); // Key: settingsMaxAutomaticBrightnessSubtitleDisabled
+      expect(
+        find.text('Enable automatic brightness to set level.'),
+        findsOneWidget,
+      ); // Key: settingsMaxAutomaticBrightnessSubtitleDisabled
     });
 
     testWidgets('changes slider value when enabled', (WidgetTester tester) async {
@@ -321,7 +336,6 @@ void main() {
       expect(sliderWidget.onChanged, isNotNull); // Enabled
       expect(find.text('Maximum level to which the screen will brighten up.'), findsOneWidget);
 
-
       // Setup mocks for interaction:
       // 1. When setMaxScreenBrightnessLevel is called, it should succeed.
       when(mockSettingsRepository.setMaxScreenBrightnessLevel(any)).thenAnswer((_) async {});
@@ -343,20 +357,19 @@ void main() {
       // 0.8 is the 8th value if 0.1 is 1st (0.1, 0.2 ... 0.8) so ((8-1)/(10-1)) = 7/9 of the width
       // Target position for 0.8: (0.8 - 0.1) / (1.0 - 0.1) = 0.7 / 0.9 = 7/9 of the track width.
       // We'll use a drag offset that should reliably change the value.
-      await tester.drag(sliderFinder, const Offset(100.0, 0.0)); // Arbitrary drag right
+      await tester.drag(sliderFinder, const Offset(100, 0)); // Arbitrary drag right
       await tester.pumpAndSettle();
-
 
       // Assert
       // 1. Repository method was called with the new value.
       //    Due to drag inaccuracy, we capture the argument.
-      final capturedValue = verify(mockSettingsRepository.setMaxScreenBrightnessLevel(captureAny)).captured.single as double;
+      final capturedValue =
+          verify(mockSettingsRepository.setMaxScreenBrightnessLevel(captureAny)).captured.single as double;
       // Check if it's close to one of the discrete values. Here, we expect it to trigger an update.
       // The actual value might not be exactly 0.8 due to drag behavior.
       // For simplicity, we'll check that it was called, and then check the UI.
       // A better check would be to ensure capturedValue is one of 0.1, 0.2 ... 1.0
-      expect(capturedValue, isNotNull, reason: "setMaxScreenBrightnessLevel should be called");
-
+      expect(capturedValue, isNotNull, reason: 'setMaxScreenBrightnessLevel should be called');
 
       // 2. Slider UI updated
       sliderWidget = tester.widget<Slider>(find.byKey(const Key('maxBrightnessSlider')));
@@ -374,7 +387,6 @@ void main() {
       when(mockSettingsRepository.getAutomaticScreenBrightness()).thenAnswer((_) async => false);
       when(mockSettingsRepository.getMaxScreenBrightnessLevel()).thenAnswer((_) async => initialSliderVal);
 
-
       await pumpSettingsPage(
         tester,
         settingsRepository: mockSettingsRepository,
@@ -391,7 +403,7 @@ void main() {
       expect(find.text('Enable automatic brightness to set level.'), findsOneWidget);
 
       // Act: Attempt to drag the slider
-      await tester.drag(find.byKey(const Key('maxBrightnessSlider')), const Offset(100.0, 0.0));
+      await tester.drag(find.byKey(const Key('maxBrightnessSlider')), const Offset(100, 0));
       await tester.pumpAndSettle();
 
       // Assert
@@ -438,7 +450,7 @@ void main() {
 
       // Act
       final manageCategoriesTile = find.widgetWithText(ListTile, 'Manage Categories');
-      expect(manageCategoriesTile, findsOneWidget, reason: "Manage Categories ListTile should be present");
+      expect(manageCategoriesTile, findsOneWidget, reason: 'Manage Categories ListTile should be present');
       await tester.tap(manageCategoriesTile);
       await tester.pumpAndSettle(); // Process navigation
 
