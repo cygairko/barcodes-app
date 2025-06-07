@@ -21,7 +21,8 @@ class _BarcodesListState extends ConsumerState<BarcodesList> {
       barcodesListControllerProvider,
       (_, state) => state.showAlertDialogOnError(context),
     );
-    // ignore: unused_local_variable
+
+    // ignore: unused_local_variable , Watching the provider to ensure it stays active and to trigger rebuilds on state changes, even if the 'state' variable itself is not directly used in this build method.
     final state = ref.watch(barcodesListControllerProvider);
 
     return AsyncValueWidget(

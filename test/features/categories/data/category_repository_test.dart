@@ -2,7 +2,6 @@ import 'package:barcodes/features/categories/data/category_repository.dart';
 import 'package:barcodes/features/categories/domain/category.dart';
 import 'package:barcodes/utils/data_store.dart'; // Added import for DataStore
 import 'package:flutter_test/flutter_test.dart';
-import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_memory.dart'; // For in-memory database
 
 void main() {
@@ -28,8 +27,8 @@ void main() {
     await db.close();
   });
 
-  final categoryNoId1 = Category(name: 'Electronics');
-  final categoryNoId2 = Category(name: 'Books');
+  const categoryNoId1 = Category(name: 'Electronics');
+  const categoryNoId2 = Category(name: 'Books');
 
   group('CategoryRepository with Sembast', () {
     group('addCategory and getCategories', () {
@@ -76,7 +75,7 @@ void main() {
       });
 
       test('should throw an exception when updating a category with null ID', () async {
-        final categoryWithNullId = Category(name: 'Test Category');
+        const categoryWithNullId = Category(name: 'Test Category');
         expect(
           () => categoryRepository.updateCategory(categoryWithNullId),
           throwsA(isA<ArgumentError>()),
@@ -84,7 +83,7 @@ void main() {
       });
 
       test('should throw an exception when updating a non-existent category ID', () async {
-        final nonExistentCategory = Category(id: 999, name: 'Non Existent');
+        const nonExistentCategory = Category(id: 999, name: 'Non Existent');
         expect(
           () => categoryRepository.updateCategory(nonExistentCategory),
           throwsA(isA<Exception>()), // Expecting the 'not found for update' exception

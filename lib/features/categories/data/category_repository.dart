@@ -1,19 +1,19 @@
 import 'dart:async';
-import 'package:sembast/sembast.dart';
+
+import 'package:barcodes/features/categories/domain/category.dart';
+import 'package:barcodes/utils/data_store.dart'; // Assuming this path is correct
 import 'package:flutter_riverpod/flutter_riverpod.dart'; // Ensure this is present for Ref
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:barcodes/utils/data_store.dart'; // Assuming this path is correct
-import '../domain/category.dart';
+import 'package:sembast/sembast.dart';
 
 part 'category_repository.g.dart';
 
 class CategoryRepository {
-  static const String storeName = 'categories';
-
-  final DataStore _dataStore;
-  final _categoryStore = intMapStoreFactory.store(storeName);
-
   CategoryRepository(this._dataStore);
+
+  static const String storeName = 'categories';
+  final DataStore _dataStore;
+  final StoreRef<int, Map<String, Object?>> _categoryStore = intMapStoreFactory.store(storeName);
 
   Future<Database> get _db async => _dataStore.db;
 

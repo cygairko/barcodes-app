@@ -1,7 +1,6 @@
 import 'package:barcodes/features/settings/data/settings_repository.dart';
 import 'package:barcodes/utils/data_store.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_memory.dart';
 
 void main() {
@@ -35,13 +34,13 @@ void main() {
       });
 
       test('setAutomaticScreenBrightness(true) and then getAutomaticScreenBrightness() returns true', () async {
-        await settingsRepository.setAutomaticScreenBrightness(true);
+        await settingsRepository.setAutomaticScreenBrightness(isAutoBrightness: true);
         final value = await settingsRepository.getAutomaticScreenBrightness();
         expect(value, isTrue);
       });
 
       test('setAutomaticScreenBrightness(false) and then getAutomaticScreenBrightness() returns false', () async {
-        await settingsRepository.setAutomaticScreenBrightness(false);
+        await settingsRepository.setAutomaticScreenBrightness(isAutoBrightness: false);
         final value = await settingsRepository.getAutomaticScreenBrightness();
         expect(value, isFalse);
       });
@@ -60,13 +59,13 @@ void main() {
       });
 
       test('setMaxScreenBrightnessLevel(1.0) and then getMaxScreenBrightnessLevel() returns 1.0', () async {
-        await settingsRepository.setMaxScreenBrightnessLevel(1.0);
+        await settingsRepository.setMaxScreenBrightnessLevel(1);
         final value = await settingsRepository.getMaxScreenBrightnessLevel();
         expect(value, 1.0);
       });
 
       test('setMaxScreenBrightnessLevel(0) and then getMaxScreenBrightnessLevel() returns 0.0 (edge case)', () async {
-        await settingsRepository.setMaxScreenBrightnessLevel(0.0);
+        await settingsRepository.setMaxScreenBrightnessLevel(0);
         final value = await settingsRepository.getMaxScreenBrightnessLevel();
         expect(value, 0.0);
       });

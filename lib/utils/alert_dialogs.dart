@@ -1,4 +1,4 @@
-library alert_dialogs;
+library;
 
 import 'dart:io';
 

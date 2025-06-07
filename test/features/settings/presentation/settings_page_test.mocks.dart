@@ -68,9 +68,9 @@ class MockSettingsRepository extends _i1.Mock implements _i4.SettingsRepository 
           as _i5.Future<bool>);
 
   @override
-  _i5.Future<void> setAutomaticScreenBrightness(bool? value) =>
+  _i5.Future<void> setAutomaticScreenBrightness({required bool isAutoBrightness}) =>
       (super.noSuchMethod(
-            Invocation.method(#setAutomaticScreenBrightness, [value]),
+            Invocation.method(#setAutomaticScreenBrightness, [isAutoBrightness]),
             returnValue: _i5.Future<void>.value(),
             returnValueForMissingStub: _i5.Future<void>.value(),
           )

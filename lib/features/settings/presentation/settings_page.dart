@@ -1,13 +1,11 @@
 import 'package:barcodes/common_widgets/async_value_widget.dart';
 import 'package:barcodes/features/settings/data/settings_repository.dart';
 import 'package:barcodes/l10n/l10n.dart';
+import 'package:barcodes/routing/app_routes.dart'; // Added import for typed routes
 import 'package:barcodes/utils/package_info.dart';
 import 'package:flutter/material.dart';
-// Import for CategoryManagementPage is no longer needed here if using GoRouter for navigation
-// import 'package:barcodes/features/categories/presentation/category_management_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart'; // Added import for GoRouter
-import 'package:barcodes/routing/app_routes.dart'; // Added import for typed routes
 
 class SettingsPage extends ConsumerWidget {
   const SettingsPage({super.key});
@@ -36,7 +34,7 @@ class SettingsPage extends ConsumerWidget {
             subtitle: Text(context.l10n.settingsAutomaticBrightnessSubtitle), // Placeholder
             value: automaticBrightness.asData?.value ?? false, // Default to false if loading or error
             onChanged: (bool newValue) {
-              ref.read(settingsRepositoryProvider).setAutomaticScreenBrightness(newValue);
+              ref.read(settingsRepositoryProvider).setAutomaticScreenBrightness(isAutoBrightness: newValue);
               ref
                 ..invalidate(automaticScreenBrightnessProvider)
                 // Also invalidate max brightness provider in case its UI needs to update (e.g. enabled state)

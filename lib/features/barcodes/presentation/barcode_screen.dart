@@ -40,7 +40,7 @@ class _BarcodeScreenState extends ConsumerState<BarcodeScreen> {
       // Use a try-catch here as well, in case restoring brightness fails
       try {
         _brightnessService?.resetBrightness();
-      } catch (e) {
+      } on Exception catch (e) {
         context.logger.e('Error restoring brightness in BarcodeScreen dispose: $e');
         // Log the error but do not throw it, as we are in dispose and should not interrupt the lifecycle.
       }
@@ -95,7 +95,7 @@ class _BarcodeScreenState extends ConsumerState<BarcodeScreen> {
                               // Try to get current brightness only if not already fetched by initState or previous double tap
                               try {
                                 _originalBrightness = await brightnessService.getCurrentBrightness();
-                              } catch (e) {
+                              } on Exception catch (e) {
                                 ref.read(loggerProvider).e('Error getting current brightness on double tap: $e');
 
                                 // If we can't get current brightness, we might not want to proceed
@@ -107,9 +107,9 @@ class _BarcodeScreenState extends ConsumerState<BarcodeScreen> {
                             // Ensure that if brightness is set, we attempt to restore it.
                             // No need to call setState if these vars don't directly drive UI rebuilds for this action.
                             _brightnessWasAdjustedByThisScreen = true;
-                          } catch (e) {
+                          } on Exception catch (e) {
                             // Catch any errors from reading providers or other operations
-                            print('Error in onDoubleTap brightness adjustment: $e');
+                            ref.read(loggerProvider).e('Error in onDoubleTap brightness adjustment: $e');
                           }
                         },
                         child: BarcodeWidget(
@@ -151,7 +151,7 @@ class _BarcodeScreenState extends ConsumerState<BarcodeScreen> {
         // For example, if the platform call fails.
         try {
           _originalBrightness = await brightnessService.getCurrentBrightness();
-        } catch (e) {
+        } on Exception catch (e) {
           ref.read(loggerProvider).e('Error getting current brightness in BarcodeScreen: $e');
           // Log the error but do not throw it, as we want to handle it gracefully.
 
@@ -170,7 +170,7 @@ class _BarcodeScreenState extends ConsumerState<BarcodeScreen> {
           _brightnessWasAdjustedByThisScreen = true;
         }
       }
-    } catch (e) {
+    } on Exception catch (e) {
       // Catch any errors from reading providers or other operations
       ref.read(loggerProvider).e('Error in _setupBrightness: $e');
       // Log the error but do not throw it, as we want to handle it gracefully.

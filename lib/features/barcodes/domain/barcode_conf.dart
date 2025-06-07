@@ -34,7 +34,6 @@ class BarcodeConf extends ChangeNotifier {
 
   String get normalizedData {
     if (barcode is BarcodeEan && barcode.name != 'UPC E') {
-      // ignore: avoid_as
       final ean = barcode as BarcodeEan;
       return ean.normalize(data);
     }
@@ -130,7 +129,7 @@ class BarcodeConf extends ChangeNotifier {
         _barcode = Barcode.isbn(drawEndChar: true);
       case BarcodeType.Code39:
         _desc =
-            'The Code 39 specification defines 43 characters, consisting of uppercase letters (A through Z), numeric digits (0 through 9) and a number of special characters (-, ., \$, /, +, %, and space). An additional character (denoted \'*\') is used for both start and stop delimiters.';
+            r"The Code 39 specification defines 43 characters, consisting of uppercase letters (A through Z), numeric digits (0 through 9) and a number of special characters (-, ., $, /, +, %, and space). An additional character (denoted '*') is used for both start and stop delimiters.";
         _method = 'code39()';
         _barcode = Barcode.code39();
       case BarcodeType.Code93:

@@ -34,8 +34,8 @@ class SettingsRepository {
     return value as bool? ?? false;
   }
 
-  Future<void> setAutomaticScreenBrightness(bool value) async {
-    await storeRef.record(kAutomaticScreenBrightness).put(datastore.db, value);
+  Future<void> setAutomaticScreenBrightness({required bool isAutoBrightness}) async {
+    await storeRef.record(kAutomaticScreenBrightness).put(datastore.db, isAutoBrightness);
   }
 
   Future<double> getMaxScreenBrightnessLevel() async {
