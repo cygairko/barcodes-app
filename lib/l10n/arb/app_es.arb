@@ -49,5 +49,8 @@
                 "type": "String"
             }
         }
-    }
+    },
+  "settingsBarcodeDisplayModeTitle": "Modo de visualización de códigos de barras",
+  "settingsBarcodeDisplayModeList": "Lista",
+  "settingsBarcodeDisplayModeCarousel": "Carrusel"
 }

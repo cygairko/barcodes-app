@@ -31,6 +31,7 @@ void main() {
     // To test AsyncValue states, the Future itself should resolve to data, error, or be delayed for loading.
     Future<bool> Function()? automaticScreenBrightnessFuture,
     Future<double> Function()? maxScreenBrightnessFuture,
+    Future<BarcodeDisplayMode> Function()? barcodeDisplayModeFuture,
     GoRouter? router,
   }) async {
     final defaultPackageInfo = PackageInfo(
@@ -70,6 +71,8 @@ void main() {
             automaticScreenBrightnessProvider.overrideWith((ref) => automaticScreenBrightnessFuture()),
           if (maxScreenBrightnessFuture != null)
             maxScreenBrightnessLevelProvider.overrideWith((ref) => maxScreenBrightnessFuture()),
+          if (barcodeDisplayModeFuture != null)
+            barcodeDisplayModeProvider.overrideWith((ref) => barcodeDisplayModeFuture()),
         ],
         child: MaterialApp.router(
           locale: const Locale('en'),
@@ -460,6 +463,87 @@ void main() {
       // And the original SettingsPage might be gone or not visible depending on router stack behavior
       // For a simple push, the original page might still be in the widget tree but not visible.
       // A more robust check is that the new page's content is there.
+    });
+  });
+
+  group('Barcode Display Mode setting', () {
+    final testPackageInfo = PackageInfo(
+      appName: 'Test App Barcode',
+      packageName: 'com.example.barcode',
+      version: '1.0',
+      buildNumber: '1',
+    );
+
+    testWidgets('renders SegmentedButton for BarcodeDisplayMode', (WidgetTester tester) async {
+      // Arrange
+      when(mockSettingsRepository.getAutomaticScreenBrightness()).thenAnswer((_) async => false);
+      when(mockSettingsRepository.getMaxScreenBrightnessLevel()).thenAnswer((_) async => 0.5);
+      when(mockSettingsRepository.getBarcodeDisplayMode()).thenAnswer((_) async => BarcodeDisplayMode.list);
+
+      await pumpSettingsPage(
+        tester,
+        settingsRepository: mockSettingsRepository,
+        packageInfo: testPackageInfo,
+        automaticScreenBrightnessFuture: () => mockSettingsRepository.getAutomaticScreenBrightness(),
+        maxScreenBrightnessFuture: () => mockSettingsRepository.getMaxScreenBrightnessLevel(),
+        barcodeDisplayModeFuture: () => mockSettingsRepository.getBarcodeDisplayMode(),
+      );
+      await tester.pumpAndSettle();
+
+      // Assert
+      expect(find.byType(SegmentedButton<BarcodeDisplayMode>), findsOneWidget);
+      expect(find.text('List'), findsOneWidget); // From AppLocalizations.en
+      expect(find.text('Carousel'), findsOneWidget); // From AppLocalizations.en
+
+      final segmentedButton = tester.widget<SegmentedButton<BarcodeDisplayMode>>(
+        find.byType(SegmentedButton<BarcodeDisplayMode>),
+      );
+      expect(segmentedButton.selected, {BarcodeDisplayMode.list});
+    });
+
+    testWidgets('tapping SegmentedButton updates BarcodeDisplayMode', (WidgetTester tester) async {
+      // Initial state: List selected
+      when(mockSettingsRepository.getBarcodeDisplayMode()).thenAnswer((_) async => BarcodeDisplayMode.list);
+      // Mock other providers that SettingsPage might depend on during init
+      when(mockSettingsRepository.getAutomaticScreenBrightness()).thenAnswer((_) async => false);
+      when(mockSettingsRepository.getMaxScreenBrightnessLevel()).thenAnswer((_) async => 0.5);
+
+
+      await pumpSettingsPage(
+        tester,
+        settingsRepository: mockSettingsRepository,
+        packageInfo: testPackageInfo,
+        automaticScreenBrightnessFuture: () => mockSettingsRepository.getAutomaticScreenBrightness(),
+        maxScreenBrightnessFuture: () => mockSettingsRepository.getMaxScreenBrightnessLevel(),
+        barcodeDisplayModeFuture: () => mockSettingsRepository.getBarcodeDisplayMode(),
+      );
+      await tester.pumpAndSettle();
+
+      // Verify initial state "List" is selected
+      SegmentedButton<BarcodeDisplayMode> segmentedButton = tester.widget(find.byType(SegmentedButton<BarcodeDisplayMode>));
+      expect(segmentedButton.selected, {BarcodeDisplayMode.list});
+
+      // Tap "Carousel"
+      when(mockSettingsRepository.setBarcodeDisplayMode(BarcodeDisplayMode.carousel)).thenAnswer((_) async {});
+      when(mockSettingsRepository.getBarcodeDisplayMode()).thenAnswer((_) async => BarcodeDisplayMode.carousel); // For provider refresh
+
+      await tester.tap(find.text('Carousel'));
+      await tester.pumpAndSettle();
+
+      verify(mockSettingsRepository.setBarcodeDisplayMode(BarcodeDisplayMode.carousel)).called(1);
+      segmentedButton = tester.widget(find.byType(SegmentedButton<BarcodeDisplayMode>));
+      expect(segmentedButton.selected, {BarcodeDisplayMode.carousel});
+
+      // Tap "List"
+      when(mockSettingsRepository.setBarcodeDisplayMode(BarcodeDisplayMode.list)).thenAnswer((_) async {});
+      when(mockSettingsRepository.getBarcodeDisplayMode()).thenAnswer((_) async => BarcodeDisplayMode.list); // For provider refresh
+
+      await tester.tap(find.text('List'));
+      await tester.pumpAndSettle();
+
+      verify(mockSettingsRepository.setBarcodeDisplayMode(BarcodeDisplayMode.list)).called(1);
+      segmentedButton = tester.widget(find.byType(SegmentedButton<BarcodeDisplayMode>));
+      expect(segmentedButton.selected, {BarcodeDisplayMode.list});
     });
   });
 }

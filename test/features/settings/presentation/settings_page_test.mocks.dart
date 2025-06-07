@@ -5,7 +5,8 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i5;
 
-import 'package:barcodes/features/settings/data/settings_repository.dart' as _i4;
+import 'package:barcodes/features/settings/data/settings_repository.dart'
+    as _i4;
 import 'package:barcodes/utils/data_store.dart' as _i2;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:sembast/sembast.dart' as _i3;
@@ -25,17 +26,22 @@ import 'package:sembast/sembast.dart' as _i3;
 // ignore_for_file: subtype_of_sealed_class
 
 class _FakeDataStore_0 extends _i1.SmartFake implements _i2.DataStore {
-  _FakeDataStore_0(Object parent, Invocation parentInvocation) : super(parent, parentInvocation);
+  _FakeDataStore_0(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
-class _FakeStoreRef_1<K extends Object?, V extends Object?> extends _i1.SmartFake implements _i3.StoreRef<K, V> {
-  _FakeStoreRef_1(Object parent, Invocation parentInvocation) : super(parent, parentInvocation);
+class _FakeStoreRef_1<K extends Object?, V extends Object?>
+    extends _i1.SmartFake
+    implements _i3.StoreRef<K, V> {
+  _FakeStoreRef_1(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 /// A class which mocks [SettingsRepository].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockSettingsRepository extends _i1.Mock implements _i4.SettingsRepository {
+class MockSettingsRepository extends _i1.Mock
+    implements _i4.SettingsRepository {
   @override
   _i2.DataStore get datastore =>
       (super.noSuchMethod(
@@ -98,6 +104,28 @@ class MockSettingsRepository extends _i1.Mock implements _i4.SettingsRepository 
   _i5.Future<void> setMaxScreenBrightnessLevel(double? value) =>
       (super.noSuchMethod(
             Invocation.method(#setMaxScreenBrightnessLevel, [value]),
+            returnValue: _i5.Future<void>.value(),
+            returnValueForMissingStub: _i5.Future<void>.value(),
+          )
+          as _i5.Future<void>);
+
+  @override
+  _i5.Future<_i4.BarcodeDisplayMode> getBarcodeDisplayMode() =>
+      (super.noSuchMethod(
+            Invocation.method(#getBarcodeDisplayMode, []),
+            returnValue: _i5.Future<_i4.BarcodeDisplayMode>.value(
+              _i4.BarcodeDisplayMode.list,
+            ),
+            returnValueForMissingStub: _i5.Future<_i4.BarcodeDisplayMode>.value(
+              _i4.BarcodeDisplayMode.list,
+            ),
+          )
+          as _i5.Future<_i4.BarcodeDisplayMode>);
+
+  @override
+  _i5.Future<void> setBarcodeDisplayMode(_i4.BarcodeDisplayMode? mode) =>
+      (super.noSuchMethod(
+            Invocation.method(#setBarcodeDisplayMode, [mode]),
             returnValue: _i5.Future<void>.value(),
             returnValueForMissingStub: _i5.Future<void>.value(),
           )

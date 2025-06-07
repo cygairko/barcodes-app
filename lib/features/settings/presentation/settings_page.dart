@@ -15,6 +15,7 @@ class SettingsPage extends ConsumerWidget {
     final packageInfo = ref.watch(packageInfoProvider);
     final automaticBrightness = ref.watch(automaticScreenBrightnessProvider);
     final maxBrightness = ref.watch(maxScreenBrightnessLevelProvider);
+    final barcodeDisplayMode = ref.watch(barcodeDisplayModeProvider); // This should already be correct if I followed the convention. Let's double check.
 
     // Determine if the slider should be enabled
     // It's enabled if automatic brightness is ON (true) and has data.
@@ -101,6 +102,32 @@ class SettingsPage extends ConsumerWidget {
               // Navigate using GoRouter's named route
               context.pushNamed(ManageCategoriesRoute.name);
             },
+          ),
+          const Divider(),
+          ListTile(
+            title: Text(context.l10n.settingsBarcodeDisplayModeTitle),
+          ),
+          AsyncValueWidget<BarcodeDisplayMode>(
+            value: barcodeDisplayMode, // This should be correct
+            data: (currentMode) => SegmentedButton<BarcodeDisplayMode>(
+              segments: <ButtonSegment<BarcodeDisplayMode>>[
+                ButtonSegment<BarcodeDisplayMode>(
+                  value: BarcodeDisplayMode.list,
+                  label: Text(context.l10n.settingsBarcodeDisplayModeList),
+                ),
+                ButtonSegment<BarcodeDisplayMode>(
+                  value: BarcodeDisplayMode.carousel,
+                  label: Text(context.l10n.settingsBarcodeDisplayModeCarousel),
+                ),
+              ],
+              selected: <BarcodeDisplayMode>{currentMode},
+              onSelectionChanged: (Set<BarcodeDisplayMode> newSelection) {
+                if (newSelection.isNotEmpty) {
+                  ref.read(settingsRepositoryProvider).setBarcodeDisplayMode(newSelection.first);
+                  ref.invalidate(barcodeDisplayModeProvider); // This should be correct
+                }
+              },
+            ),
           ),
         ],
       ),

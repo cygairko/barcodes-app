@@ -7,6 +7,12 @@ part 'settings_repository.g.dart';
 
 const String kAutomaticScreenBrightness = 'automaticScreenBrightness';
 const String kMaxScreenBrightnessLevel = 'maxScreenBrightnessLevel';
+const String kBarcodeDisplayMode = 'barcodeDisplayMode';
+
+enum BarcodeDisplayMode {
+  list,
+  carousel,
+}
 
 @Riverpod(keepAlive: true)
 SettingsRepository settingsRepository(Ref ref) {
@@ -21,6 +27,11 @@ Future<bool> automaticScreenBrightness(Ref ref) {
 @riverpod
 Future<double> maxScreenBrightnessLevel(Ref ref) {
   return ref.watch(settingsRepositoryProvider).getMaxScreenBrightnessLevel();
+}
+
+@riverpod
+Future<BarcodeDisplayMode> barcodeDisplayMode(BarcodeDisplayModeRef ref) {
+  return ref.watch(settingsRepositoryProvider).getBarcodeDisplayMode();
 }
 
 class SettingsRepository {
@@ -48,5 +59,20 @@ class SettingsRepository {
 
   Future<void> setMaxScreenBrightnessLevel(double value) async {
     await storeRef.record(kMaxScreenBrightnessLevel).put(datastore.db, value);
+  }
+
+  Future<BarcodeDisplayMode> getBarcodeDisplayMode() async {
+    final value = await storeRef.record(kBarcodeDisplayMode).get(datastore.db);
+    if (value == null) {
+      return BarcodeDisplayMode.list;
+    }
+    return BarcodeDisplayMode.values.firstWhere(
+      (e) => e.toString() == 'BarcodeDisplayMode.$value',
+      orElse: () => BarcodeDisplayMode.list,
+    );
+  }
+
+  Future<void> setBarcodeDisplayMode(BarcodeDisplayMode mode) async {
+    await storeRef.record(kBarcodeDisplayMode).put(datastore.db, mode.name);
   }
 }
