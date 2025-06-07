@@ -1,4 +1,6 @@
+import 'package:barcodes/common_widgets/async_value_widget.dart';
 import 'package:barcodes/features/barcodes/presentation/barcodes_list.dart';
+import 'package:barcodes/features/settings/data/settings_repository.dart';
 import 'package:barcodes/l10n/l10n.dart';
 import 'package:barcodes/routing/app_routes.dart';
 import 'package:flutter/material.dart';
@@ -10,11 +12,25 @@ class BarcodesPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final barcodeDisplayModeAsync = ref.watch(barcodeDisplayModeProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text(context.l10n.appBarTitleBarcodes),
       ),
-      body: const BarcodesList(),
+      body: AsyncValueWidget<BarcodeDisplayMode>(
+        value: barcodeDisplayModeAsync,
+        data: (displayMode) {
+          if (displayMode == BarcodeDisplayMode.list) {
+            return const BarcodesList();
+          } else if (displayMode == BarcodeDisplayMode.carousel) {
+            return const Center(
+              child: Text('Carousel view coming soon!'),
+            );
+          }
+          // Default fallback, though ideally should not be reached if enum is handled exhaustively.
+          return const BarcodesList();
+        },
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => context.goNamed(AddEntryRoute.name),
         child: const Icon(Icons.add),

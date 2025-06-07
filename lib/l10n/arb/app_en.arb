@@ -189,5 +189,8 @@
         "example": "Groceries"
       }
     }
-  }
+  },
+  "settingsBarcodeDisplayModeTitle": "Barcode Display Mode",
+  "settingsBarcodeDisplayModeList": "List",
+  "settingsBarcodeDisplayModeCarousel": "Carousel"
 }

@@ -79,5 +79,27 @@ void main() {
         expect(value, isA<double>());
       });
     });
+
+    group('barcodeDisplayMode', () {
+      test('getBarcodeDisplayMode returns default value (list) when no value is set', () async {
+        // Act
+        final result = await settingsRepository.getBarcodeDisplayMode();
+
+        // Assert
+        expect(result, BarcodeDisplayMode.list);
+      });
+
+      test('setBarcodeDisplayMode and getBarcodeDisplayMode work correctly', () async {
+        // Act & Assert for carousel
+        await settingsRepository.setBarcodeDisplayMode(BarcodeDisplayMode.carousel);
+        var result = await settingsRepository.getBarcodeDisplayMode();
+        expect(result, BarcodeDisplayMode.carousel);
+
+        // Act & Assert for list
+        await settingsRepository.setBarcodeDisplayMode(BarcodeDisplayMode.list);
+        result = await settingsRepository.getBarcodeDisplayMode();
+        expect(result, BarcodeDisplayMode.list);
+      });
+    });
   });
 }

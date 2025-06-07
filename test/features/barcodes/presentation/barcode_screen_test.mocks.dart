@@ -155,6 +155,25 @@ class MockSettingsRepository extends _i1.Mock
             returnValueForMissingStub: _i6.Future<void>.value(),
           )
           as _i6.Future<void>);
+
+  @override
+  _i6.Future<_i7.BarcodeDisplayMode> getBarcodeDisplayMode() =>
+      (super.noSuchMethod(
+            Invocation.method(#getBarcodeDisplayMode, []),
+            returnValue: _i6.Future<_i7.BarcodeDisplayMode>.value(
+              _i7.BarcodeDisplayMode.list,
+            ),
+          )
+          as _i6.Future<_i7.BarcodeDisplayMode>);
+
+  @override
+  _i6.Future<void> setBarcodeDisplayMode(_i7.BarcodeDisplayMode? mode) =>
+      (super.noSuchMethod(
+            Invocation.method(#setBarcodeDisplayMode, [mode]),
+            returnValue: _i6.Future<void>.value(),
+            returnValueForMissingStub: _i6.Future<void>.value(),
+          )
+          as _i6.Future<void>);
 }
 
 /// A class which mocks [BarcodesListController].

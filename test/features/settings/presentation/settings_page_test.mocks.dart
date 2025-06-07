@@ -108,4 +108,26 @@ class MockSettingsRepository extends _i1.Mock
             returnValueForMissingStub: _i5.Future<void>.value(),
           )
           as _i5.Future<void>);
+
+  @override
+  _i5.Future<_i4.BarcodeDisplayMode> getBarcodeDisplayMode() =>
+      (super.noSuchMethod(
+            Invocation.method(#getBarcodeDisplayMode, []),
+            returnValue: _i5.Future<_i4.BarcodeDisplayMode>.value(
+              _i4.BarcodeDisplayMode.list,
+            ),
+            returnValueForMissingStub: _i5.Future<_i4.BarcodeDisplayMode>.value(
+              _i4.BarcodeDisplayMode.list,
+            ),
+          )
+          as _i5.Future<_i4.BarcodeDisplayMode>);
+
+  @override
+  _i5.Future<void> setBarcodeDisplayMode(_i4.BarcodeDisplayMode? mode) =>
+      (super.noSuchMethod(
+            Invocation.method(#setBarcodeDisplayMode, [mode]),
+            returnValue: _i5.Future<void>.value(),
+            returnValueForMissingStub: _i5.Future<void>.value(),
+          )
+          as _i5.Future<void>);
 }

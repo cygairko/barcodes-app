@@ -62,5 +62,25 @@ final maxScreenBrightnessLevelProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef MaxScreenBrightnessLevelRef = AutoDisposeFutureProviderRef<double>;
+String _$barcodeDisplayModeHash() =>
+    r'efeac66664c1dcf6e405202b80155173a954dd1b';
+
+/// See also [barcodeDisplayMode].
+@ProviderFor(barcodeDisplayMode)
+final barcodeDisplayModeProvider =
+    AutoDisposeFutureProvider<BarcodeDisplayMode>.internal(
+      barcodeDisplayMode,
+      name: r'barcodeDisplayModeProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$barcodeDisplayModeHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef BarcodeDisplayModeRef =
+    AutoDisposeFutureProviderRef<BarcodeDisplayMode>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
