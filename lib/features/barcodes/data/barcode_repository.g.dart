@@ -6,14 +6,16 @@ part of 'barcode_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$barcodeRepositoryHash() => r'e5a0c345ffb435471411e78f65bec2173d2fc2a1';
+String _$barcodeRepositoryHash() => r'9c73fcdd40549ecf34f86f66ab39c3b5ab37bc47';
 
 /// See also [barcodeRepository].
 @ProviderFor(barcodeRepository)
 final barcodeRepositoryProvider = Provider<BarcodeRepository>.internal(
   barcodeRepository,
   name: r'barcodeRepositoryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$barcodeRepositoryHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$barcodeRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
@@ -21,22 +23,25 @@ final barcodeRepositoryProvider = Provider<BarcodeRepository>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef BarcodeRepositoryRef = ProviderRef<BarcodeRepository>;
-String _$barcodesStreamHash() => r'1e43601806c1e2a58d3d8eb36f6645b22c82842b';
+String _$barcodesStreamHash() => r'c0bd3932abe84cfebe627cce1139cbdc35e5dd7d';
 
 /// See also [barcodesStream].
 @ProviderFor(barcodesStream)
-final barcodesStreamProvider = AutoDisposeStreamProvider<List<BarcodeEntry>>.internal(
-  barcodesStream,
-  name: r'barcodesStreamProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$barcodesStreamHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+final barcodesStreamProvider =
+    AutoDisposeStreamProvider<List<BarcodeEntry>>.internal(
+      barcodesStream,
+      name: r'barcodesStreamProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$barcodesStreamHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef BarcodesStreamRef = AutoDisposeStreamProviderRef<List<BarcodeEntry>>;
-String _$barcodeStreamHash() => r'5e807cff1a059ec68ca65568b352ee32d941470c';
+String _$barcodeStreamHash() => r'866a82c5060266c11e38230cef098a2ab5b5e852';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -88,7 +93,8 @@ class BarcodeStreamFamily extends Family<AsyncValue<BarcodeEntry?>> {
   static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
 
   @override
-  Iterable<ProviderOrFamily>? get allTransitiveDependencies => _allTransitiveDependencies;
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
 
   @override
   String? get name => r'barcodeStreamProvider';
@@ -102,9 +108,12 @@ class BarcodeStreamProvider extends AutoDisposeStreamProvider<BarcodeEntry?> {
         (ref) => barcodeStream(ref as BarcodeStreamRef, entryId),
         from: barcodeStreamProvider,
         name: r'barcodeStreamProvider',
-        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$barcodeStreamHash,
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$barcodeStreamHash,
         dependencies: BarcodeStreamFamily._dependencies,
-        allTransitiveDependencies: BarcodeStreamFamily._allTransitiveDependencies,
+        allTransitiveDependencies:
+            BarcodeStreamFamily._allTransitiveDependencies,
         entryId: entryId,
       );
 
@@ -164,7 +173,9 @@ mixin BarcodeStreamRef on AutoDisposeStreamProviderRef<BarcodeEntry?> {
   int get entryId;
 }
 
-class _BarcodeStreamProviderElement extends AutoDisposeStreamProviderElement<BarcodeEntry?> with BarcodeStreamRef {
+class _BarcodeStreamProviderElement
+    extends AutoDisposeStreamProviderElement<BarcodeEntry?>
+    with BarcodeStreamRef {
   _BarcodeStreamProviderElement(super.provider);
 
   @override

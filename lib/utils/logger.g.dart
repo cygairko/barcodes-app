@@ -13,7 +13,9 @@ String _$loggerHash() => r'09c5b3af792366a31741a2765c0844e854c6764c';
 final loggerProvider = AutoDisposeProvider<Logger>.internal(
   logger,
   name: r'loggerProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$loggerHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$loggerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

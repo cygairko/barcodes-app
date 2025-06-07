@@ -36,7 +36,7 @@ class _CategoryManagementPageState extends ConsumerState<CategoryManagementPage>
     final categoryRepository = ref.read(categoryRepositoryProvider);
     try {
       _categories = await categoryRepository.getCategories();
-    } catch (e) {
+    } on Exception catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(context.l10n.errorFailedToLoadCategories(e.toString()))),
@@ -111,9 +111,11 @@ class _CategoryManagementPageState extends ConsumerState<CategoryManagementPage>
                     final newCategory = Category(name: name);
                     await categoryRepository.addCategory(newCategory);
                   }
+                  if (!dialogContext.mounted) return;
                   Navigator.of(dialogContext).pop();
                   await _fetchCategories();
-                } catch (e) {
+                } on Exception catch (e) {
+                  if (!dialogContext.mounted) return;
                   ScaffoldMessenger.of(dialogContext).showSnackBar(
                     SnackBar(content: Text(context.l10n.errorFailedToSaveCategory(e.toString()))),
                   );
@@ -165,7 +167,7 @@ class _CategoryManagementPageState extends ConsumerState<CategoryManagementPage>
           SnackBar(content: Text(context.l10n.infoCategoryDeleted(category.name))),
         );
         await _fetchCategories();
-      } catch (e) {
+      } on Exception catch (e) {
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text(context.l10n.errorFailedToDeleteCategory(e.toString()))),

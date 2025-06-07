@@ -1,17 +1,17 @@
 import 'dart:async';
-import 'package:sembast/sembast.dart';
+
+import 'package:barcodes/features/categories/domain/category.dart';
+import 'package:barcodes/utils/data_store.dart'; // Assuming this path is correct
 import 'package:flutter_riverpod/flutter_riverpod.dart'; // Ensure this is present for Ref
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:barcodes/utils/data_store.dart'; // Assuming this path is correct
-import '../domain/category.dart';
+import 'package:sembast/sembast.dart';
 
 part 'category_repository.g.dart';
 
 class CategoryRepository {
-  static const String storeName = 'categories';
-
   final DataStore _dataStore;
   final _categoryStore = intMapStoreFactory.store(storeName);
+  static const String storeName = 'categories';
 
   CategoryRepository(this._dataStore);
 
@@ -39,7 +39,7 @@ class CategoryRepository {
     if (category.id == null) {
       throw ArgumentError('Category ID cannot be null for update');
     }
-    final finder = Finder(filter: Filter.byKey(category.id));
+    final finder = Finder(filter: Filter.byKey(category.id!));
     final count = await _categoryStore.update(db, category.toJson(), finder: finder);
     if (count == 0) {
       throw Exception('Category with ID ${category.id} not found for update.');
@@ -60,7 +60,7 @@ class CategoryRepository {
 }
 
 @Riverpod(keepAlive: true)
-CategoryRepository categoryRepository(Ref ref) {
+CategoryRepository categoryRepository(CategoryRepositoryRef ref) {
   // Changed to Ref
   // .requireValue is used here assuming DataStoreProvider handles its async states
   // and provides a DataStore object synchronously once ready, or throws if not.

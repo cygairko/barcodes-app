@@ -6,14 +6,17 @@ part of 'category_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$categoryRepositoryHash() => r'310b67c2104ad85d8c113cd5e83add7eacbdbae9';
+String _$categoryRepositoryHash() =>
+    r'e616385996cb0bacb49aeead139206ac21793feb';
 
 /// See also [categoryRepository].
 @ProviderFor(categoryRepository)
 final categoryRepositoryProvider = Provider<CategoryRepository>.internal(
   categoryRepository,
   name: r'categoryRepositoryProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$categoryRepositoryHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$categoryRepositoryHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );

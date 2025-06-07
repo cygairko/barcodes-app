@@ -34,7 +34,8 @@ class BarcodeConf extends ChangeNotifier {
 
   String get normalizedData {
     if (barcode is BarcodeEan && barcode.name != 'UPC E') {
-      // ignore: avoid_as
+      // ignore: avoid_as , The type check `is BarcodeEan` ensures that `barcode` is of type `BarcodeEan`.
+      // Therefore, the cast `as BarcodeEan` is safe here.
       final ean = barcode as BarcodeEan;
       return ean.normalize(data);
     }

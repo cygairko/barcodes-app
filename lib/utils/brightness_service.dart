@@ -22,9 +22,7 @@ class BrightnessService {
     final clampedBrightness = math.max(0.0, math.min(1.0, brightness));
     try {
       await _screenBrightness.setApplicationScreenBrightness(clampedBrightness);
-      print('Brightness set to $clampedBrightness');
     } on PlatformException catch (e) {
-      print('Failed to set brightness: ${e.message}');
       // Depending on the app's error handling strategy,
       // you might want to rethrow a custom exception here.
     }
@@ -37,10 +35,8 @@ class BrightnessService {
   Future<double> getCurrentBrightness() async {
     try {
       final brightness = await _screenBrightness.application;
-      print('Current brightness: $brightness');
       return brightness;
     } on PlatformException catch (e) {
-      print('Failed to get current brightness: ${e.message}');
       // Rethrow or handle as appropriate for your app
       rethrow;
     }
@@ -50,9 +46,7 @@ class BrightnessService {
   Future<void> resetBrightness() async {
     try {
       await _screenBrightness.resetApplicationScreenBrightness();
-      print('Brightness reset to system default.');
     } on PlatformException catch (e) {
-      print('Failed to reset brightness: ${e.message}');
       // Rethrow or handle as appropriate for your app
     }
   }

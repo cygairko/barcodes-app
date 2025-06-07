@@ -16,10 +16,10 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Category {
 
-// For Sembast, the ID is the record key.
+ String get name;// For Sembast, the ID is the record key.
 // It's often not stored as part of the JSON value itself if auto-generated.
 // Making it potentially null for new objects not yet saved.
- int? get id; String get name;
+ int? get id;
 /// Create a copy of Category
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -32,16 +32,16 @@ $CategoryCopyWith<Category> get copyWith => _$CategoryCopyWithImpl<Category>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Category&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Category&&(identical(other.name, name) || other.name == name)&&(identical(other.id, id) || other.id == id));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name);
+int get hashCode => Object.hash(runtimeType,name,id);
 
 @override
 String toString() {
-  return 'Category(id: $id, name: $name)';
+  return 'Category(name: $name, id: $id)';
 }
 
 
@@ -52,7 +52,7 @@ abstract mixin class $CategoryCopyWith<$Res>  {
   factory $CategoryCopyWith(Category value, $Res Function(Category) _then) = _$CategoryCopyWithImpl;
 @useResult
 $Res call({
- int? id, String name
+ String name, int? id
 });
 
 
@@ -69,11 +69,11 @@ class _$CategoryCopyWithImpl<$Res>
 
 /// Create a copy of Category
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? name = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? name = null,Object? id = freezed,}) {
   return _then(_self.copyWith(
-id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int?,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,
+name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int?,
   ));
 }
 
@@ -84,14 +84,14 @@ as String,
 @JsonSerializable()
 
 class _Category implements Category {
-  const _Category({this.id, required this.name});
+  const _Category({required this.name, this.id});
   factory _Category.fromJson(Map<String, dynamic> json) => _$CategoryFromJson(json);
 
+@override final  String name;
 // For Sembast, the ID is the record key.
 // It's often not stored as part of the JSON value itself if auto-generated.
 // Making it potentially null for new objects not yet saved.
 @override final  int? id;
-@override final  String name;
 
 /// Create a copy of Category
 /// with the given fields replaced by the non-null parameter values.
@@ -106,16 +106,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Category&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Category&&(identical(other.name, name) || other.name == name)&&(identical(other.id, id) || other.id == id));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name);
+int get hashCode => Object.hash(runtimeType,name,id);
 
 @override
 String toString() {
-  return 'Category(id: $id, name: $name)';
+  return 'Category(name: $name, id: $id)';
 }
 
 
@@ -126,7 +126,7 @@ abstract mixin class _$CategoryCopyWith<$Res> implements $CategoryCopyWith<$Res>
   factory _$CategoryCopyWith(_Category value, $Res Function(_Category) _then) = __$CategoryCopyWithImpl;
 @override @useResult
 $Res call({
- int? id, String name
+ String name, int? id
 });
 
 
@@ -143,11 +143,11 @@ class __$CategoryCopyWithImpl<$Res>
 
 /// Create a copy of Category
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? name = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? name = null,Object? id = freezed,}) {
   return _then(_Category(
-id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int?,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String,
+name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as int?,
   ));
 }
 

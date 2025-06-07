@@ -26,7 +26,7 @@ Future<void> pumpSettingsPage(
   when(mockSettingsRepository.getMaxScreenBrightnessLevel()).thenAnswer((_) async => initialMaxBrightnessLevel);
 
   // Mock the set methods to do nothing or return a completed Future
-  when(mockSettingsRepository.setAutomaticScreenBrightness(any)).thenAnswer((_) async {});
+  when(mockSettingsRepository.setAutomaticScreenBrightness(value: anyNamed('value'))).thenAnswer((_) async {});
   when(mockSettingsRepository.setMaxScreenBrightnessLevel(any)).thenAnswer((_) async {});
 
   await tester.pumpWidget(
@@ -85,23 +85,22 @@ void main() {
       when(mockSettingsRepository.getAutomaticScreenBrightness()).thenAnswer((_) async => false);
       when(mockSettingsRepository.getMaxScreenBrightnessLevel()).thenAnswer((_) async => 0.7);
       // Ensure set methods are stubbed if they could possibly be called, though not expected here.
-      when(mockSettingsRepository.setAutomaticScreenBrightness(any)).thenAnswer((_) async {});
+      when(mockSettingsRepository.setAutomaticScreenBrightness(value: anyNamed('value'))).thenAnswer((_) async {});
       when(mockSettingsRepository.setMaxScreenBrightnessLevel(any)).thenAnswer((_) async {});
 
       await pumpSettingsPage(
         tester,
         mockSettingsRepository: mockSettingsRepository,
         // These values are used by pumpSettingsPage to set up the initial mocks
-        initialAutoBrightness: false,
         initialMaxBrightnessLevel: 0.7,
       );
 
       // Verify switch state
-      final SwitchListTile switchTile = tester.widget(find.byKey(const Key('automaticBrightnessSwitch')));
+      final switchTile = tester.widget(find.byKey(const Key('automaticBrightnessSwitch')));
       expect(switchTile.value, isFalse);
 
       // Verify slider value
-      final Slider slider = tester.widget(find.byKey(const Key('maxBrightnessSlider')));
+      final slider = tester.widget(find.byKey(const Key('maxBrightnessSlider')));
       expect(slider.value, 0.7);
 
       // Verify slider is disabled (onChanged is null)
@@ -113,20 +112,19 @@ void main() {
       // Initial state: switch is OFF
       when(mockSettingsRepository.getAutomaticScreenBrightness()).thenAnswer((_) async => false);
       when(mockSettingsRepository.getMaxScreenBrightnessLevel()).thenAnswer((_) async => 0.8);
-      when(mockSettingsRepository.setAutomaticScreenBrightness(any)).thenAnswer((_) async {});
+      when(mockSettingsRepository.setAutomaticScreenBrightness(value: anyNamed('value'))).thenAnswer((_) async {});
 
       await pumpSettingsPage(
         tester,
         mockSettingsRepository: mockSettingsRepository,
-        initialAutoBrightness: false,
         initialMaxBrightnessLevel: 0.8,
       );
 
       // Verify initial state
-      SwitchListTile switchTile = tester.widget(find.byKey(const Key('automaticBrightnessSwitch')));
-      expect(switchTile.value, isFalse, reason: "Switch should initially be off");
-      Slider slider = tester.widget(find.byKey(const Key('maxBrightnessSlider')));
-      expect(slider.onChanged, isNull, reason: "Slider should initially be disabled");
+      var switchTile = tester.widget(find.byKey(const Key('automaticBrightnessSwitch')));
+      expect(switchTile.value, isFalse, reason: 'Switch should initially be off');
+      var slider = tester.widget(find.byKey(const Key('maxBrightnessSlider')));
+      expect(slider.onChanged, isNull, reason: 'Slider should initially be disabled');
 
       // 1. Update the mock: When getAutomaticScreenBrightness is called next (after invalidation), it should return true.
       when(mockSettingsRepository.getAutomaticScreenBrightness()).thenAnswer((_) async => true);
@@ -143,7 +141,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // 4. Verify repository SET method was called
-      verify(mockSettingsRepository.setAutomaticScreenBrightness(true)).called(1);
+      verify(mockSettingsRepository.setAutomaticScreenBrightness(value: true)).called(1);
 
       // 5. Verify UI updates (switch is now on, slider is enabled)
       // Re-fetch the widget after pumpAndSettle
@@ -153,9 +151,9 @@ void main() {
       expect(
         switchTile.value,
         isTrue,
-        reason: "Switch should be on after tap. Provider may not have updated UI if this fails.",
+        reason: 'Switch should be on after tap. Provider may not have updated UI if this fails.',
       );
-      expect(slider.onChanged, isNotNull, reason: "Slider should be enabled when switch is on");
+      expect(slider.onChanged, isNotNull, reason: 'Slider should be enabled when switch is on');
       expect(find.text('Enable automatic brightness to set level.'), findsNothing);
     });
 
@@ -174,9 +172,9 @@ void main() {
       );
 
       // Verify initial state for slider
-      Slider slider = tester.widget(find.byKey(const Key('maxBrightnessSlider')));
-      expect(slider.onChanged, isNotNull, reason: "Slider should be enabled");
-      expect(slider.value, 0.5, reason: "Initial slider value");
+      var slider = tester.widget(find.byKey(const Key('maxBrightnessSlider')));
+      expect(slider.onChanged, isNotNull, reason: 'Slider should be enabled');
+      expect(slider.value, 0.5, reason: 'Initial slider value');
 
       // Clear any interactions that might have happened during setup (e.g. if a provider invalidation caused a set)
       // This is important before verifying the specific call from the drag.
@@ -199,13 +197,13 @@ void main() {
       // Verify setMaxScreenBrightnessLevel was called. Due to drag behavior, it might be called multiple times.
       // We care that it was called, and typically would check the last value or that one of the values is what we expect.
       final captured = verify(mockSettingsRepository.setMaxScreenBrightnessLevel(captureAny)).captured;
-      expect(captured, isNotEmpty, reason: "setMaxScreenBrightnessLevel should be called by the drag");
+      expect(captured, isNotEmpty, reason: 'setMaxScreenBrightnessLevel should be called by the drag');
       // If you need to check the value, you might check the last one:
       // expect(captured.last, closeTo(newSliderValue, 0.1)); // Or some other expected value based on drag
 
       // Verify that the slider UI updated (reads the new value from the provider)
       slider = tester.widget(find.byKey(const Key('maxBrightnessSlider')));
-      expect(slider.value, newSliderValue, reason: "Slider value should update after interaction and provider refresh");
+      expect(slider.value, newSliderValue, reason: 'Slider value should update after interaction and provider refresh');
     });
 
     testWidgets('Slider is disabled and does not call repository when switch is off', (WidgetTester tester) async {
@@ -213,13 +211,12 @@ void main() {
       when(mockSettingsRepository.getAutomaticScreenBrightness()).thenAnswer((_) async => false);
       when(mockSettingsRepository.getMaxScreenBrightnessLevel()).thenAnswer((_) async => 0.8);
       // No set calls expected, but stub them just in case for robustness.
-      when(mockSettingsRepository.setAutomaticScreenBrightness(any)).thenAnswer((_) async {});
+      when(mockSettingsRepository.setAutomaticScreenBrightness(value: anyNamed('value'))).thenAnswer((_) async {});
       when(mockSettingsRepository.setMaxScreenBrightnessLevel(any)).thenAnswer((_) async {});
 
       await pumpSettingsPage(
         tester,
         mockSettingsRepository: mockSettingsRepository,
-        initialAutoBrightness: false,
         initialMaxBrightnessLevel: 0.8,
       );
 
@@ -231,7 +228,7 @@ void main() {
       verifyNever(mockSettingsRepository.setMaxScreenBrightnessLevel(any));
 
       // Verify slider is still disabled
-      final Slider slider = tester.widget(find.byKey(const Key('maxBrightnessSlider')));
+      final slider = tester.widget(find.byKey(const Key('maxBrightnessSlider')));
       expect(slider.onChanged, isNull);
     });
   });

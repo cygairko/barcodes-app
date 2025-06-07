@@ -1,7 +1,6 @@
 import 'package:barcodes/features/settings/data/settings_repository.dart';
 import 'package:barcodes/utils/data_store.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_memory.dart';
 
 void main() {
@@ -35,13 +34,13 @@ void main() {
       });
 
       test('setAutomaticScreenBrightness(true) and then getAutomaticScreenBrightness() returns true', () async {
-        await settingsRepository.setAutomaticScreenBrightness(true);
+        await settingsRepository.setAutomaticScreenBrightness(value: true);
         final value = await settingsRepository.getAutomaticScreenBrightness();
         expect(value, isTrue);
       });
 
       test('setAutomaticScreenBrightness(false) and then getAutomaticScreenBrightness() returns false', () async {
-        await settingsRepository.setAutomaticScreenBrightness(false);
+        await settingsRepository.setAutomaticScreenBrightness(value: false);
         final value = await settingsRepository.getAutomaticScreenBrightness();
         expect(value, isFalse);
       });
