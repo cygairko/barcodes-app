@@ -13,7 +13,9 @@ String _$brightnessServiceHash() => r'e3d32e70837dc353320cbd04622e7979c8f9fb53';
 final brightnessServiceProvider = Provider<BrightnessService>.internal(
   brightnessService,
   name: r'brightnessServiceProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product') ? null : _$brightnessServiceHash,
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$brightnessServiceHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
