@@ -2,7 +2,6 @@ import 'package:barcodes/common_widgets/async_value_widget.dart';
 import 'package:barcodes/common_widgets/empty_content.dart';
 import 'package:barcodes/features/barcodes/data/barcode_repository.dart';
 import 'package:barcodes/features/barcodes/presentation/barcode_card.dart';
-import 'package:barcodes/features/barcodes/presentation/barcode_error.dart';
 import 'package:barcodes/features/barcodes/presentation/barcodes_list_controller.dart';
 import 'package:barcodes/features/settings/data/settings_repository.dart';
 import 'package:barcodes/l10n/l10n.dart';
