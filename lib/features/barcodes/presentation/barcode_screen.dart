@@ -1,10 +1,8 @@
-import 'package:barcode_widget/barcode_widget.dart';
 import 'package:barcodes/common_widgets/async_value_widget.dart';
 import 'package:barcodes/common_widgets/empty_content.dart';
 import 'package:barcodes/features/barcodes/data/barcode_repository.dart';
-import 'package:barcodes/features/barcodes/domain/barcode_conf.dart';
+import 'package:barcodes/features/barcodes/presentation/barcode_card.dart';
 import 'package:barcodes/features/barcodes/presentation/barcode_error.dart';
-import 'package:barcodes/features/barcodes/presentation/barcode_info.dart';
 import 'package:barcodes/features/barcodes/presentation/barcodes_list_controller.dart';
 import 'package:barcodes/features/settings/data/settings_repository.dart';
 import 'package:barcodes/l10n/l10n.dart';
@@ -69,64 +67,39 @@ class _BarcodeScreenState extends ConsumerState<BarcodeScreen> {
         value: asyncEntry,
         data: (p0) {
           if (p0 != null) {
-            final conf = BarcodeConf(p0.data, p0.type);
-
-            try {
-              conf.barcode.verify(conf.normalizedData);
-            } on BarcodeException catch (error) {
-              return BarcodeError(message: error.message);
-            }
+            // The BarcodeConf and verification logic is now inside BarcodeCard
+            // return BarcodeError(message: error.message); // This error handling is also in BarcodeCard
 
             return SingleChildScrollView(
-              child: Card(
-                margin: const EdgeInsets.all(12),
-                child: Column(
-                  children: [
-                    Container(
-                      alignment: Alignment.topCenter,
-                      child: GestureDetector(
-                        onDoubleTap: () async {
-                          try {
-                            final maxLevel = await ref.read(maxScreenBrightnessLevelProvider.future);
-                            final brightnessService = ref.read(brightnessServiceProvider);
-                            _brightnessService = brightnessService;
+              child: BarcodeCard(
+                entry: p0,
+                onDoubleTap: () async {
+                  try {
+                    final maxLevel = await ref.read(maxScreenBrightnessLevelProvider.future);
+                    final brightnessService = ref.read(brightnessServiceProvider);
+                    _brightnessService = brightnessService;
 
-                            if (_originalBrightness == null) {
-                              // Try to get current brightness only if not already fetched by initState or previous double tap
-                              try {
-                                _originalBrightness = await brightnessService.getCurrentBrightness();
-                              } on Exception catch (e) {
-                                ref.read(loggerProvider).e('Error getting current brightness on double tap: $e');
+                    if (_originalBrightness == null) {
+                      // Try to get current brightness only if not already fetched by initState or previous double tap
+                      try {
+                        _originalBrightness = await brightnessService.getCurrentBrightness();
+                      } on Exception catch (e) {
+                        ref.read(loggerProvider).e('Error getting current brightness on double tap: $e');
 
-                                // If we can't get current brightness, we might not want to proceed
-                                // or we proceed without being able to restore. For now, let's print and continue.
-                              }
-                            }
+                        // If we can't get current brightness, we might not want to proceed
+                        // or we proceed without being able to restore. For now, let's print and continue.
+                      }
+                    }
 
-                            await brightnessService.setBrightness(maxLevel);
-                            // Ensure that if brightness is set, we attempt to restore it.
-                            // No need to call setState if these vars don't directly drive UI rebuilds for this action.
-                            _brightnessWasAdjustedByThisScreen = true;
-                          } on Exception catch (e) {
-                            // Catch any errors from reading providers or other operations
-                            ref.read(loggerProvider).e('Error in onDoubleTap brightness adjustment: $e');
-                          }
-                        },
-                        child: BarcodeWidget(
-                          padding: const EdgeInsets.all(12),
-                          data: conf.normalizedData,
-                          barcode: conf.barcode,
-                          height: conf.height,
-                          width: conf.width,
-                          style: TextStyle(fontSize: conf.fontSize),
-                        ),
-                      ),
-                    ),
-                    BarcodeInfo(
-                      entry: p0,
-                    ),
-                  ],
-                ),
+                    await brightnessService.setBrightness(maxLevel);
+                    // Ensure that if brightness is set, we attempt to restore it.
+                    // No need to call setState if these vars don't directly drive UI rebuilds for this action.
+                    _brightnessWasAdjustedByThisScreen = true;
+                  } on Exception catch (e) {
+                    // Catch any errors from reading providers or other operations
+                    ref.read(loggerProvider).e('Error in onDoubleTap brightness adjustment: $e');
+                  }
+                },
               ),
             );
           } else {
