@@ -44,7 +44,7 @@ void main() {
     testWidgets('shows loading indicator and fetches categories on init', (tester) async {
       final categories = [const Category(id: 1, name: 'Test Category 1')]; // ID is int
       when(() => mockCategoryRepository.getCategories()).thenAnswer((_) async {
-        await Future.delayed(const Duration(milliseconds: 50)); // Simulate network delay
+        await Future<void>.delayed(const Duration(milliseconds: 50)); // Simulate network delay
         return categories;
       });
 
