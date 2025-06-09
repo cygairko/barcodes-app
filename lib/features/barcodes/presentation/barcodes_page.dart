@@ -1,6 +1,6 @@
 import 'package:barcodes/common_widgets/async_value_widget.dart';
-import 'package:barcodes/features/barcodes/presentation/barcode_carousel_view.dart'; // Added import
 import 'package:barcodes/features/barcodes/presentation/barcodes_list.dart';
+import 'package:barcodes/features/barcodes/presentation/barcode_carousel_view.dart'; // Added import
 import 'package:barcodes/features/settings/data/settings_repository.dart';
 import 'package:barcodes/l10n/l10n.dart';
 import 'package:barcodes/routing/app_routes.dart';

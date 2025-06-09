@@ -41,24 +41,32 @@ class BarcodeCard extends ConsumerWidget {
 
     return Card(
       margin: const EdgeInsets.all(12),
-      child: Column(
+      clipBehavior: Clip.antiAlias, // Add clipBehavior to ensure content respects card boundaries
+      child: Stack(
+        alignment: Alignment.center, // Or Alignment.topCenter for BarcodeWidget
         children: [
+          // BarcodeWidget part (ensure it's not unnecessarily expanding)
           Container(
-            alignment: Alignment.topCenter,
+            alignment: Alignment.topCenter, // Keep barcode at the top
             child: GestureDetector(
               onDoubleTap: onDoubleTap,
               child: BarcodeWidget(
                 padding: const EdgeInsets.all(12),
                 data: conf.normalizedData,
                 barcode: conf.barcode,
-                height: conf.height,
-                width: conf.width,
+                height: conf.height, // These dimensions from conf might be key
+                width: conf.width,   // to controlling size
                 style: TextStyle(fontSize: conf.fontSize),
               ),
             ),
           ),
-          BarcodeInfo(
-            entry: entry,
+          // BarcodeInfo part, positioned at the bottom
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container( // Optional: Add a background to BarcodeInfo for readability
+              color: Colors.black.withOpacity(0.0), // Start with transparent, can be themed later
+              child: BarcodeInfo(entry: entry),
+            ),
           ),
         ],
       ),
