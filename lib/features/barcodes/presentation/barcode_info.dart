@@ -14,17 +14,29 @@ class BarcodeInfo extends StatelessWidget {
         children: [
           ListTile(
             leading: const Icon(Icons.label_outline),
-            title: Text(entry.name),
+            title: Text(
+              entry.name,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+            ),
             subtitle: Text(context.l10n.labelAddFormEntryName),
           ),
           ListTile(
             leading: const Icon(Icons.settings_overscan),
-            title: Text(entry.type.name),
+            title: Text(
+              entry.type.name,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+            ),
             subtitle: Text(context.l10n.labelAddFormEntryTypeDropdown),
           ),
           ListTile(
             leading: const Icon(Icons.comment_outlined),
-            title: Text(entry.comment ?? ''),
+            title: Text(
+              entry.comment ?? '',
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+            ),
             subtitle: Text(context.l10n.labelAddFormEntryComment),
           ),
         ],
