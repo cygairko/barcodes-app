@@ -73,7 +73,7 @@ class SettingsBranch extends StatefulShellBranchData {
   const SettingsBranch();
 }
 
-class BarcodesPageRoute extends GoRouteData {
+class BarcodesPageRoute extends GoRouteData with _$BarcodesPageRoute {
   static const String name = 'barcodes';
   static const String path = '/';
 
@@ -83,7 +83,7 @@ class BarcodesPageRoute extends GoRouteData {
   );
 }
 
-class ManageCategoriesRoute extends GoRouteData {
+class ManageCategoriesRoute extends GoRouteData with _$ManageCategoriesRoute {
   const ManageCategoriesRoute();
   static const String name = 'manageCategories';
   // This path will be relative to its parent, which is '/settings'
@@ -97,7 +97,7 @@ class ManageCategoriesRoute extends GoRouteData {
   );
 }
 
-class BarcodeRoute extends GoRouteData {
+class BarcodeRoute extends GoRouteData with _$BarcodeRoute {
   const BarcodeRoute(
     this.eid,
   );
@@ -114,7 +114,7 @@ class BarcodeRoute extends GoRouteData {
   );
 }
 
-class AddEntryRoute extends GoRouteData {
+class AddEntryRoute extends GoRouteData with _$AddEntryRoute {
   const AddEntryRoute();
   static const String name = 'addBarcode';
   static const String path = 'barcode/add';
@@ -125,7 +125,7 @@ class AddEntryRoute extends GoRouteData {
   );
 }
 
-class SettingsPageRoute extends GoRouteData {
+class SettingsPageRoute extends GoRouteData with _$SettingsPageRoute {
   static const String name = 'settings';
   static const String path = '/settings';
 

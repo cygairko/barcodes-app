@@ -14,6 +14,7 @@ class BarcodeCarouselView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // Added WidgetRef
     final barcodesAsyncValue = ref.watch(barcodesStreamProvider); // Watch the provider
+    final height = MediaQuery.sizeOf(context).height;
 
     return AsyncValueWidget<List<BarcodeEntry>>(
       value: barcodesAsyncValue,
@@ -24,17 +25,20 @@ class BarcodeCarouselView extends ConsumerWidget {
           );
         }
         // Replace placeholder with CarouselView.weighted
-        return CarouselView.weighted(
-          itemSnapping: true,
-          flexWeights: const <int>[1], // Show one card at a time primarily
-          children: barcodes.map((barcode) {
-            return BarcodeCard(
-              entry: barcode,
-              onDoubleTap: () {
-                // No action specified for double tap in carousel view as per issue
-              },
-            );
-          }).toList(),
+        return ConstrainedBox(
+          constraints: BoxConstraints(maxHeight: height / 2),
+          child: CarouselView.weighted(
+            itemSnapping: true,
+            flexWeights: const <int>[1, 7, 1], // Show one card at a time primarily
+            children: barcodes.map((barcode) {
+              return BarcodeCard(
+                entry: barcode,
+                onDoubleTap: () {
+                  // No action specified for double tap in carousel view as per issue
+                },
+              );
+            }).toList(),
+          ),
         );
       },
       // Error and loading states are handled by AsyncValueWidget

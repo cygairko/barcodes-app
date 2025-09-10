@@ -1,4 +1,4 @@
-synthetic-package: false
+# synthetic-package: false
 arb-dir: lib/l10n/arb
 output-dir: lib/l10n/generated
 template-arb-file: app_en.arb

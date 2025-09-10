@@ -16,20 +16,17 @@ RouteBase get $mainShellRouteData => StatefulShellRouteData.$route(
         GoRouteData.$route(
           path: '/',
           name: 'barcodes',
-
-          factory: $BarcodesPageRouteExtension._fromState,
+          factory: _$BarcodesPageRoute._fromState,
           routes: [
             GoRouteData.$route(
               path: 'barcode/show/:eid',
               name: 'barcode',
-
-              factory: $BarcodeRouteExtension._fromState,
+              factory: _$BarcodeRoute._fromState,
             ),
             GoRouteData.$route(
               path: 'barcode/add',
               name: 'addBarcode',
-
-              factory: $AddEntryRouteExtension._fromState,
+              factory: _$AddEntryRoute._fromState,
             ),
           ],
         ),
@@ -40,14 +37,12 @@ RouteBase get $mainShellRouteData => StatefulShellRouteData.$route(
         GoRouteData.$route(
           path: '/settings',
           name: 'settings',
-
-          factory: $SettingsPageRouteExtension._fromState,
+          factory: _$SettingsPageRoute._fromState,
           routes: [
             GoRouteData.$route(
               path: 'categories',
               name: 'manageCategories',
-
-              factory: $ManageCategoriesRouteExtension._fromState,
+              factory: _$ManageCategoriesRoute._fromState,
             ),
           ],
         ),
@@ -61,83 +56,110 @@ extension $MainShellRouteDataExtension on MainShellRouteData {
       const MainShellRouteData();
 }
 
-extension $BarcodesPageRouteExtension on BarcodesPageRoute {
+mixin _$BarcodesPageRoute on GoRouteData {
   static BarcodesPageRoute _fromState(GoRouterState state) =>
       BarcodesPageRoute();
 
+  @override
   String get location => GoRouteData.$location('/');
 
+  @override
   void go(BuildContext context) => context.go(location);
 
+  @override
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
+  @override
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
 
+  @override
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $BarcodeRouteExtension on BarcodeRoute {
+mixin _$BarcodeRoute on GoRouteData {
   static BarcodeRoute _fromState(GoRouterState state) =>
-      BarcodeRoute(int.parse(state.pathParameters['eid']!)!);
+      BarcodeRoute(int.parse(state.pathParameters['eid']!));
 
+  BarcodeRoute get _self => this as BarcodeRoute;
+
+  @override
   String get location => GoRouteData.$location(
-    '/barcode/show/${Uri.encodeComponent(eid.toString())}',
+    '/barcode/show/${Uri.encodeComponent(_self.eid.toString())}',
   );
 
+  @override
   void go(BuildContext context) => context.go(location);
 
+  @override
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
+  @override
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
 
+  @override
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $AddEntryRouteExtension on AddEntryRoute {
+mixin _$AddEntryRoute on GoRouteData {
   static AddEntryRoute _fromState(GoRouterState state) => const AddEntryRoute();
 
+  @override
   String get location => GoRouteData.$location('/barcode/add');
 
+  @override
   void go(BuildContext context) => context.go(location);
 
+  @override
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
+  @override
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
 
+  @override
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $SettingsPageRouteExtension on SettingsPageRoute {
+mixin _$SettingsPageRoute on GoRouteData {
   static SettingsPageRoute _fromState(GoRouterState state) =>
       SettingsPageRoute();
 
+  @override
   String get location => GoRouteData.$location('/settings');
 
+  @override
   void go(BuildContext context) => context.go(location);
 
+  @override
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
+  @override
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
 
+  @override
   void replace(BuildContext context) => context.replace(location);
 }
 
-extension $ManageCategoriesRouteExtension on ManageCategoriesRoute {
+mixin _$ManageCategoriesRoute on GoRouteData {
   static ManageCategoriesRoute _fromState(GoRouterState state) =>
       const ManageCategoriesRoute();
 
+  @override
   String get location => GoRouteData.$location('/settings/categories');
 
+  @override
   void go(BuildContext context) => context.go(location);
 
+  @override
   Future<T?> push<T>(BuildContext context) => context.push<T>(location);
 
+  @override
   void pushReplacement(BuildContext context) =>
       context.pushReplacement(location);
 
+  @override
   void replace(BuildContext context) => context.replace(location);
 }

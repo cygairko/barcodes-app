@@ -6,22 +6,43 @@ part of 'data_store.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$dataStoreHash() => r'fe2107a035cbdc3e46d3b7010d5a64599dfbeb4c';
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// See also [dataStore].
 @ProviderFor(dataStore)
-final dataStoreProvider = FutureProvider<DataStore>.internal(
-  dataStore,
-  name: r'dataStoreProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$dataStoreHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
+const dataStoreProvider = DataStoreProvider._();
 
-@Deprecated('Will be removed in 3.0. Use Ref instead')
-// ignore: unused_element
-typedef DataStoreRef = FutureProviderRef<DataStore>;
-// ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
+final class DataStoreProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<DataStore>,
+          DataStore,
+          FutureOr<DataStore>
+        >
+    with $FutureModifier<DataStore>, $FutureProvider<DataStore> {
+  const DataStoreProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'dataStoreProvider',
+        isAutoDispose: false,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$dataStoreHash();
+
+  @$internal
+  @override
+  $FutureProviderElement<DataStore> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<DataStore> create(Ref ref) {
+    return dataStore(ref);
+  }
+}
+
+String _$dataStoreHash() => r'fe2107a035cbdc3e46d3b7010d5a64599dfbeb4c';
