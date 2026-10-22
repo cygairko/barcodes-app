@@ -24,7 +24,7 @@ jobs:
       coverage_excludes: "*.g.dart *.freezed.dart" # defaults to "" (none)
 
   spell-check:
-    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/spell_check.yml@v1
+    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/spell_check.yml@v2
     with:
       includes: |
         **/*.md
